@@ -14,6 +14,10 @@ namespace SmoothService
     public class EmployeeService : IEmployeeService
     {
         private EmployeeLogic _employeeLogic;
+        private LoginLogic _loginLogic; //For Login process
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 
         public string GetData(int value)
         {
@@ -34,16 +38,32 @@ namespace SmoothService
         }
 
 
-        public int AddNewEmployee(string stringJSON)
+        public int AddNewEmployeeDetail(string stringJSON)
+        {
+            log.Info("SmoothService -- AddNewEmployeeDetail");
+            log.Info("SmoothService -- :" + stringJSON);
+            _employeeLogic = new EmployeeLogic();
+            return _employeeLogic.AddNewEmployeeLogic(stringJSON);
+        }
+
+        public int UpdateEmployeeDetail(string stringJSON)
         {
             _employeeLogic = new EmployeeLogic();
-            return _employeeLogic.AddNewEmployee(stringJSON);
+            return _employeeLogic.UpdateEmployeeLogic(stringJSON);
         }
 
         public string GetListOfEmployee()
         {
+            log.Info("SmoothService => EmployeeService -- GetListOfEmployee");
             _employeeLogic = new EmployeeLogic();
-            return _employeeLogic.GetListOfEmployee();
+            return _employeeLogic.GetListOfEmployeeLogic();
+        }
+
+        public bool LogIn(string passwordJson)
+        {
+            _loginLogic = new LoginLogic();
+            log.Info("Here is for Log in << "+ passwordJson);
+            return _loginLogic.FindUserByPW(passwordJson);
         }
     }
 }

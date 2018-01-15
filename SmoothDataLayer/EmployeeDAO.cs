@@ -17,9 +17,11 @@ namespace SmoothDataLayer
 
         private const string TABLE_EMPLOYEE = "tb_employee";
 
+        
+
         private void DatabaseOpen()
         {
-            string connectionPath = "server=localhost;user id=root;persistsecurityinfo=True;database=smoothdb;password=G4856162651O;";
+            string connectionPath = "server=localhost;port=3310;user id=root;persistsecurityinfo=True;database=smoothdb;password=JuJ90507;";
             //string connectionPath = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             _conn = new MySqlConnection(connectionPath);
             _conn.Open();
@@ -61,7 +63,7 @@ namespace SmoothDataLayer
                 cmd.ExecuteNonQuery();
 
                 DatabaseClose();
-                log.Info("Add Employee Success");
+                log.Info("SmoothDataLayer -- Add Employee Success");
                 return 1;
             }
             catch (Exception ex)
@@ -80,7 +82,7 @@ namespace SmoothDataLayer
         /// <param name="Phone"></param>
         /// <param name="Email"></param>
         /// <returns></returns>
-        public int UpdateProfileEmployee(int EmployeeID, string FirstName, string LastName, string Phone, string Email)
+        public int UpdateProfileEmployee(int EmployeeID, string FirstName, string LastName, string Phone, string Email, string password)
         {
             try
             {
@@ -150,6 +152,34 @@ namespace SmoothDataLayer
                 log.Error("DataLayer => ListOfEmployee(): " + ex.Message);
                 return null;
             }
+        }
+        public bool FindData(string password, string command)
+        {
+            bool ret = false;
+            try
+            {
+                StringBuilder stringSQL = new StringBuilder();
+                DatabaseOpen();
+                stringSQL.Append("SELECT * ");
+                stringSQL.Append("FROM ");
+                stringSQL.Append(TABLE_EMPLOYEE);
+                stringSQL.Append(" WHERE password = @password;");
+
+                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
+                cmd.Parameters.AddWithValue("@password", password);
+
+                cmd.ExecuteNonQuery();
+
+                DatabaseClose();
+                
+                ret = true;
+            }
+            catch (Exception ex)
+            {
+                log.Error("DataLayer => FindData(): " + ex.Message);
+            }
+            log.Info("Log in Status ret = " + ret);
+            return ret;
         }
     }
 }

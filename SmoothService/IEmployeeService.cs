@@ -21,10 +21,18 @@ namespace SmoothService
 
         // TODO: Add your service operations here
         [OperationContract]
-        int AddNewEmployee(string stringJSON);
+        int AddNewEmployeeDetail(string stringJSON);
+
+        [OperationContract]
+        int UpdateEmployeeDetail(string stringJSON);
 
         [OperationContract]
         string GetListOfEmployee();
+
+        //Log in using password 
+        [OperationContract] 
+        bool LogIn(string passwordJson);
+
     }
 
 
