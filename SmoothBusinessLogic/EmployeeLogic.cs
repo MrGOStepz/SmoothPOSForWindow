@@ -21,10 +21,11 @@ namespace SmoothBusinessLogic
             _employeeDAO = new EmployeeDAO();
         }
 
-        public int AddNewEmployee(string stringJSON)
+        public int AddNewEmployeeLogic(string stringJSON)
         {
             try
             {
+                log.Info("BusinessLogic => AddNewEmplouee - Begin");
                 EmployeeModel employeeModel = JsonConvert.DeserializeObject<EmployeeModel>(stringJSON);
                 return _employeeDAO.AddNewEmployee(employeeModel.FirstName, employeeModel.LastName, employeeModel.Phone, employeeModel.Email, employeeModel.Password);
             }
@@ -35,7 +36,28 @@ namespace SmoothBusinessLogic
             }
         }
 
-        public string GetListOfEmployee()
+        public int UpdateEmployeeLogic(string stringJSON)
+        {
+            log.Info("BusinessLogic -- UpdateEmployee");
+            try
+            {
+                EmployeeModel employeeModel = JsonConvert.DeserializeObject<EmployeeModel>(stringJSON);
+                if(employeeModel.EmployeeID == 0)
+                {
+                    log.Info("BusinessLogic => UpdateEmployeeProfile, EmployeeID == 0");
+                    return 0;
+                }
+                else
+                    return _employeeDAO.UpdateProfileEmployee(employeeModel.EmployeeID, employeeModel.FirstName, employeeModel.LastName, employeeModel.Phone, employeeModel.Email, employeeModel.Password);
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => AddNewEmployee" + ex.Message);
+                return -1;
+            }
+        }
+
+        public string GetListOfEmployeeLogic()
         {
             try
             {

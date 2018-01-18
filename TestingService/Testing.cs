@@ -14,7 +14,8 @@ namespace TestingService
 {
     public partial class Testing : Form
     {
-        private EmployeeService.EmployeeServiceClient _em = new EmployeeService.EmployeeServiceClient();
+        //private EmployeeService.EmployeeServiceClient _em = new EmployeeService.EmployeeServiceClient();
+        private EmployeeServiceTest.EmployeeServiceClient _em = new EmployeeServiceTest.EmployeeServiceClient();
 
         public Testing()
         {
@@ -27,10 +28,10 @@ namespace TestingService
                 LastName = txtLastName.Text,
                 Phone = txtPhone.Text,
                 Password = txtPassword.Text };
-
+           
             string json = JsonConvert.SerializeObject(employeeDetail);
-
-            _em.AddNewEmployee(json);
+            _em.AddNewEmployeeDetail(json);
+            //_em.AddNewEmployee(json);
         }
 
         private void Testing_Load(object sender, EventArgs e)

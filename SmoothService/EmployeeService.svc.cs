@@ -40,8 +40,7 @@ namespace SmoothService
 
         public int AddNewEmployeeDetail(string stringJSON)
         {
-            log.Info("SmoothService -- AddNewEmployeeDetail");
-            log.Info("SmoothService -- :" + stringJSON);
+            log.Info("SmoothService :: AddNewEmployeeDetail :: " + stringJSON);
             _employeeLogic = new EmployeeLogic();
             return _employeeLogic.AddNewEmployeeLogic(stringJSON);
         }
@@ -54,7 +53,7 @@ namespace SmoothService
 
         public string GetListOfEmployee()
         {
-            log.Info("SmoothService => EmployeeService -- GetListOfEmployee");
+            log.Info("SmoothService :: EmployeeService :: GetListOfEmployee");
             _employeeLogic = new EmployeeLogic();
             return _employeeLogic.GetListOfEmployeeLogic();
         }
@@ -62,7 +61,7 @@ namespace SmoothService
         public bool LogIn(string passwordJson)
         {
             _loginLogic = new LoginLogic();
-            log.Info("Here is for Log in << "+ passwordJson);
+            log.Info("Here is for Log in :: "+ passwordJson);
             return _loginLogic.FindUserByPW(passwordJson);
         }
     }
