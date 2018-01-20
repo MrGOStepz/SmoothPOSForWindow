@@ -58,11 +58,11 @@ namespace SmoothService
             return _employeeLogic.GetListOfEmployeeLogic();
         }
 
-        public bool LogIn(string passwordJson)
+        public string LogIn(string stringJSON)
         {
             _loginLogic = new LoginLogic();
-            log.Info("Here is for Log in :: "+ passwordJson);
-            return _loginLogic.FindUserByPW(passwordJson);
+            log.Info("Here is for Log in :: "+ stringJSON);
+            return _loginLogic.FindUserByPW(stringJSON);
         }
     }
 }

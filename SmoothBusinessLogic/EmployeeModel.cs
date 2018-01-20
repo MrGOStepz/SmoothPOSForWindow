@@ -15,7 +15,7 @@ namespace SmoothBusinessLogic
         private string email;
         private int shiftID;
         private int levelID;
-        private string password;
+        private int password;
 
         public int EmployeeID
         {
@@ -47,7 +47,7 @@ namespace SmoothBusinessLogic
             set { email = value; }
         }
 
-        public string Password
+        public int Password
         {
             get { return password; }
             set { password = value; }

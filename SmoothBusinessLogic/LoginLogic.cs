@@ -20,20 +20,41 @@ namespace SmoothBusinessLogic
             _employeeDAO = new EmployeeDAO();
         }
 
-        public bool FindUserByPW(string stringJSON)
+        public string FindUserByPW(string stringJSON)
         {
-            bool ret = false;
             try
             {
+                DataTable dt = new DataTable();
                 EmployeeModel employeeModel = JsonConvert.DeserializeObject<EmployeeModel>(stringJSON);
-                ret = _employeeDAO.FindData(employeeModel.Password, "password");
-                log.Info("BusinessLogic => Log in");
+                dt = _employeeDAO.FindData(employeeModel.Password, "password");
+
+
+                //Convert DataTable to JSON
+                //Add Refernces System.Web.Extension
+                //Import using System.Web.Script.Serialization;
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+                List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+                Dictionary<string, object> row;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    row = new Dictionary<string, object>();
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        row.Add(col.ColumnName, dr[col]);
+                    }
+                    rows.Add(row);
+                }
+
+                //Return to JSON format
+                //return JsonConvert.SerializeObject(rows);
+                return serializer.Serialize(rows);
             }
             catch (Exception ex)
             {
                 log.Error("BussicnessLogic => Login failed" + ex.Message);
+                return null;
             }
-            return ret;
         }
     }
 }

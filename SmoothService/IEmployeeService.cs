@@ -31,7 +31,7 @@ namespace SmoothService
 
         //Log in using password 
         [OperationContract] 
-        bool LogIn(string passwordJson);
+        string LogIn(string stringJSON);
 
     }
 

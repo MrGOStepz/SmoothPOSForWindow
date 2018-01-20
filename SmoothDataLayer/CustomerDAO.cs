@@ -144,7 +144,7 @@ namespace SmoothDataLayer
             return ret;
         }
 
-        public DataTable GetCustomerByPhoneNumber(string phoneNo)
+        public DataTable GetCustomerByPhoneNumber(int phoneNo)
         {
             DataTable dt=null;
 
@@ -180,5 +180,7 @@ namespace SmoothDataLayer
 
             return dt;
         }
+
+
     }
 }

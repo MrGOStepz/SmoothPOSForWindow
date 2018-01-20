@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Configuration;
+using System.Security.Cryptography;
 
 namespace SmoothDataLayer
 {
@@ -41,11 +42,13 @@ namespace SmoothDataLayer
         /// <param name="Email"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
-        public int AddNewEmployee(string FirstName, string LastName, string Phone, string Email, string Password)
+        public int AddNewEmployee(string FirstName, string LastName, string Phone, string Email, int Password)
         {
             try
             {
                 StringBuilder stringSQL = new StringBuilder();
+
+                string hash = CalculateMD5Hash(Password);
 
                 DatabaseOpen();
                 stringSQL.Append("INSERT INTO ");
@@ -58,7 +61,7 @@ namespace SmoothDataLayer
                 cmd.Parameters.AddWithValue("@lastName", LastName);
                 cmd.Parameters.AddWithValue("@phone", Phone);
                 cmd.Parameters.AddWithValue("@email", Email);
-                cmd.Parameters.AddWithValue("@password", Password);
+                cmd.Parameters.AddWithValue("@password", hash);
 
                 cmd.ExecuteNonQuery();
 
@@ -82,7 +85,7 @@ namespace SmoothDataLayer
         /// <param name="Phone"></param>
         /// <param name="Email"></param>
         /// <returns></returns>
-        public int UpdateProfileEmployee(int EmployeeID, string FirstName, string LastName, string Phone, string Email, string password)
+        public int UpdateProfileEmployee(int EmployeeID, string FirstName, string LastName, string Phone, string Email, int password)
         {
             try
             {
@@ -153,33 +156,59 @@ namespace SmoothDataLayer
                 return null;
             }
         }
-        public bool FindData(string password, string command)
+        public DataTable FindData(int password, string command)
         {
-            bool ret = false;
+            DataTable dt = null;
             try
             {
                 StringBuilder stringSQL = new StringBuilder();
+                string hash = CalculateMD5Hash(password);
+
                 DatabaseOpen();
                 stringSQL.Append("SELECT * ");
                 stringSQL.Append("FROM ");
                 stringSQL.Append(TABLE_EMPLOYEE);
                 stringSQL.Append(" WHERE password = @password;");
+                
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@password", hash);
+                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
 
-                cmd.ExecuteNonQuery();
-
+                DataTable dt_temp = new DataTable();
+                adp.Fill(dt_temp);
+                cmd.Dispose();
                 DatabaseClose();
-                
-                ret = true;
+
+                log.Info("CustomerDAO :: Get Customer Data By phone number:: Success");
+                dt = dt_temp;
             }
             catch (Exception ex)
             {
                 log.Error("DataLayer => FindData(): " + ex.Message);
             }
-            log.Info("Log in Status ret = " + ret);
-            return ret;
+            //log.Info("Log in Status ret = " + ret);
+            return dt;
+        }
+
+        public string CalculateMD5Hash(int input)
+
+        {
+            // step 1, calculate MD5 hash from input
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            string string_temp = input.ToString();
+
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(string_temp);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+
+            return sb.ToString();
         }
     }
 }
