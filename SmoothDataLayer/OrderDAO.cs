@@ -76,6 +76,47 @@ namespace SmoothDataLayer
             }
         }
 
+        public int AddOrderDetail(int productID,
+                        int popUpItemID,
+                        int orderID,
+                        int productQty,
+                        float amount,
+                        string comment)
+        {
+            try
+            {
+                StringBuilder stringSQL = new StringBuilder();
+
+                DatabaseOpen();
+                stringSQL.Append("INSERT INTO ");
+                stringSQL.Append(TABLE_ORDERDETAIL);
+                stringSQL.Append(" (product_id, popup_item_id, order_id, product_qty, amount, comment)");
+                stringSQL.Append(" VALUES (@productID, @popUpItemID, @orderID, @productQty, @amount, @comment);");
+
+                log.Info(stringSQL);
+
+                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
+                cmd.Parameters.AddWithValue("@productID", productID);
+                cmd.Parameters.AddWithValue("@orderID", orderID);
+                cmd.Parameters.AddWithValue("@popUpItemID", popUpItemID);
+                cmd.Parameters.AddWithValue("@productQty", productQty);
+                cmd.Parameters.AddWithValue("@amount", amount);
+                cmd.Parameters.AddWithValue("@comment", comment);
+
+                log.Info(stringSQL);
+                cmd.ExecuteNonQuery();
+
+                DatabaseClose();
+                log.Info("SmoothDataLayer -- Add Order Detail Success");
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                log.Error("DataLayer => AppNewOrder(): " + ex.Message);
+                return -1;
+            }
+        }
+
         public DataTable GetListOfATable(string tableName)
         {
             DataTable dt = null;

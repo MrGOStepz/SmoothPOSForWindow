@@ -37,13 +37,36 @@ namespace SmoothBusinessLogic
             return ret;
         }
 
+        public int AddOrderDetailLogic(string stringJSON)
+        {
+            int ret = 0;
+            try
+            {
+                log.Info("BusinessLogic :: AddOrderDetail");
+                OrderDetailModel orderDetailModel = JsonConvert.DeserializeObject<OrderDetailModel>(stringJSON);
+
+                ret = _orderDAO.AddOrderDetail(orderDetailModel.ProductID, 
+                                                orderDetailModel.PopUpItemID, 
+                                                orderDetailModel.OrderID, 
+                                                orderDetailModel.ProductQty,
+                                                orderDetailModel.Amount,
+                                                orderDetailModel.Comment);
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => AddOrderDetail" + ex.Message);
+                ret = -1;
+            }
+            return ret;
+        }
+        
+
         public string GetListOfATABLE(string stringJSON)
         {
             try
             {
                 DataTable dt = new DataTable();
-                OrderModel orderModel = JsonConvert.DeserializeObject<OrderModel>(stringJSON);
-                dt = _orderDAO.GetListOfATable(orderModel.TableName);
+                dt = _orderDAO.GetListOfATable(stringJSON);
 
                 //Convert DataTable to JSON
                 //Add Refernces System.Web.Extension

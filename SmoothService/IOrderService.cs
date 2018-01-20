@@ -17,14 +17,22 @@ namespace SmoothService
         [OperationContract]
         int AddNewOrder(string stringJSON);
 
-        //For getting a list of Data in a table
-        //For instance
-        //"tb_order";
-        //"tb_order_type";
-        //"tb_order_status";
-        //"tb_order_detail";
-        //To use the function :: set table_name parameter in orderModel 
         [OperationContract]
-        string GetListOfATable(string stringJSON);
+        int AddOrderDetail(string stringJSON);
+
+        [OperationContract]
+        string GetListOfOrderTable();
+
+        [OperationContract]
+        string GetListofOrderType();
+
+        [OperationContract]
+        string GetListofOrderStatus();
+
+        [OperationContract]
+        string GetListOfOrderDetail();
+
+        //[OperationContract]
+        //string GetListOfATable(string stringJSON);
     }
 }

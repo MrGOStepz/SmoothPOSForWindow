@@ -16,13 +16,6 @@ namespace SmoothBusinessLogic
         private int orderStatusID;
         private int paymentID;
         private int customerID;
-        private string tableName;
-
-        public string TableName
-        {   
-            get { return tableName; }
-            set { tableName = value; }
-        }
 
         public int OrderID
         {
