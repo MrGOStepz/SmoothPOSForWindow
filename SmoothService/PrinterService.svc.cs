@@ -16,15 +16,15 @@ namespace SmoothService
         private PrinterLogic _printerLogic;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public string GetPrinterFront(string stringJSON)
+        public string PrintOrder(string stringJSON)
         {
-            log.Info("SmoothService :: GetPrinterFront :: " + stringJSON);
+            log.Info("SmoothService :: PrintOrder :: " + stringJSON);
             _printerLogic = new PrinterLogic();
             return _printerLogic.GetPrinter(stringJSON, "Front");
 
         }
 
-        public string GetPrinterCenter(string stringJSON)
+        /*public string GetPrinterCenter(string stringJSON)
         {
             log.Info("SmoothService :: GetPrinterFront :: " + stringJSON);
             _printerLogic = new PrinterLogic();
@@ -36,6 +36,6 @@ namespace SmoothService
             log.Info("SmoothService :: GetPrinterFront :: " + stringJSON);
             _printerLogic = new PrinterLogic();
             return _printerLogic.GetPrinter(stringJSON, "Back");
-        }
+        }*/
     }
 }

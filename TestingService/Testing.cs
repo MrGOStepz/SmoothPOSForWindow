@@ -40,6 +40,12 @@ namespace TestingService
 
             DataTable dt = (DataTable)JsonConvert.DeserializeObject(strJSON, (typeof(DataTable)));
             dgvListOfEmployee.DataSource = dt;
+
+        }
+
+        private void dgvListOfEmployee_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

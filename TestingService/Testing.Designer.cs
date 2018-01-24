@@ -192,6 +192,7 @@
             this.dgvListOfEmployee.Name = "dgvListOfEmployee";
             this.dgvListOfEmployee.Size = new System.Drawing.Size(523, 547);
             this.dgvListOfEmployee.TabIndex = 1;
+            this.dgvListOfEmployee.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListOfEmployee_CellContentClick);
             // 
             // tabPage2
             // 

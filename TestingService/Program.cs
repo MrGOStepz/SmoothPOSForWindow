@@ -16,7 +16,8 @@ namespace TestingService
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Testing());
+            //Application.Run(new Testing());
+            Application.Run(new PrinterTest());
         }
     }
 }

@@ -28,7 +28,33 @@ namespace SmoothBusinessLogic
                 OrderDetailModel orderDetailModel = JsonConvert.DeserializeObject<OrderDetailModel>(stringJSON);
                 log.Info("BusinessLogic :: AddOrderDetail");
 
-                //ret = _printerDAO.GetListForPrint(orderDetailModel.OrderID,prtLocation);
+                string orderNo = orderDetailModel.OrderID.ToString();
+
+                //ret = _printerDAO.GetListForPrint(orderNo, prtLocation);
+
+                DataTable dt = new DataTable();
+                dt = _printerDAO.GetListForPrint(orderDetailModel.OrderID, prtLocation);
+
+                //Convert DataTable to JSON
+                //Add Refernces System.Web.Extension
+                //Import using System.Web.Script.Serialization;
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+                List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+                Dictionary<string, object> row;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    row = new Dictionary<string, object>();
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        row.Add(col.ColumnName, dr[col]);
+                    }
+                    rows.Add(row);
+                }
+
+                //Return to JSON format
+                //return JsonConvert.SerializeObject(rows);
+                return serializer.Serialize(rows);
             }
             catch (Exception ex)
             {

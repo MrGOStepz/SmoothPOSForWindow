@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Text;
 
 namespace SmoothService
@@ -12,13 +13,13 @@ namespace SmoothService
     public interface IPrinterService
     {
         [OperationContract]
-        string GetPrinterFront(string stringJSON);
+        string PrintOrder(string stringJSON);
 
-        [OperationContract]
-        string GetPrinterCenter(string stringJSON);
+        //[OperationContract]
+        //string GetPrinterCenter(string stringJSON);
 
-        [OperationContract]
-        string GetPrinterBack(string stringJSON);
+        //[OperationContract]
+        //string GetPrinterBack(string stringJSON);
 
     }
 }
