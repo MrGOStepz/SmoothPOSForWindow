@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmoothPOS"
         mc:Ignorable="d"
-        Title="BackOffice" Height="300" Width="300">
+        Title="BackOffice" Height="768" Width="1024">
     <Grid>
-        
+
     </Grid>
 </Window>
