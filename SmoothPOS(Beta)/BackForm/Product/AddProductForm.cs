@@ -16,5 +16,6 @@ namespace SmoothPOS_Beta_
         {
             InitializeComponent();
         }
+
     }
 }
