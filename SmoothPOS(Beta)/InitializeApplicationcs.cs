@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SmoothPOS_Beta_
 {
-    public static class GlobalHelper
+    public class InitializeApplicationcs
     {
-        public static Users Users;
+        
     }
-
 }

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SmoothPOS_Beta_
 {
-    public static class GlobalHelper
+    public static class Options
     {
-        public static Users Users;
+        public static float Tax = 10;
     }
-
 }

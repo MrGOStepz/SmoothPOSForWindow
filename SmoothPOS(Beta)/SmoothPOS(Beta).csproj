@@ -52,6 +52,7 @@
     <Compile Include="BackForm\Printer\AddPrinterForm.Designer.cs">
       <DependentUpon>AddPrinterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExceptionLog.cs" />
     <Compile Include="BackForm\Wage\AddWagesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +104,8 @@
     <Compile Include="DatabaseHandle.cs" />
     <Compile Include="GlobalHelper.cs" />
     <Compile Include="IDatabase.cs" />
+    <Compile Include="Ingredients.cs" />
+    <Compile Include="InitializeApplicationcs.cs" />
     <Compile Include="IPrinter.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -116,6 +119,9 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Options.cs" />
+    <Compile Include="Popups.cs" />
+    <Compile Include="Printer.cs" />
     <Compile Include="Products.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

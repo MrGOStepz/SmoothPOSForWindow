@@ -30,38 +30,40 @@
         {
             this.lbName = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnAddProduct = new System.Windows.Forms.Button();
             this.gbPrinter = new System.Windows.Forms.GroupBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.gbImage = new System.Windows.Forms.GroupBox();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.btnUploadImage = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gbDetail = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbAvaliable = new System.Windows.Forms.CheckBox();
+            this.txtStock = new System.Windows.Forms.TextBox();
+            this.cbPopup = new System.Windows.Forms.ComboBox();
+            this.btnAddPopup = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.gbIngredients = new System.Windows.Forms.GroupBox();
+            this.lvIngredients = new System.Windows.Forms.ListView();
+            this.btnIngredients = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPriceInc = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtPrice = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtTax = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtProductID = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtSCName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.lbDescription = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnAddProduct = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtTax = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.gbIngredients = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbAvaliable = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnAddPopup = new System.Windows.Forms.Button();
-            this.cbPopup = new System.Windows.Forms.ComboBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtStock = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnIngredients = new System.Windows.Forms.Button();
-            this.lvIngredients = new System.Windows.Forms.ListView();
             this.lbName.SuspendLayout();
             this.panel2.SuspendLayout();
             this.gbPrinter.SuspendLayout();
@@ -69,9 +71,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDetail.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.gbIngredients.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.gbIngredients.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbName
@@ -99,6 +101,18 @@
             this.panel2.Size = new System.Drawing.Size(182, 436);
             this.panel2.TabIndex = 7;
             // 
+            // btnAddProduct
+            // 
+            this.btnAddProduct.AutoSize = true;
+            this.btnAddProduct.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnAddProduct.Location = new System.Drawing.Point(0, 375);
+            this.btnAddProduct.Name = "btnAddProduct";
+            this.btnAddProduct.Size = new System.Drawing.Size(182, 61);
+            this.btnAddProduct.TabIndex = 12;
+            this.btnAddProduct.Text = "Add Product";
+            this.btnAddProduct.UseVisualStyleBackColor = true;
+            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
+            // 
             // gbPrinter
             // 
             this.gbPrinter.Controls.Add(this.checkedListBox1);
@@ -109,6 +123,16 @@
             this.gbPrinter.TabIndex = 6;
             this.gbPrinter.TabStop = false;
             this.gbPrinter.Text = "Printer";
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(3, 20);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.ScrollAlwaysVisible = true;
+            this.checkedListBox1.Size = new System.Drawing.Size(176, 127);
+            this.checkedListBox1.TabIndex = 11;
             // 
             // gbImage
             // 
@@ -157,7 +181,7 @@
             this.gbDetail.Controls.Add(this.label7);
             this.gbDetail.Controls.Add(this.gbIngredients);
             this.gbDetail.Controls.Add(this.groupBox1);
-            this.gbDetail.Controls.Add(this.textBox4);
+            this.gbDetail.Controls.Add(this.txtProductID);
             this.gbDetail.Controls.Add(this.label3);
             this.gbDetail.Controls.Add(this.txtSCName);
             this.gbDetail.Controls.Add(this.label2);
@@ -172,6 +196,198 @@
             this.gbDetail.TabIndex = 6;
             this.gbDetail.TabStop = false;
             this.gbDetail.Text = "Product Detail";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.cbAvaliable);
+            this.groupBox3.Controls.Add(this.txtStock);
+            this.groupBox3.Location = new System.Drawing.Point(132, 338);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(144, 90);
+            this.groupBox3.TabIndex = 25;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Avaliable";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(23, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(51, 18);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Stock:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 54);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(69, 18);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Avaliable:";
+            // 
+            // cbAvaliable
+            // 
+            this.cbAvaliable.AutoSize = true;
+            this.cbAvaliable.Checked = true;
+            this.cbAvaliable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAvaliable.Location = new System.Drawing.Point(81, 57);
+            this.cbAvaliable.Name = "cbAvaliable";
+            this.cbAvaliable.Size = new System.Drawing.Size(15, 14);
+            this.cbAvaliable.TabIndex = 8;
+            this.cbAvaliable.UseVisualStyleBackColor = true;
+            // 
+            // txtStock
+            // 
+            this.txtStock.Location = new System.Drawing.Point(80, 20);
+            this.txtStock.Name = "txtStock";
+            this.txtStock.Size = new System.Drawing.Size(50, 24);
+            this.txtStock.TabIndex = 7;
+            // 
+            // cbPopup
+            // 
+            this.cbPopup.FormattingEnabled = true;
+            this.cbPopup.Location = new System.Drawing.Point(111, 213);
+            this.cbPopup.Name = "cbPopup";
+            this.cbPopup.Size = new System.Drawing.Size(121, 26);
+            this.cbPopup.TabIndex = 4;
+            // 
+            // btnAddPopup
+            // 
+            this.btnAddPopup.Location = new System.Drawing.Point(236, 213);
+            this.btnAddPopup.Name = "btnAddPopup";
+            this.btnAddPopup.Size = new System.Drawing.Size(25, 25);
+            this.btnAddPopup.TabIndex = 18;
+            this.btnAddPopup.Text = "+";
+            this.btnAddPopup.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(51, 216);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 18);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Popup:";
+            // 
+            // gbIngredients
+            // 
+            this.gbIngredients.Controls.Add(this.lvIngredients);
+            this.gbIngredients.Controls.Add(this.btnIngredients);
+            this.gbIngredients.Location = new System.Drawing.Point(282, 17);
+            this.gbIngredients.Name = "gbIngredients";
+            this.gbIngredients.Size = new System.Drawing.Size(200, 413);
+            this.gbIngredients.TabIndex = 13;
+            this.gbIngredients.TabStop = false;
+            this.gbIngredients.Text = "Ingredients";
+            // 
+            // lvIngredients
+            // 
+            this.lvIngredients.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvIngredients.Location = new System.Drawing.Point(3, 20);
+            this.lvIngredients.Name = "lvIngredients";
+            this.lvIngredients.Size = new System.Drawing.Size(194, 358);
+            this.lvIngredients.TabIndex = 1;
+            this.lvIngredients.UseCompatibleStateImageBehavior = false;
+            // 
+            // btnIngredients
+            // 
+            this.btnIngredients.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnIngredients.Location = new System.Drawing.Point(3, 378);
+            this.btnIngredients.Name = "btnIngredients";
+            this.btnIngredients.Size = new System.Drawing.Size(194, 32);
+            this.btnIngredients.TabIndex = 9;
+            this.btnIngredients.Text = "Ingredients";
+            this.btnIngredients.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtPriceInc);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.txtPrice);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtTax);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Location = new System.Drawing.Point(8, 296);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(118, 130);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Price";
+            // 
+            // txtPriceInc
+            // 
+            this.txtPriceInc.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtPriceInc.Location = new System.Drawing.Point(54, 93);
+            this.txtPriceInc.Name = "txtPriceInc";
+            this.txtPriceInc.Size = new System.Drawing.Size(50, 24);
+            this.txtPriceInc.TabIndex = 15;
+            this.txtPriceInc.Text = "0";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(9, 93);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(46, 18);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "Price:";
+            // 
+            // txtPrice
+            // 
+            this.txtPrice.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtPrice.Location = new System.Drawing.Point(54, 57);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(50, 24);
+            this.txtPrice.TabIndex = 6;
+            this.txtPrice.Text = "0";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 57);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(46, 18);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Price:";
+            // 
+            // txtTax
+            // 
+            this.txtTax.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtTax.Location = new System.Drawing.Point(54, 23);
+            this.txtTax.Name = "txtTax";
+            this.txtTax.Size = new System.Drawing.Size(50, 24);
+            this.txtTax.TabIndex = 5;
+            this.txtTax.Text = Options.Tax.ToString();
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(19, 26);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(36, 18);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Tax:";
+            // 
+            // txtProductID
+            // 
+            this.txtProductID.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtProductID.Enabled = false;
+            this.txtProductID.Location = new System.Drawing.Point(112, 17);
+            this.txtProductID.Name = "txtProductID";
+            this.txtProductID.Size = new System.Drawing.Size(150, 24);
+            this.txtProductID.TabIndex = 11;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(80, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(26, 18);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "ID:";
             // 
             // txtSCName
             // 
@@ -222,197 +438,6 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Name:";
             // 
-            // btnAddProduct
-            // 
-            this.btnAddProduct.AutoSize = true;
-            this.btnAddProduct.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnAddProduct.Location = new System.Drawing.Point(0, 375);
-            this.btnAddProduct.Name = "btnAddProduct";
-            this.btnAddProduct.Size = new System.Drawing.Size(182, 61);
-            this.btnAddProduct.TabIndex = 12;
-            this.btnAddProduct.Text = "Add Product";
-            this.btnAddProduct.UseVisualStyleBackColor = true;
-            // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(112, 17);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(150, 24);
-            this.textBox4.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(80, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 18);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "ID:";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtPrice);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtTax);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(8, 338);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(118, 90);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Price";
-            // 
-            // txtTax
-            // 
-            this.txtTax.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.txtTax.Location = new System.Drawing.Point(54, 20);
-            this.txtTax.Name = "txtTax";
-            this.txtTax.Size = new System.Drawing.Size(50, 24);
-            this.txtTax.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 18);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Tax:";
-            // 
-            // txtPrice
-            // 
-            this.txtPrice.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.txtPrice.Location = new System.Drawing.Point(54, 54);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(50, 24);
-            this.txtPrice.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 54);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 18);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Price:";
-            // 
-            // gbIngredients
-            // 
-            this.gbIngredients.Controls.Add(this.lvIngredients);
-            this.gbIngredients.Controls.Add(this.btnIngredients);
-            this.gbIngredients.Location = new System.Drawing.Point(282, 17);
-            this.gbIngredients.Name = "gbIngredients";
-            this.gbIngredients.Size = new System.Drawing.Size(200, 413);
-            this.gbIngredients.TabIndex = 13;
-            this.gbIngredients.TabStop = false;
-            this.gbIngredients.Text = "Ingredients";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 54);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 18);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Avaliable:";
-            // 
-            // cbAvaliable
-            // 
-            this.cbAvaliable.AutoSize = true;
-            this.cbAvaliable.Checked = true;
-            this.cbAvaliable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAvaliable.Location = new System.Drawing.Point(81, 57);
-            this.cbAvaliable.Name = "cbAvaliable";
-            this.cbAvaliable.Size = new System.Drawing.Size(15, 14);
-            this.cbAvaliable.TabIndex = 8;
-            this.cbAvaliable.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(51, 216);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 18);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Popup:";
-            // 
-            // btnAddPopup
-            // 
-            this.btnAddPopup.Location = new System.Drawing.Point(236, 213);
-            this.btnAddPopup.Name = "btnAddPopup";
-            this.btnAddPopup.Size = new System.Drawing.Size(25, 25);
-            this.btnAddPopup.TabIndex = 18;
-            this.btnAddPopup.Text = "+";
-            this.btnAddPopup.UseVisualStyleBackColor = true;
-            // 
-            // cbPopup
-            // 
-            this.cbPopup.FormattingEnabled = true;
-            this.cbPopup.Location = new System.Drawing.Point(111, 213);
-            this.cbPopup.Name = "cbPopup";
-            this.cbPopup.Size = new System.Drawing.Size(121, 26);
-            this.cbPopup.TabIndex = 4;
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(3, 20);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.ScrollAlwaysVisible = true;
-            this.checkedListBox1.Size = new System.Drawing.Size(176, 127);
-            this.checkedListBox1.TabIndex = 11;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(23, 23);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 18);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "Stock:";
-            // 
-            // txtStock
-            // 
-            this.txtStock.Location = new System.Drawing.Point(80, 20);
-            this.txtStock.Name = "txtStock";
-            this.txtStock.Size = new System.Drawing.Size(50, 24);
-            this.txtStock.TabIndex = 7;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.cbAvaliable);
-            this.groupBox3.Controls.Add(this.txtStock);
-            this.groupBox3.Location = new System.Drawing.Point(132, 338);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(144, 90);
-            this.groupBox3.TabIndex = 25;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Avaliable";
-            // 
-            // btnIngredients
-            // 
-            this.btnIngredients.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnIngredients.Location = new System.Drawing.Point(3, 378);
-            this.btnIngredients.Name = "btnIngredients";
-            this.btnIngredients.Size = new System.Drawing.Size(194, 32);
-            this.btnIngredients.TabIndex = 9;
-            this.btnIngredients.Text = "Ingredients";
-            this.btnIngredients.UseVisualStyleBackColor = true;
-            // 
-            // lvIngredients
-            // 
-            this.lvIngredients.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvIngredients.Location = new System.Drawing.Point(3, 20);
-            this.lvIngredients.Name = "lvIngredients";
-            this.lvIngredients.Size = new System.Drawing.Size(194, 358);
-            this.lvIngredients.TabIndex = 1;
-            this.lvIngredients.UseCompatibleStateImageBehavior = false;
-            // 
             // AddProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -434,11 +459,11 @@
             this.panel1.ResumeLayout(false);
             this.gbDetail.ResumeLayout(false);
             this.gbDetail.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.gbIngredients.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.gbIngredients.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -472,12 +497,14 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtTax;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtProductID;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.ListView lvIngredients;
         private System.Windows.Forms.Button btnIngredients;
+        private System.Windows.Forms.TextBox txtPriceInc;
+        private System.Windows.Forms.Label label9;
     }
 }
