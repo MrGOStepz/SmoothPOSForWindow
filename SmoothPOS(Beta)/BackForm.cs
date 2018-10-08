@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,6 +26,11 @@ namespace SmoothPOS_Beta_
         {
             AddProductForm addProductForm = new AddProductForm();
             addProductForm.ShowDialog();
+        }
+
+        private void btnUpdateProduct_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

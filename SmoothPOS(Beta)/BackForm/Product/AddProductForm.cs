@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,10 +16,15 @@ namespace SmoothPOS_Beta_
         public AddProductForm()
         {
             InitializeComponent();
+            InitializeEvent();
+            InitializeData();
+        }
+
+        private void InitializeEvent()
+        {
             txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
             txtPriceInc.TextChanged += new System.EventHandler(this.txtPriceInc_TextChanged);
             txtTax.TextChanged += new System.EventHandler(this.txtTax_TextChanged);
-            InitializeData();
         }
 
         private void InitializeData()
@@ -30,6 +36,9 @@ namespace SmoothPOS_Beta_
             txtTax.Text = Options.Tax.ToString();
             txtPrice.Text = "0";
             txtPriceInc.Text = "0";
+
+            //TODO Database Get list of Priter
+            //TODO Database Get list of Ingredients for Product
         }
 
         private void btnAddProduct_Click(object sender, EventArgs e)
@@ -87,6 +96,7 @@ namespace SmoothPOS_Beta_
                     }
                 }
 
+                //Textbox Stock
                 if(txtStock.Text == "")
                 {
                     product.Stock = 0;
@@ -106,8 +116,10 @@ namespace SmoothPOS_Beta_
                     }
                 }
 
-
+                //Checkbox Avaliable
+                product.Avaliable = cbAvaliable.Checked == true ? true : false;
                 
+
             }
             catch(Exception ex)
             {
@@ -116,6 +128,19 @@ namespace SmoothPOS_Beta_
             }
         }
 
+        //private IEnumerable<ListViewSubItem> GetListOfIngredient()
+        //{
+        //    foreach (ListViewItem itemRow in lvIngredients.Items)
+        //    {
+        //        for (int i = 0; i < itemRow.SubItems.Count; i++)
+        //        {
+        //            yield return itemRow.SubItems[i];          
+        //        }
+        //    }      
+        //}
+    
+
+        #region Event Text change
         private void txtTax_TextChanged(object sender, EventArgs e)
         {           
             if(txtTax.Text == "")
@@ -186,5 +211,29 @@ namespace SmoothPOS_Beta_
             txtPrice.TextChanged += txtPrice_TextChanged;
 
         }
+
+        #endregion
+
+        private void btnUploadImage_Click(object sender, EventArgs e)
+        {           
+            var thread = new Thread(ShowOpenDialog);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            thread.Join();
+        }
+
+        private void ShowOpenDialog()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                pbImage.Image = new Bitmap(ofd.FileName);
+
+            }
+            ofd = null;
+        }
+
     }
 }

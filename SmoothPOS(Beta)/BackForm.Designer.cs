@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.gbProduct = new System.Windows.Forms.GroupBox();
-            this.btnAddProduct = new System.Windows.Forms.Button();
-            this.btnUpdateProduct = new System.Windows.Forms.Button();
             this.btnRemoveProduct = new System.Windows.Forms.Button();
+            this.btnUpdateProduct = new System.Windows.Forms.Button();
+            this.btnAddProduct = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRemovePopup = new System.Windows.Forms.Button();
             this.btnUpdatePopup = new System.Windows.Forms.Button();
@@ -41,6 +41,10 @@
             this.btnUpdateIngredient = new System.Windows.Forms.Button();
             this.btnAddIngredient = new System.Windows.Forms.Button();
             this.gbProducts = new System.Windows.Forms.GroupBox();
+            this.gbComboSet = new System.Windows.Forms.GroupBox();
+            this.btnRemoveComboSet = new System.Windows.Forms.Button();
+            this.btnComboSet = new System.Windows.Forms.Button();
+            this.btnAddComboSet = new System.Windows.Forms.Button();
             this.gbStaffs = new System.Windows.Forms.GroupBox();
             this.gbStaff = new System.Windows.Forms.GroupBox();
             this.btnDeleteStaff = new System.Windows.Forms.Button();
@@ -55,24 +59,20 @@
             this.btnUpdatepRoster = new System.Windows.Forms.Button();
             this.btnAddRoster = new System.Windows.Forms.Button();
             this.gbReport = new System.Windows.Forms.GroupBox();
-            this.gbComboSet = new System.Windows.Forms.GroupBox();
-            this.btnRemoveComboSet = new System.Windows.Forms.Button();
-            this.btnComboSet = new System.Windows.Forms.Button();
-            this.btnAddComboSet = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.gbPrinter = new System.Windows.Forms.GroupBox();
-            this.btnAddPrinter = new System.Windows.Forms.Button();
             this.btnRemovePrinter = new System.Windows.Forms.Button();
+            this.btnAddPrinter = new System.Windows.Forms.Button();
             this.gbProduct.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbIngredient.SuspendLayout();
             this.gbProducts.SuspendLayout();
+            this.gbComboSet.SuspendLayout();
             this.gbStaffs.SuspendLayout();
             this.gbStaff.SuspendLayout();
             this.gbWages.SuspendLayout();
             this.gbRoster.SuspendLayout();
             this.gbReport.SuspendLayout();
-            this.gbComboSet.SuspendLayout();
             this.gbPrinter.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,15 +88,14 @@
             this.gbProduct.TabStop = false;
             this.gbProduct.Text = "Product";
             // 
-            // btnAddProduct
+            // btnRemoveProduct
             // 
-            this.btnAddProduct.Location = new System.Drawing.Point(6, 19);
-            this.btnAddProduct.Name = "btnAddProduct";
-            this.btnAddProduct.Size = new System.Drawing.Size(188, 60);
-            this.btnAddProduct.TabIndex = 0;
-            this.btnAddProduct.Text = "Add Product";
-            this.btnAddProduct.UseVisualStyleBackColor = true;
-            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
+            this.btnRemoveProduct.Location = new System.Drawing.Point(6, 152);
+            this.btnRemoveProduct.Name = "btnRemoveProduct";
+            this.btnRemoveProduct.Size = new System.Drawing.Size(188, 60);
+            this.btnRemoveProduct.TabIndex = 2;
+            this.btnRemoveProduct.Text = "Remove Product";
+            this.btnRemoveProduct.UseVisualStyleBackColor = true;
             // 
             // btnUpdateProduct
             // 
@@ -106,15 +105,17 @@
             this.btnUpdateProduct.TabIndex = 1;
             this.btnUpdateProduct.Text = "Update Product";
             this.btnUpdateProduct.UseVisualStyleBackColor = true;
+            this.btnUpdateProduct.Click += new System.EventHandler(this.btnUpdateProduct_Click);
             // 
-            // btnRemoveProduct
+            // btnAddProduct
             // 
-            this.btnRemoveProduct.Location = new System.Drawing.Point(6, 152);
-            this.btnRemoveProduct.Name = "btnRemoveProduct";
-            this.btnRemoveProduct.Size = new System.Drawing.Size(188, 60);
-            this.btnRemoveProduct.TabIndex = 2;
-            this.btnRemoveProduct.Text = "Remove Product";
-            this.btnRemoveProduct.UseVisualStyleBackColor = true;
+            this.btnAddProduct.Location = new System.Drawing.Point(6, 19);
+            this.btnAddProduct.Name = "btnAddProduct";
+            this.btnAddProduct.Size = new System.Drawing.Size(188, 60);
+            this.btnAddProduct.TabIndex = 0;
+            this.btnAddProduct.Text = "Add Product";
+            this.btnAddProduct.UseVisualStyleBackColor = true;
+            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
             // groupBox1
             // 
@@ -207,6 +208,45 @@
             this.gbProducts.TabIndex = 5;
             this.gbProducts.TabStop = false;
             this.gbProducts.Text = "Product";
+            // 
+            // gbComboSet
+            // 
+            this.gbComboSet.Controls.Add(this.btnRemoveComboSet);
+            this.gbComboSet.Controls.Add(this.btnComboSet);
+            this.gbComboSet.Controls.Add(this.btnAddComboSet);
+            this.gbComboSet.Location = new System.Drawing.Point(630, 21);
+            this.gbComboSet.Name = "gbComboSet";
+            this.gbComboSet.Size = new System.Drawing.Size(200, 223);
+            this.gbComboSet.TabIndex = 4;
+            this.gbComboSet.TabStop = false;
+            this.gbComboSet.Text = "Combo Set";
+            // 
+            // btnRemoveComboSet
+            // 
+            this.btnRemoveComboSet.Location = new System.Drawing.Point(6, 152);
+            this.btnRemoveComboSet.Name = "btnRemoveComboSet";
+            this.btnRemoveComboSet.Size = new System.Drawing.Size(188, 60);
+            this.btnRemoveComboSet.TabIndex = 2;
+            this.btnRemoveComboSet.Text = "Remove Combo Set";
+            this.btnRemoveComboSet.UseVisualStyleBackColor = true;
+            // 
+            // btnComboSet
+            // 
+            this.btnComboSet.Location = new System.Drawing.Point(6, 85);
+            this.btnComboSet.Name = "btnComboSet";
+            this.btnComboSet.Size = new System.Drawing.Size(188, 60);
+            this.btnComboSet.TabIndex = 1;
+            this.btnComboSet.Text = "Update Combo Set";
+            this.btnComboSet.UseVisualStyleBackColor = true;
+            // 
+            // btnAddComboSet
+            // 
+            this.btnAddComboSet.Location = new System.Drawing.Point(6, 19);
+            this.btnAddComboSet.Name = "btnAddComboSet";
+            this.btnAddComboSet.Size = new System.Drawing.Size(188, 60);
+            this.btnAddComboSet.TabIndex = 0;
+            this.btnAddComboSet.Text = "Add Combo Set";
+            this.btnAddComboSet.UseVisualStyleBackColor = true;
             // 
             // gbStaffs
             // 
@@ -349,45 +389,6 @@
             this.gbReport.TabStop = false;
             this.gbReport.Text = "Report";
             // 
-            // gbComboSet
-            // 
-            this.gbComboSet.Controls.Add(this.btnRemoveComboSet);
-            this.gbComboSet.Controls.Add(this.btnComboSet);
-            this.gbComboSet.Controls.Add(this.btnAddComboSet);
-            this.gbComboSet.Location = new System.Drawing.Point(630, 21);
-            this.gbComboSet.Name = "gbComboSet";
-            this.gbComboSet.Size = new System.Drawing.Size(200, 223);
-            this.gbComboSet.TabIndex = 4;
-            this.gbComboSet.TabStop = false;
-            this.gbComboSet.Text = "Combo Set";
-            // 
-            // btnRemoveComboSet
-            // 
-            this.btnRemoveComboSet.Location = new System.Drawing.Point(6, 152);
-            this.btnRemoveComboSet.Name = "btnRemoveComboSet";
-            this.btnRemoveComboSet.Size = new System.Drawing.Size(188, 60);
-            this.btnRemoveComboSet.TabIndex = 2;
-            this.btnRemoveComboSet.Text = "Remove Combo Set";
-            this.btnRemoveComboSet.UseVisualStyleBackColor = true;
-            // 
-            // btnComboSet
-            // 
-            this.btnComboSet.Location = new System.Drawing.Point(6, 85);
-            this.btnComboSet.Name = "btnComboSet";
-            this.btnComboSet.Size = new System.Drawing.Size(188, 60);
-            this.btnComboSet.TabIndex = 1;
-            this.btnComboSet.Text = "Update Combo Set";
-            this.btnComboSet.UseVisualStyleBackColor = true;
-            // 
-            // btnAddComboSet
-            // 
-            this.btnAddComboSet.Location = new System.Drawing.Point(6, 19);
-            this.btnAddComboSet.Name = "btnAddComboSet";
-            this.btnAddComboSet.Size = new System.Drawing.Size(188, 60);
-            this.btnAddComboSet.TabIndex = 0;
-            this.btnAddComboSet.Text = "Add Combo Set";
-            this.btnAddComboSet.UseVisualStyleBackColor = true;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(12, 19);
@@ -408,15 +409,6 @@
             this.gbPrinter.TabStop = false;
             this.gbPrinter.Text = "Printer";
             // 
-            // btnAddPrinter
-            // 
-            this.btnAddPrinter.Location = new System.Drawing.Point(12, 19);
-            this.btnAddPrinter.Name = "btnAddPrinter";
-            this.btnAddPrinter.Size = new System.Drawing.Size(188, 60);
-            this.btnAddPrinter.TabIndex = 1;
-            this.btnAddPrinter.Text = "Add Printer";
-            this.btnAddPrinter.UseVisualStyleBackColor = true;
-            // 
             // btnRemovePrinter
             // 
             this.btnRemovePrinter.Location = new System.Drawing.Point(12, 85);
@@ -425,6 +417,15 @@
             this.btnRemovePrinter.TabIndex = 2;
             this.btnRemovePrinter.Text = "Remove Printer";
             this.btnRemovePrinter.UseVisualStyleBackColor = true;
+            // 
+            // btnAddPrinter
+            // 
+            this.btnAddPrinter.Location = new System.Drawing.Point(12, 19);
+            this.btnAddPrinter.Name = "btnAddPrinter";
+            this.btnAddPrinter.Size = new System.Drawing.Size(188, 60);
+            this.btnAddPrinter.TabIndex = 1;
+            this.btnAddPrinter.Text = "Add Printer";
+            this.btnAddPrinter.UseVisualStyleBackColor = true;
             // 
             // BackForm
             // 
@@ -443,12 +444,12 @@
             this.groupBox1.ResumeLayout(false);
             this.gbIngredient.ResumeLayout(false);
             this.gbProducts.ResumeLayout(false);
+            this.gbComboSet.ResumeLayout(false);
             this.gbStaffs.ResumeLayout(false);
             this.gbStaff.ResumeLayout(false);
             this.gbWages.ResumeLayout(false);
             this.gbRoster.ResumeLayout(false);
             this.gbReport.ResumeLayout(false);
-            this.gbComboSet.ResumeLayout(false);
             this.gbPrinter.ResumeLayout(false);
             this.ResumeLayout(false);
 

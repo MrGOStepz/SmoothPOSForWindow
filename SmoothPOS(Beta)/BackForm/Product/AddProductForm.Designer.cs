@@ -163,6 +163,7 @@
             this.btnUploadImage.TabIndex = 10;
             this.btnUploadImage.Text = "Upload Image";
             this.btnUploadImage.UseVisualStyleBackColor = true;
+            this.btnUploadImage.Click += new System.EventHandler(this.btnUploadImage_Click);
             // 
             // panel1
             // 
@@ -360,7 +361,7 @@
             this.txtTax.Name = "txtTax";
             this.txtTax.Size = new System.Drawing.Size(50, 24);
             this.txtTax.TabIndex = 5;
-            this.txtTax.Text = Options.Tax.ToString();
+            this.txtTax.Text = "10";
             // 
             // label4
             // 
