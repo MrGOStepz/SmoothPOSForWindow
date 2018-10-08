@@ -17,7 +17,6 @@ namespace SmoothDataLayer
 
         private const string TABLE_EMPLOYEE = "tb_employee";
 
-        
 
         private void DatabaseOpen()
         {

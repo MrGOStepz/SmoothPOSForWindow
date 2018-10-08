@@ -33,8 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +59,11 @@
     </Compile>
     <Compile Include="BackForm\Printer\AddPrinterForm.Designer.cs">
       <DependentUpon>AddPrinterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ProductService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ExceptionLog.cs" />
     <Compile Include="BackForm\Wage\AddWagesForm.cs">
@@ -122,6 +135,7 @@
     <Compile Include="Options.cs" />
     <Compile Include="Popups.cs" />
     <Compile Include="Printer.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Products.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -246,6 +260,14 @@
     <EmbeddedResource Include="SearchProductForm.resx">
       <DependentUpon>SearchProductForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Connected Services\ProductService\ProductService.wsdl" />
+    <None Include="Connected Services\ProductService\ProductService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProductService\ProductService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -262,9 +284,15 @@
   <ItemGroup>
     <Folder Include="AppData\" />
     <Folder Include="Interface\" />
-    <Folder Include="Modals\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\ProductService\ProductService.disco" />
+    <None Include="Connected Services\ProductService\configuration91.svcinfo" />
+    <None Include="Connected Services\ProductService\configuration.svcinfo" />
+    <None Include="Connected Services\ProductService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Resources\Images\Icons\Add.png" />
     <Content Include="Resources\Images\Icons\Delete.png" />
     <Content Include="Resources\Images\Icons\Delete2.png" />
@@ -282,6 +310,12 @@
     <Content Include="Resources\Images\Icons\Send.png" />
     <Content Include="Resources\Images\Icons\Setting.png" />
     <Content Include="Resources\Images\Icons\Update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ProductService\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

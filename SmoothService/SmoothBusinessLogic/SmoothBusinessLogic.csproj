@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,8 +49,9 @@
   <ItemGroup>
     <Compile Include="CustomerLogic.cs" />
     <Compile Include="EmployeeLogic.cs" />
-    <Compile Include="EmployeeModel.cs" />
+    <Compile Include="Model\EmployeeModel.cs" />
     <Compile Include="LoginLogic.cs" />
+    <Compile Include="Model\ProductModel.cs" />
     <Compile Include="PrinterLogic.cs" />
     <Compile Include="ProductLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -43,9 +44,9 @@ namespace SmoothPOS_Beta_
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            Product product = new Product();
+            ProductModel product = new ProductModel();
 
-            product.ID = int.Parse(txtProductID.Text);
+            product.ProductID = int.Parse(txtProductID.Text);
 
             try
             {
@@ -61,10 +62,10 @@ namespace SmoothPOS_Beta_
                 }
 
                 //Textbox Shotcut Name
-                product.ShotName = txtSCName.Text.Trim() == "" ? "" : txtSCName.Text;
+                product.ShortName = txtSCName.Text.Trim() == "" ? "" : txtSCName.Text;
 
                 //Textbox Desicription
-                product.Discription = txtDescription.Text.Trim() == "" ? "" : txtDescription.Text;
+                product.Description = txtDescription.Text.Trim() == "" ? "" : txtDescription.Text;
 
                 //Textbox Popup
                 if(cbPopup.Text == "")
@@ -117,8 +118,20 @@ namespace SmoothPOS_Beta_
                 }
 
                 //Checkbox Avaliable
-                product.Avaliable = cbAvaliable.Checked == true ? true : false;
-                
+                product.Avaliable = cbAvaliable.Checked == true ? 1 : 0;
+
+                string json = JsonConvert.SerializeObject(product);
+
+                DatabaseHandle dbHandle = new DatabaseHandle();
+
+                if(dbHandle.AddProduct(json) > 0)
+                {
+                    MessageBox.Show("Add Product Complete!");
+                }
+                else
+                {
+                    MessageBox.Show("Something Wrong!");
+                }
 
             }
             catch(Exception ex)
@@ -230,7 +243,6 @@ namespace SmoothPOS_Beta_
             {
                 pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
                 pbImage.Image = new Bitmap(ofd.FileName);
-
             }
             ofd = null;
         }

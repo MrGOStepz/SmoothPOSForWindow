@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmoothPOS_Beta_.ProductService;
 
 namespace SmoothPOS_Beta_
 {
     public class DatabaseHandle : IProduct
     {
+        ProductService.ProductServiceClient _productService;
         #region IProduct
-        public int AddProduct(string product)
+        public int AddProduct(string productDetail)
         {
-            throw new NotImplementedException();
+            _productService = new ProductServiceClient();
+            return _productService.AddProduct(productDetail);
         }
 
         public string FilterOfProduct(string product)
