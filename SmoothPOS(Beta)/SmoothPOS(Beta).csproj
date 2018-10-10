@@ -65,6 +65,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ConvertImage.cs" />
     <Compile Include="ExceptionLog.cs" />
     <Compile Include="BackForm\Wage\AddWagesForm.cs">
       <SubType>Form</SubType>
@@ -117,6 +118,7 @@
     <Compile Include="DatabaseHandle.cs" />
     <Compile Include="GlobalHelper.cs" />
     <Compile Include="IDatabase.cs" />
+    <Compile Include="Models\IngredientModel.cs" />
     <Compile Include="Ingredients.cs" />
     <Compile Include="InitializeApplicationcs.cs" />
     <Compile Include="IPrinter.cs" />
@@ -133,6 +135,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Options.cs" />
+    <Compile Include="Models\PopupModel.cs" />
     <Compile Include="Popups.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="Models\ProductModel.cs" />
@@ -239,6 +242,9 @@
     <EmbeddedResource Include="BackForm.resx">
       <DependentUpon>BackForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BackForm\Ingredient\AddIngredientForm.resx">
+      <DependentUpon>AddIngredientForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BackForm\Popup\AddPopupForm.resx">
       <DependentUpon>AddPopupForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -293,23 +299,60 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Resources\Images\Icons\Add.png" />
-    <Content Include="Resources\Images\Icons\Delete.png" />
-    <Content Include="Resources\Images\Icons\Delete2.png" />
-    <Content Include="Resources\Images\Icons\Dollar.png" />
-    <Content Include="Resources\Images\Icons\Edit.png" />
-    <Content Include="Resources\Images\Icons\Left.png" />
-    <Content Include="Resources\Images\Icons\Login.png" />
-    <Content Include="Resources\Images\Icons\Minus.png" />
-    <Content Include="Resources\Images\Icons\Next.png" />
-    <Content Include="Resources\Images\Icons\Plus.png" />
-    <Content Include="Resources\Images\Icons\Print Android.png" />
-    <Content Include="Resources\Images\Icons\Print IO.png" />
-    <Content Include="Resources\Images\Icons\Right.png" />
-    <Content Include="Resources\Images\Icons\Search.png" />
-    <Content Include="Resources\Images\Icons\Send.png" />
-    <Content Include="Resources\Images\Icons\Setting.png" />
-    <Content Include="Resources\Images\Icons\Update.png" />
+    <Content Include="Resources\Images\Icons\Add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Cancel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Delete2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Dollar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Left.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Login.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Minus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Next.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Plus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Print Android.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Print IO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Right.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Send.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Setting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Update.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

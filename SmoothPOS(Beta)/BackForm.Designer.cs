@@ -155,6 +155,7 @@
             this.btnAddPopup.TabIndex = 0;
             this.btnAddPopup.Text = "Add Popup";
             this.btnAddPopup.UseVisualStyleBackColor = true;
+            this.btnAddPopup.Click += new System.EventHandler(this.btnAddPopup_Click);
             // 
             // gbIngredient
             // 

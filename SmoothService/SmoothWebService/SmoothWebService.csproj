@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EmployeeService.svc" />
+    <Content Include="PopupService.svc" />
     <Content Include="ProductService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -78,7 +79,11 @@
       <DependentUpon>EmployeeService.svc</DependentUpon>
     </Compile>
     <Compile Include="IEmployeeService.cs" />
+    <Compile Include="IPopupService.cs" />
     <Compile Include="IProductService.cs" />
+    <Compile Include="PopupService.svc.cs">
+      <DependentUpon>PopupService.svc</DependentUpon>
+    </Compile>
     <Compile Include="ProductService.svc.cs">
       <DependentUpon>ProductService.svc</DependentUpon>
     </Compile>
