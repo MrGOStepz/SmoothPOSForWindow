@@ -9,16 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmoothBusinessLogic", "Smoo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmoothWebService", "SmoothService\SmoothWebService\SmoothWebService.csproj", "{33E8E94E-B3E4-4A9D-B1F1-FD515C62D486}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmoothServer", "SmoothServer\SmoothServer.csproj", "{31EE0A6C-FB81-4226-8DF8-36559BE999E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1D61B83A-7D66-414D-9BEF-1FF85E279833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D61B83A-7D66-414D-9BEF-1FF85E279833}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D61B83A-7D66-414D-9BEF-1FF85E279833}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D61B83A-7D66-414D-9BEF-1FF85E279833}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9F86091-731B-456D-ABBE-1120B5B47E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9F86091-731B-456D-ABBE-1120B5B47E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9F86091-731B-456D-ABBE-1120B5B47E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,10 +29,10 @@ Global
 		{33E8E94E-B3E4-4A9D-B1F1-FD515C62D486}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33E8E94E-B3E4-4A9D-B1F1-FD515C62D486}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33E8E94E-B3E4-4A9D-B1F1-FD515C62D486}.Release|Any CPU.Build.0 = Release|Any CPU
-		{865AB277-E353-4CA7-B2EA-330D516F401E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{865AB277-E353-4CA7-B2EA-330D516F401E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{865AB277-E353-4CA7-B2EA-330D516F401E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{865AB277-E353-4CA7-B2EA-330D516F401E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31EE0A6C-FB81-4226-8DF8-36559BE999E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31EE0A6C-FB81-4226-8DF8-36559BE999E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31EE0A6C-FB81-4226-8DF8-36559BE999E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31EE0A6C-FB81-4226-8DF8-36559BE999E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,6 +12,18 @@ namespace SmoothService
     public interface IPopupService
     {
         [OperationContract]
-        void DoWork();
+        int AddPopup(string stringJSON);
+
+        [OperationContract]
+        int UpdatePopup(string stringJSON);
+
+        [OperationContract]
+        int RemovePopup(int productID);
+
+        [OperationContract]
+        string ListOfPopup();
+
+        [OperationContract]
+        string FilterOfPopup(string popupName);
     }
 }

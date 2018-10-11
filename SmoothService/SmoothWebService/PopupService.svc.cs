@@ -11,8 +11,29 @@ namespace SmoothService
     // NOTE: In order to launch WCF Test Client for testing this service, please select PopupService.svc or PopupService.svc.cs at the Solution Explorer and start debugging.
     public class PopupService : IPopupService
     {
-        public void DoWork()
+        public int AddPopup(string stringJSON)
         {
+            throw new NotImplementedException();
+        }
+
+        public string FilterOfPopup(string popupName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ListOfPopup()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int RemovePopup(int productID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdatePopup(string stringJSON)
+        {
+            throw new NotImplementedException();
         }
     }
 }
