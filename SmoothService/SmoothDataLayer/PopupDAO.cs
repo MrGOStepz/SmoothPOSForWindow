@@ -51,8 +51,9 @@ namespace SmoothDataLayer
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
                 cmd.Parameters.AddWithValue("@Name", Name);
 
-                //cmd.ExecuteNonQuery();
-                int popupID = Convert.ToInt32(cmd.ExecuteScalar());
+                cmd.ExecuteNonQuery();
+
+                long popupID = cmd.LastInsertedId;
                 DatabaseClose();
 
                 DatabaseOpen();
@@ -74,12 +75,12 @@ namespace SmoothDataLayer
                 }
 
                 DatabaseClose();
-                log.Info("SmoothDataLayer -- Add Product Success");
+                log.Info("SmoothDataLayer -- Add Popup Success");
                 return 1;
             }
             catch (Exception ex)
             {
-                log.Error("DataLayer => AddProduct(): " + ex.Message);
+                log.Error("SmoothDataLayer => AddPopup(): " + ex.Message);
                 return -1;
             }
         }

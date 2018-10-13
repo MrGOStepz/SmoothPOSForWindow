@@ -60,6 +60,11 @@
     <Compile Include="BackForm\Printer\AddPrinterForm.Designer.cs">
       <DependentUpon>AddPrinterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\PopupService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ProductService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -266,6 +271,13 @@
     <EmbeddedResource Include="SearchProductForm.resx">
       <DependentUpon>SearchProductForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Connected Services\PopupService\PopupService.wsdl" />
+    <None Include="Connected Services\PopupService\PopupService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PopupService\PopupService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ProductService\ProductService.wsdl" />
     <None Include="Connected Services\ProductService\ProductService.xsd">
       <SubType>Designer</SubType>
@@ -296,6 +308,13 @@
     <None Include="Connected Services\ProductService\configuration91.svcinfo" />
     <None Include="Connected Services\ProductService\configuration.svcinfo" />
     <None Include="Connected Services\ProductService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\PopupService\PopupService.disco" />
+    <None Include="Connected Services\PopupService\configuration91.svcinfo" />
+    <None Include="Connected Services\PopupService\configuration.svcinfo" />
+    <None Include="Connected Services\PopupService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -358,6 +377,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\PopupService\" />
     <WCFMetadataStorage Include="Connected Services\ProductService\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

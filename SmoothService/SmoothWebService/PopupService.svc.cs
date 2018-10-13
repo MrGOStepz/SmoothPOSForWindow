@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using SmoothBusinessLogic;
 
 namespace SmoothService
 {
@@ -11,9 +12,11 @@ namespace SmoothService
     // NOTE: In order to launch WCF Test Client for testing this service, please select PopupService.svc or PopupService.svc.cs at the Solution Explorer and start debugging.
     public class PopupService : IPopupService
     {
+        private PopupLogic _popupLogic;
         public int AddPopup(string stringJSON)
         {
-            throw new NotImplementedException();
+            _popupLogic = new PopupLogic();
+            return _popupLogic.AddNewPopupLogic(stringJSON);
         }
 
         public string FilterOfPopup(string popupName)

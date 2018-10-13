@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,8 @@ namespace SmoothPOS_Beta_
 {
     public partial class AddPopupForm : Form
     {
+
+
         private ImageList _imageList = new ImageList();
 
         public AddPopupForm()
@@ -147,13 +150,25 @@ namespace SmoothPOS_Beta_
                 Bitmap bitmap = new Bitmap(_imageList.Images[index]);
 
                 if (tempImage != null)
-                    listPopup.Image64 = ConvertImage.ImageToString(bitmap); //ConvertImageToString(bitmap);
+                    listPopup.Image64 = ConvertImage.ImageToString(bitmap);
                 else
                     listPopup.Image64 = "";
 
                 popupModel.ListSubPopup.Add(listPopup);
 
                 i++;
+            }
+
+            string JSON = JsonConvert.SerializeObject(popupModel);
+            DatabaseHandle databaseHandle = new DatabaseHandle();
+
+            if(databaseHandle.AddPopup(JSON) > 0)
+            {
+                MessageBox.Show("Add Popup Complete!", "Success", MessageBoxButtons.OK);
+            }
+            else
+            {
+                MessageBox.Show("Something wrong", "Fail", MessageBoxButtons.OK);
             }
         }
 
