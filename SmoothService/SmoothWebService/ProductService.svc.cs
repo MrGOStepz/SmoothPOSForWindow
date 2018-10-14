@@ -17,7 +17,7 @@ namespace SmoothService
         public int AddProduct(string stringJSON)
         {
             _productLogic = new ProductLogic();
-            return _productLogic.AddProduct(stringJSON);
+            return _productLogic.AddProductLogic(stringJSON);
         }
 
         public string FilterOfProduct(string productName)

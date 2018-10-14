@@ -222,10 +222,10 @@ namespace SmoothDataLayer
                 stringSQL.Append("SELECT popup_id, name ");
                 stringSQL.Append("FROM ");
                 stringSQL.Append(TABLE_POPUP);
-                stringSQL.Append(" WEHRE name LIKE % @Name %;");
+                stringSQL.Append(" WHERE name LIKE @Name;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@Name", "%"+name+"%");
 
                 MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
 

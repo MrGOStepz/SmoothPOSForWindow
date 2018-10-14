@@ -38,5 +38,11 @@ namespace SmoothPOS_Beta_
             AddPopupForm addPopupForm = new AddPopupForm();
             addPopupForm.ShowDialog();
         }
+
+        private void btnUpdatePopup_Click(object sender, EventArgs e)
+        {
+            SearchPopupForm searchPopupForm = new SearchPopupForm();
+            searchPopupForm.ShowDialog();
+        }
     }
 }

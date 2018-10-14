@@ -32,7 +32,14 @@ namespace SmoothPOS_Beta_
 
         public string ListOfPopup()
         {
-            throw new NotImplementedException();
+            _popupService = new PopupServiceClient();
+            return _popupService.ListOfPopup();
+        }
+
+        public string ListOfPopupFilter(string name)
+        {
+            _popupService = new PopupServiceClient();
+            return _popupService.FilterOfPopup(name);
         }
 
         public string ListOfProduct()

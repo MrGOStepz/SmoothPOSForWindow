@@ -129,6 +129,7 @@ namespace SmoothBusinessLogic
 
                 foreach (DataRow row in dt.Rows)
                 {
+                    popupModel = new PopupModel();
                     popupModel.PopupID = (int) row["popup_id"];
                     popupModel.Name = row["name"].ToString();
 
@@ -153,10 +154,11 @@ namespace SmoothBusinessLogic
                 DataTable dt = new DataTable();
                 List<PopupModel> lstPopupModel = new List<PopupModel>();
                 PopupModel popupModel = new PopupModel();
-                dt = _popupDAO.GetListOfPopup();
+                dt = _popupDAO.GetListOfPopupFilter(name);
 
                 foreach (DataRow row in dt.Rows)
                 {
+                    popupModel = new PopupModel();
                     popupModel.PopupID = (int)row["popup_id"];
                     popupModel.Name = row["name"].ToString();
 

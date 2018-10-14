@@ -146,6 +146,7 @@
             this.btnUpdatePopup.TabIndex = 1;
             this.btnUpdatePopup.Text = "Update Popup";
             this.btnUpdatePopup.UseVisualStyleBackColor = true;
+            this.btnUpdatePopup.Click += new System.EventHandler(this.btnUpdatePopup_Click);
             // 
             // btnAddPopup
             // 
