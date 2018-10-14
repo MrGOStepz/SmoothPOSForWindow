@@ -2,6 +2,7 @@
 using SmoothDataLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -76,6 +77,100 @@ namespace SmoothBusinessLogic
             {
                 log.Error("BussicnessLogic => AddProduct" + ex.Message);
                 return -1;
+            }
+        }
+
+        public int UpdatePopup(string stringJSON)
+        {
+            try
+            {
+                PopupModel popupModel = JsonConvert.DeserializeObject<PopupModel>(stringJSON);
+
+                List<int> lstSubpPopupID = new List<int>();
+                List<string> lstSubPopupName = new List<string>();
+                List<float> lstSubPopupPrice = new List<float>();
+                List<string> lstSubpopupImagePath = new List<string>();
+
+                lstSubpPopupID = popupModel.ListSubPopup.Select(x => x.SubPopUpID).ToList();
+                lstSubPopupName = popupModel.ListSubPopup.Select(x => x.Name).ToList();
+                lstSubPopupPrice = popupModel.ListSubPopup.Select(x => x.Price).ToList();
+                lstSubpopupImagePath = popupModel.ListSubPopup.Select(x => x.Image64).ToList();
+
+                return _popupDAO.UpdatePopup(popupModel.PopupID, popupModel.Name, lstSubpPopupID, lstSubPopupName, lstSubPopupPrice, lstSubpopupImagePath);
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => AddProduct" + ex.Message);
+                return -1;
+            }
+        }
+
+        public int DeletePopup(int PopupID)
+        {
+            try
+            {
+                return _popupDAO.DeletePopup(PopupID);
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => AddProduct" + ex.Message);
+                return -1;
+            }
+        }
+
+        public string GetListOfPopup()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                List<PopupModel> lstPopupModel = new List<PopupModel>();
+                PopupModel popupModel = new PopupModel();
+                dt = _popupDAO.GetListOfPopup();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    popupModel.PopupID = (int) row["popup_id"];
+                    popupModel.Name = row["name"].ToString();
+
+                    lstPopupModel.Add(popupModel);
+                }
+
+                string stringJSON = JsonConvert.SerializeObject(lstPopupModel);
+
+                return stringJSON;
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => AddProduct" + ex.Message);
+                return null;
+            }
+        }
+
+        public string GetListOfPopupFilter(string name)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                List<PopupModel> lstPopupModel = new List<PopupModel>();
+                PopupModel popupModel = new PopupModel();
+                dt = _popupDAO.GetListOfPopup();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    popupModel.PopupID = (int)row["popup_id"];
+                    popupModel.Name = row["name"].ToString();
+
+                    lstPopupModel.Add(popupModel);
+                }
+
+                string stringJSON = JsonConvert.SerializeObject(lstPopupModel);
+
+                return stringJSON;
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => AddProduct" + ex.Message);
+                return null;
             }
         }
     }

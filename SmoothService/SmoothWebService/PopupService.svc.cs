@@ -21,22 +21,26 @@ namespace SmoothService
 
         public string FilterOfPopup(string popupName)
         {
-            throw new NotImplementedException();
+            _popupLogic = new PopupLogic();
+            return _popupLogic.GetListOfPopupFilter(popupName);
         }
 
         public string ListOfPopup()
         {
-            throw new NotImplementedException();
+            _popupLogic = new PopupLogic();
+            return _popupLogic.GetListOfPopup();
         }
 
-        public int RemovePopup(int productID)
+        public int RemovePopup(int PopupID)
         {
-            throw new NotImplementedException();
+            _popupLogic = new PopupLogic();
+            return _popupLogic.DeletePopup(PopupID);
         }
 
         public int UpdatePopup(string stringJSON)
         {
-            throw new NotImplementedException();
+            _popupLogic = new PopupLogic();
+            return _popupLogic.UpdatePopup(stringJSON);
         }
     }
 }

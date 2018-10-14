@@ -21,6 +21,7 @@ namespace SmoothPOS_Beta_
         int UpdatPopup(string popup);
         int RemovePopup(int popupID);
         string ListOfPopup();
+        string ListOfPopupFilter(string name);
     }
 
     interface IIngredient
