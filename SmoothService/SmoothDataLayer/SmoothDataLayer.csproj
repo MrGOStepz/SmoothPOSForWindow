@@ -78,6 +78,8 @@
   <ItemGroup>
     <Compile Include="CustomerDAO.cs" />
     <Compile Include="EmployeeDAO.cs" />
+    <Compile Include="IngredientDAO.cs" />
+    <Compile Include="PopupDAO.cs" />
     <Compile Include="PrinterDAO.cs" />
     <Compile Include="ProductDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
