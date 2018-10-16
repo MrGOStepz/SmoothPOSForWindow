@@ -43,6 +43,7 @@ namespace SmoothPOS_Beta_
         {
             SearchPopupForm searchPopupForm = new SearchPopupForm();
             searchPopupForm.ShowDialog();
+
         }
     }
 }
