@@ -8,7 +8,10 @@ namespace SmoothPOS_Beta_
 {
     public class Users
     {
-        
+        public int ID { get; set; }
+        public int Level { get; set; }
+        public string FirstName { get; set; }
+
     }
 
     public class Admin:Users

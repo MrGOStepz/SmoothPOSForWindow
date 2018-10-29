@@ -15,6 +15,24 @@ namespace SmoothPOS_Beta_
         public RemovePrinterForm()
         {
             InitializeComponent();
+            InitilizePrinter();
+        }
+
+        private void InitilizePrinter()
+        {
+            //TODO Get List of Pritner
+
+            List<string> lstPritner = new List<string>();
+
+            foreach (string printer in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
+            {
+                lstPritner.Add(printer);
+            }
+        }
+
+        private void btnRemovePrinter_Click(object sender, EventArgs e)
+        {
+            //TODO Remove pritner in Database
         }
     }
 }

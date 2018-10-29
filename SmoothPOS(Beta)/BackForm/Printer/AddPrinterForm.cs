@@ -15,6 +15,22 @@ namespace SmoothPOS_Beta_
         public AddPrinterForm()
         {
             InitializeComponent();
+            InitializePrinter();
+        }
+
+        private void InitializePrinter()
+        {
+            List<string> lstPrinter = new List<string>();
+
+            foreach (string printer in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
+            {
+                lstPrinter.Add(printer);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //TODO Add Printer to Database
         }
     }
 }
