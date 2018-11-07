@@ -123,7 +123,7 @@ namespace SmoothDataLayer
                 StringBuilder stringSQL = new StringBuilder();
 
                 DatabaseOpen();
-                stringSQL.Append("SELECT * ");
+                stringSQL.Append("SELECT first_name, last_name, phone, email, level_id, status_id ");
                 stringSQL.Append("FROM ");
                 stringSQL.Append(TABLE_EMPLOYEE +";");
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
@@ -162,7 +162,7 @@ namespace SmoothDataLayer
                 stringSQL.Append("SELECT * ");
                 stringSQL.Append("FROM ");
                 stringSQL.Append(TABLE_EMPLOYEE);
-                stringSQL.Append(" WHERE password = @password;");
+                stringSQL.Append(" WHERE password LIKE '@password';");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
                 cmd.Parameters.AddWithValue("@password", password);

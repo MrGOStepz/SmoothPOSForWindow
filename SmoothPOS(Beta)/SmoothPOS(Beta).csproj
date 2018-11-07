@@ -359,6 +359,15 @@
     <Folder Include="Interface\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Images\Images\10-dollar-note.jpg" />
+    <Content Include="Resources\Images\Images\100-dollar-note.jpg" />
+    <Content Include="Resources\Images\Images\20-dollar-note.jpg" />
+    <Content Include="Resources\Images\Images\5-dollar-note.jpg" />
+    <Content Include="Resources\Images\Images\50-dollar-note.jpg" />
+    <Content Include="Resources\Images\Images\Amex.jpg" />
+    <Content Include="Resources\Images\Images\Eftpos.png" />
+    <Content Include="Resources\Images\Images\MasterCard.png" />
+    <Content Include="Resources\Images\Images\Visa.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

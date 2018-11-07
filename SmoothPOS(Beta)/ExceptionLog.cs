@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmoothPOS_Beta_
 {
-    public abstract class ExceptionLog
+    public class ExceptionLog
     {
         public string Message { get; set; }
     }
