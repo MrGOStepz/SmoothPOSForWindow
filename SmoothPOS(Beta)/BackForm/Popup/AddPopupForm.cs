@@ -74,6 +74,8 @@ namespace SmoothPOS_Beta_
             lvItem.ImageIndex = _imageList.Images.Count -1;
             lsvSubPopup.Items.Add(lvItem);
 
+            txtSupPopupName.Text = "";
+            txtPopupPrice.Text = "0.00";
             pbImage.Image = null;
         }
 
