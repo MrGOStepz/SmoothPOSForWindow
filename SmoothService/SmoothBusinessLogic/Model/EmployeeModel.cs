@@ -11,6 +11,7 @@ namespace SmoothBusinessLogic
         private int employeeID;
         private string firstName;
         private string lastName;
+        private string nickName;
         private string phone;
         private string email;
         private int shiftID;
@@ -33,6 +34,12 @@ namespace SmoothBusinessLogic
         {
             get { return lastName; }
             set { lastName = value; }
+        }
+
+        public string NickName
+        {
+            get { return nickName; }
+            set { nickName = value; }
         }
 
         public string Phone

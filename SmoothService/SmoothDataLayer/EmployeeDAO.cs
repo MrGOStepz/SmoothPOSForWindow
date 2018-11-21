@@ -81,7 +81,7 @@ namespace SmoothDataLayer
         /// <param name="Phone"></param>
         /// <param name="Email"></param>
         /// <returns></returns>
-        public int UpdateProfileEmployee(int EmployeeID, string FirstName, string LastName, string Phone, string Email, string password)
+        public int UpdateProfileEmployee(int EmployeeID, string FirstName, string LastName, string NickName, string Phone, string Email, string password)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace SmoothDataLayer
                 DatabaseOpen();
                 stringSQL.Append("UPDATE ");
                 stringSQL.Append(TABLE_EMPLOYEE);
-                stringSQL.Append("SET (first_name = @firstName, last_name = @lastName, phone = @phone, email = @email)");
+                stringSQL.Append("SET (first_name = @firstName, last_name = @lastName, nick_name = @nickName, phone = @phone, email = @email)");
                 stringSQL.Append(" WHERE employee_id = @employeeID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
@@ -98,6 +98,7 @@ namespace SmoothDataLayer
                 cmd.Parameters.AddWithValue("@phone", Phone);
                 cmd.Parameters.AddWithValue("@email", Email);
                 cmd.Parameters.AddWithValue("@employeeID", EmployeeID);
+                cmd.Parameters.AddWithValue("@nickName", NickName);
 
                 cmd.ExecuteNonQuery();
 
@@ -123,7 +124,7 @@ namespace SmoothDataLayer
                 StringBuilder stringSQL = new StringBuilder();
 
                 DatabaseOpen();
-                stringSQL.Append("SELECT first_name, last_name, phone, email, level_id, status_id ");
+                stringSQL.Append("SELECT first_name, last_name, nick_name, phone, email, level_id, status_id ");
                 stringSQL.Append("FROM ");
                 stringSQL.Append(TABLE_EMPLOYEE +";");
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
@@ -152,6 +153,7 @@ namespace SmoothDataLayer
                 return null;
             }
         }
+
         public bool FindData(string password, string command)
         {
             bool ret = false;
@@ -177,8 +179,44 @@ namespace SmoothDataLayer
             {
                 log.Error("DataLayer => FindData(): " + ex.Message);
             }
+
             log.Info("Log in Status ret = " + ret);
             return ret;
+        }
+
+        public DataTable GetEmployeeDetailByPassword(string Password)
+        {
+            try
+            {
+                StringBuilder stringSQL = new StringBuilder();
+
+                DatabaseOpen();
+                stringSQL.Append("SELECT first_name, last_name, nick_name, phone, email, level_id, status_id ");
+                stringSQL.Append("FROM ");
+                stringSQL.Append(TABLE_EMPLOYEE);
+                stringSQL.Append(" WHERE password LIKE @Password");
+                
+
+                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
+                cmd.Parameters.AddWithValue("@Password", Password);
+
+                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable();
+                adp.Fill(dt);
+                cmd.Dispose();
+                DatabaseClose();
+
+                log.Info("Get Employee Detail Success");
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                log.Error("DataLayer => GetEmployeeDetailByPassword(): " + ex.Message);
+                return null;
+            }
+
         }
     }
 }

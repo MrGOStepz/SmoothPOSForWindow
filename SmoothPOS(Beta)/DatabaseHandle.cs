@@ -30,6 +30,12 @@ namespace SmoothPOS_Beta_
             throw new NotImplementedException();
         }
 
+        public string GetPopupDetail(int popupID)
+        {
+            _popupService = new PopupServiceClient();
+            return _popupService.GetPopupDetail(popupID);
+        }
+
         public string ListOfPopup()
         {
             _popupService = new PopupServiceClient();
@@ -49,7 +55,8 @@ namespace SmoothPOS_Beta_
 
         public int RemovePopup(int popupID)
         {
-            throw new NotImplementedException();
+            _popupService = new PopupServiceClient();
+            return _popupService.RemovePopup(popupID);
         }
 
         public int RemoveProduct(int productID)

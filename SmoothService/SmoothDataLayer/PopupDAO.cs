@@ -17,6 +17,7 @@ namespace SmoothDataLayer
 
         private const string TABLE_POPUP = "tb_popup";
         private const string TABLE_POPUP_ITEM = "tb_popup_item";
+        private const string TABLE_PRODUCT = "tb_product";
 
         private void DatabaseOpen()
         {
@@ -158,11 +159,16 @@ namespace SmoothDataLayer
 
                 DatabaseOpen();
 
-                stringSQL.Append("DELECT FORM ");
+                stringSQL.Append("UPDATE ");
+                stringSQL.Append(TABLE_PRODUCT);
+                stringSQL.Append(" SET popup_id = 1");
+                stringSQL.Append(" WHERE popup_id = @PopupID;");
+
+                stringSQL.Append("DELETE FROM ");
                 stringSQL.Append(TABLE_POPUP_ITEM);
                 stringSQL.Append(" WHERE popup_id = @PopupID;");
 
-                stringSQL.Append("DELECT FORM ");
+                stringSQL.Append("DELETE FROM ");
                 stringSQL.Append(TABLE_POPUP);
                 stringSQL.Append(" WHERE popup_id = @PopupID;");
 
@@ -172,12 +178,12 @@ namespace SmoothDataLayer
                 cmd.ExecuteNonQuery();
 
                 DatabaseClose();
-                log.Info("SmoothDataLayer -- Update Popup Success");
+                log.Info("SmoothDataLayer -- Delete Popup Success");
                 return 1;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => UpdatePopup(): " + ex.Message);
+                log.Error("SmoothDataLayer => DeletePopup(): " + ex.Message);
                 return -1;
             }
         }
@@ -239,6 +245,62 @@ namespace SmoothDataLayer
             catch (Exception ex)
             {
                 log.Error("SmoothDataLayer => GetLisOfPopupFilter(): " + ex.Message);
+                return null;
+            }
+        }
+
+        public List<DataTable> GetPopupDetail(int PopupID)
+        {
+            try
+            {
+                List<DataTable> lstDataTables = new List<DataTable>();
+
+                StringBuilder stringSQL = new StringBuilder();
+
+                DatabaseOpen();
+
+                stringSQL.Append("SELECT popup_id, name ");
+                stringSQL.Append("FROM ");
+                stringSQL.Append(TABLE_POPUP);
+                stringSQL.Append( "WHERE popup_id = @PopupID");
+                stringSQL.Append(";");
+
+                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
+                cmd.Parameters.AddWithValue("@PopupID", PopupID);
+                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable();
+                adp.Fill(dt);
+
+                //Index 0 = Main Popup             
+                lstDataTables.Add(dt);
+
+                stringSQL.Clear();
+                stringSQL.Append("SELECT popup_item_id, name, popup_id, price, image_path ");
+                stringSQL.Append("FROM ");
+                stringSQL.Append(TABLE_POPUP_ITEM);
+                stringSQL.Append(" WHERE popup_id = @PopupID");
+                stringSQL.Append(";");
+
+
+                cmd = new MySqlCommand(stringSQL.ToString(), _conn);
+                cmd.Parameters.AddWithValue("@PopupID", PopupID);
+                adp = new MySqlDataAdapter(cmd);
+
+                dt = new DataTable();
+                adp.Fill(dt);
+
+                //Index 1 = Sup Popup
+                lstDataTables.Add(dt);
+
+                cmd.Dispose();
+                DatabaseClose();
+                log.Info("SmoothDataLayer -- GetPopupDetail Success");
+                return lstDataTables;
+            }
+            catch (Exception ex)
+            {
+                log.Error("SmoothDataLayer => GetPopupDetail(): " + ex.Message);
                 return null;
             }
         }

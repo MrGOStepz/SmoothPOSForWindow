@@ -20,6 +20,7 @@ namespace SmoothPOS_Beta_
         int AddPopup(string popup);
         int UpdatPopup(string popup);
         int RemovePopup(int popupID);
+        string GetPopupDetail(int popupID);
         string ListOfPopup();
         string ListOfPopupFilter(string name);
     }

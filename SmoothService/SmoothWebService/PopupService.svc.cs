@@ -25,6 +25,12 @@ namespace SmoothService
             return _popupLogic.GetListOfPopupFilter(popupName);
         }
 
+        public string GetPopupDetail(int popupID)
+        {
+            _popupLogic = new PopupLogic();
+            return _popupLogic.GetPopupDetail(popupID);
+        }
+
         public string ListOfPopup()
         {
             _popupLogic = new PopupLogic();

@@ -109,11 +109,18 @@ namespace SmoothBusinessLogic
         {
             try
             {
-                return _popupDAO.DeletePopup(PopupID);
+                if (PopupID != 1)
+                {
+                    return _popupDAO.DeletePopup(PopupID);
+                }
+                else
+                {
+                    return -1;
+                }
             }
             catch (Exception ex)
             {
-                log.Error("BussicnessLogic => AddProduct" + ex.Message);
+                log.Error("BussicnessLogic => DeletePopup" + ex.Message);
                 return -1;
             }
         }
@@ -166,6 +173,53 @@ namespace SmoothBusinessLogic
                 }
 
                 string stringJSON = JsonConvert.SerializeObject(lstPopupModel);
+
+                return stringJSON;
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => AddProduct" + ex.Message);
+                return null;
+            }
+        }
+
+        public string GetPopupDetail(int PopupID)
+        {
+            try
+            {
+                List<DataTable> lstDataTables = new List<DataTable>();
+                List<ListPopup> lstPopup = new List<ListPopup>();
+                ListPopup popupDetail = new ListPopup();
+                PopupModel popupModel = new PopupModel();
+
+                lstDataTables = _popupDAO.GetPopupDetail(PopupID);
+
+                //lstDataTables Index 0 = Main Popup
+                foreach (DataRow row in lstDataTables[0].Rows)
+                {
+                    popupModel = new PopupModel();
+                    popupModel.PopupID = (int)row["popup_id"];
+                    popupModel.Name = row["name"].ToString();
+
+                }
+
+                //lstDataTables Index 1 = Sup Popup
+                foreach (DataRow row in lstDataTables[1].Rows)
+                {
+                    lstPopup = new List<ListPopup>();
+                    popupDetail = new ListPopup();
+
+                    popupDetail.SubPopUpID = (int)row["popup_item_id"];
+                    popupDetail.Name = row["name"].ToString();
+                    popupDetail.Price = (float)row["price"];
+                    popupDetail.Image64 = row["image_path"].ToString();
+                    lstPopup.Add(popupDetail);
+                }
+
+                popupModel.ListSubPopup = new List<ListPopup>();
+                popupModel.ListSubPopup = lstPopup;
+
+                string stringJSON = JsonConvert.SerializeObject(popupModel);
 
                 return stringJSON;
             }

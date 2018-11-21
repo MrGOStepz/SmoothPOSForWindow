@@ -48,7 +48,7 @@ namespace SmoothBusinessLogic
                     return 0;
                 }
                 else
-                    return _employeeDAO.UpdateProfileEmployee(employeeModel.EmployeeID, employeeModel.FirstName, employeeModel.LastName, employeeModel.Phone, employeeModel.Email, employeeModel.Password);
+                    return _employeeDAO.UpdateProfileEmployee(employeeModel.EmployeeID, employeeModel.FirstName, employeeModel.LastName, employeeModel.NickName, employeeModel.Phone, employeeModel.Email, employeeModel.Password);
             }
             catch (Exception ex)
             {
@@ -87,7 +87,36 @@ namespace SmoothBusinessLogic
             }
             catch (Exception ex)
             {
-                log.Error("BussinessLogic => GetListOfEmployee()" + ex.Message);
+                log.Error("BussinessLogic => GetListOfEmployeeLogic()" + ex.Message);
+                return null;
+            }
+        }
+
+        public string GetEmployeeDetailByPassword(string Password)
+        {
+            try
+            {
+                ListPopup popupDetail = new ListPopup();
+                PopupModel popupModel = new PopupModel();
+
+                lstDataTables = _popupDAO.GetPopupDetail(PopupID);
+
+                //lstDataTables Index 0 = Main Popup
+                foreach (DataRow row in lstDataTables[0].Rows)
+                {
+                    popupModel = new PopupModel();
+                    popupModel.PopupID = (int)row["popup_id"];
+                    popupModel.Name = row["name"].ToString();
+
+                }
+
+                string stringJSON = JsonConvert.SerializeObject(popupModel);
+
+                return stringJSON;
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => AddProduct" + ex.Message);
                 return null;
             }
         }

@@ -18,7 +18,10 @@ namespace SmoothService
         int UpdatePopup(string stringJSON);
 
         [OperationContract]
-        int RemovePopup(int productID);
+        string GetPopupDetail(int popupID);
+
+        [OperationContract]
+        int RemovePopup(int popupID);
 
         [OperationContract]
         string ListOfPopup();

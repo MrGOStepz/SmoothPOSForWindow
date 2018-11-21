@@ -16,8 +16,6 @@ namespace SmoothPOS_Beta_
 {
     public partial class AddPopupForm : Form
     {
-
-
         private ImageList _imageList = new ImageList();
 
         public AddPopupForm()
@@ -28,7 +26,7 @@ namespace SmoothPOS_Beta_
 
         private void InitializeValue()
         {
-            txtPopupPrice.Text = "0.00";
+            txtPopupPrice.Text = "0";
             _imageList.ImageSize = new Size(50, 50);
         }
 
@@ -75,7 +73,7 @@ namespace SmoothPOS_Beta_
             lsvSubPopup.Items.Add(lvItem);
 
             txtSupPopupName.Text = "";
-            txtPopupPrice.Text = "0.00";
+            txtPopupPrice.Text = "0";
             pbImage.Image = null;
         }
 
@@ -172,9 +170,14 @@ namespace SmoothPOS_Beta_
             {
                 MessageBox.Show("Something wrong", "Fail", MessageBoxButtons.OK);
             }
+
+            txtPopName.Text = "";
+            txtPopupPrice.Text = "0";
+            pbImage.Image = null;
+            _imageList = null;
+            lsvSubPopup.Items.Clear();
+
         }
-
-
 
         private void txtPopupPrice_TextChanged(object sender, EventArgs e)
         {
@@ -182,7 +185,7 @@ namespace SmoothPOS_Beta_
             if (!float.TryParse(txtPopupPrice.Text, out priceInc))
             {
                 MessageBox.Show("Price field is only number!");
-                txtPopupPrice.Text = "0.00";
+                txtPopupPrice.Text = "0";
             }
         }
     }

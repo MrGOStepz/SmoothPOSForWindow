@@ -89,5 +89,10 @@ namespace SmoothPOS_Beta_
             MainForm mainFm = new MainForm();
             mainFm.Show();
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -27,11 +27,17 @@ namespace SmoothPOS_Beta_.PopupService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPopupService/UpdatePopup", ReplyAction="http://tempuri.org/IPopupService/UpdatePopupResponse")]
         System.Threading.Tasks.Task<int> UpdatePopupAsync(string stringJSON);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPopupService/RemovePopup", ReplyAction="http://tempuri.org/IPopupService/RemovePopupResponse")]
-        int RemovePopup(int productID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPopupService/GetPopupDetail", ReplyAction="http://tempuri.org/IPopupService/GetPopupDetailResponse")]
+        string GetPopupDetail(int popupID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPopupService/GetPopupDetail", ReplyAction="http://tempuri.org/IPopupService/GetPopupDetailResponse")]
+        System.Threading.Tasks.Task<string> GetPopupDetailAsync(int popupID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPopupService/RemovePopup", ReplyAction="http://tempuri.org/IPopupService/RemovePopupResponse")]
-        System.Threading.Tasks.Task<int> RemovePopupAsync(int productID);
+        int RemovePopup(int popupID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPopupService/RemovePopup", ReplyAction="http://tempuri.org/IPopupService/RemovePopupResponse")]
+        System.Threading.Tasks.Task<int> RemovePopupAsync(int popupID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPopupService/ListOfPopup", ReplyAction="http://tempuri.org/IPopupService/ListOfPopupResponse")]
         string ListOfPopup();
@@ -89,12 +95,20 @@ namespace SmoothPOS_Beta_.PopupService {
             return base.Channel.UpdatePopupAsync(stringJSON);
         }
         
-        public int RemovePopup(int productID) {
-            return base.Channel.RemovePopup(productID);
+        public string GetPopupDetail(int popupID) {
+            return base.Channel.GetPopupDetail(popupID);
         }
         
-        public System.Threading.Tasks.Task<int> RemovePopupAsync(int productID) {
-            return base.Channel.RemovePopupAsync(productID);
+        public System.Threading.Tasks.Task<string> GetPopupDetailAsync(int popupID) {
+            return base.Channel.GetPopupDetailAsync(popupID);
+        }
+        
+        public int RemovePopup(int popupID) {
+            return base.Channel.RemovePopup(popupID);
+        }
+        
+        public System.Threading.Tasks.Task<int> RemovePopupAsync(int popupID) {
+            return base.Channel.RemovePopupAsync(popupID);
         }
         
         public string ListOfPopup() {

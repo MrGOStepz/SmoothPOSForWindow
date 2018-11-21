@@ -18,6 +18,7 @@ namespace SmoothPOS_Beta_
             InitializeComponent();
             dgvProduct.MultiSelect = false;
             dgvProduct.ReadOnly = true;
+            dgvProduct.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -44,6 +45,13 @@ namespace SmoothPOS_Beta_
 
         private void SearchPopupForm_Load(object sender, EventArgs e)
         {
+
+            RefreshTable();
+
+        }
+
+        private void RefreshTable()
+        {
             DatabaseHandle dbHandle = new DatabaseHandle();
             string JSON = dbHandle.ListOfPopup();
 
@@ -62,7 +70,41 @@ namespace SmoothPOS_Beta_
             }
 
             dgvProduct.DataSource = table;
+        }
 
+        private void btnQuickDelete_Click(object sender, EventArgs e)
+        {
+            DatabaseHandle dbHandle = new DatabaseHandle();
+            if (dgvProduct.SelectedRows.Count > 0)
+            {
+                int popupID = (int)dgvProduct.SelectedRows[0].Cells[0].Value;
+                string titleName = dgvProduct.SelectedRows[0].Cells[1].Value.ToString();
+
+                //1 is NONE Popup cann't delete it.
+                if (popupID != 1)
+                {
+                    if (MessageBox.Show("Do you want to delete " + titleName + " Popup!", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        if(dbHandle.RemovePopup(popupID) > 0)
+                        {
+                            RefreshTable();
+                            MessageBox.Show("Delete Complete!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Something wrong!");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Cann't Delete NONE Popup!");
+                }
+            }
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -28,10 +28,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPopupDetail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="popupID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPopupDetailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetPopupDetailResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RemovePopup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="productID" type="xs:int" />
+        <xs:element minOccurs="0" name="popupID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

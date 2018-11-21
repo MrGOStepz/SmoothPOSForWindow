@@ -35,6 +35,7 @@
             this.btnSelect = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnQuickDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).BeginInit();
             this.gbSearch.SuspendLayout();
@@ -65,6 +66,7 @@
             // 
             // gbSearch
             // 
+            this.gbSearch.Controls.Add(this.btnQuickDelete);
             this.gbSearch.Controls.Add(this.btnSearch);
             this.gbSearch.Controls.Add(this.btnSelect);
             this.gbSearch.Controls.Add(this.label1);
@@ -99,6 +101,7 @@
             this.btnSelect.TabIndex = 3;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // label1
             // 
@@ -117,6 +120,17 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(223, 26);
             this.txtSearch.TabIndex = 0;
+            // 
+            // btnQuickDelete
+            // 
+            this.btnQuickDelete.Location = new System.Drawing.Point(439, 25);
+            this.btnQuickDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnQuickDelete.Name = "btnQuickDelete";
+            this.btnQuickDelete.Size = new System.Drawing.Size(112, 35);
+            this.btnQuickDelete.TabIndex = 5;
+            this.btnQuickDelete.Text = "Quick Delete";
+            this.btnQuickDelete.UseVisualStyleBackColor = true;
+            this.btnQuickDelete.Click += new System.EventHandler(this.btnQuickDelete_Click);
             // 
             // SearchPopupForm
             // 
@@ -148,5 +162,6 @@
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnQuickDelete;
     }
 }

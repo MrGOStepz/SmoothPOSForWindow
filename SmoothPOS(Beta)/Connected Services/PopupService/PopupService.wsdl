@@ -18,6 +18,12 @@
   <wsdl:message name="IPopupService_UpdatePopup_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePopupResponse" />
   </wsdl:message>
+  <wsdl:message name="IPopupService_GetPopupDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPopupDetail" />
+  </wsdl:message>
+  <wsdl:message name="IPopupService_GetPopupDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPopupDetailResponse" />
+  </wsdl:message>
   <wsdl:message name="IPopupService_RemovePopup_InputMessage">
     <wsdl:part name="parameters" element="tns:RemovePopup" />
   </wsdl:message>
@@ -45,6 +51,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPopupService/UpdatePopup" message="tns:IPopupService_UpdatePopup_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPopupService/UpdatePopupResponse" message="tns:IPopupService_UpdatePopup_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetPopupDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPopupService/GetPopupDetail" message="tns:IPopupService_GetPopupDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPopupService/GetPopupDetailResponse" message="tns:IPopupService_GetPopupDetail_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="RemovePopup">
       <wsdl:input wsaw:Action="http://tempuri.org/IPopupService/RemovePopup" message="tns:IPopupService_RemovePopup_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPopupService/RemovePopupResponse" message="tns:IPopupService_RemovePopup_OutputMessage" />
@@ -71,6 +81,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdatePopup">
       <soap:operation soapAction="http://tempuri.org/IPopupService/UpdatePopup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPopupDetail">
+      <soap:operation soapAction="http://tempuri.org/IPopupService/GetPopupDetail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

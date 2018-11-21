@@ -12,9 +12,27 @@ namespace SmoothPOS_Beta_
 {
     public partial class UpdatePopupForm : Form
     {
+        public int PopupID { get; set; }
+
         public UpdatePopupForm()
         {
             InitializeComponent();
         }
+
+        private void InitializeData()
+        {
+            DatabaseHandle dbHandle = new DatabaseHandle();
+            string JSON = dbHandle.GetPopupDetail(PopupID);
+
+            if (JSON != null)
+            {
+
+            }
+            else
+            {
+                //TODO MessangeBox ERROR and Close this form
+            }
+        }
+
     }
 }
