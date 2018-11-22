@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmoothBusinessLogic
+namespace SmoothPOS_Beta_
 {
     public class EmployeeModel
     {
@@ -83,5 +83,13 @@ namespace SmoothBusinessLogic
             }
         }
 
+    }
+
+    public enum EmployeeLevel
+    {
+        Admin,
+        Manage,
+        Staff,
+        Trainee
     }
 }

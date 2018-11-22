@@ -19,25 +19,6 @@ namespace SmoothWebService
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
-        }
-
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
-
-
         public int AddNewEmployeeDetail(string stringJSON)
         {
             log.Info("SmoothWebService :: AddNewEmployeeDetail :: " + stringJSON);
@@ -63,6 +44,12 @@ namespace SmoothWebService
             _loginLogic = new LoginLogic();
             log.Info("Here is for Log in :: "+ passwordJson);
             return _loginLogic.FindUserByPW(passwordJson);
+        }
+
+        public string GetEmployeeDetailByPassword(string Password)
+        {
+            _employeeLogic = new EmployeeLogic();
+            return _employeeLogic.GetEmployeeDetailByPassword(Password);
         }
     }
 }

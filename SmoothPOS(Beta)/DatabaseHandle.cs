@@ -5,27 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using SmoothPOS_Beta_.ProductService;
 using SmoothPOS_Beta_.PopupService;
+using SmoothPOS_Beta_.EmployeeService;
 
 namespace SmoothPOS_Beta_
 {
-    public class DatabaseHandle : IProduct, IPopup
+    public class DatabaseHandle : IProduct, IPopup, IStaff
     {
         ProductService.ProductServiceClient _productService;
         PopupService.PopupServiceClient _popupService;
+        EmployeeService.EmployeeServiceClient _employeeService;
 
         public int AddPopup(string popup)
         {
             _popupService = new PopupServiceClient();
             return _popupService.AddPopup(popup);
         }
-        #region IProduct
+
         public int AddProduct(string productDetail)
         {
             _productService = new ProductServiceClient();
             return _productService.AddProduct(productDetail);
         }
 
+        public int AddStaff(string staff)
+        {
+            throw new NotImplementedException();
+        }
+
         public string FilterOfProduct(string product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string FilterOfStaff(string staff)
         {
             throw new NotImplementedException();
         }
@@ -34,6 +46,12 @@ namespace SmoothPOS_Beta_
         {
             _popupService = new PopupServiceClient();
             return _popupService.GetPopupDetail(popupID);
+        }
+
+        public string GetStaffDetailByPassword(string password)
+        {
+            _employeeService = new EmployeeServiceClient();
+            return _employeeService.GetEmployeeDetailByPassword(password);
         }
 
         public string ListOfPopup()
@@ -53,6 +71,11 @@ namespace SmoothPOS_Beta_
             throw new NotImplementedException();
         }
 
+        public string ListOfStaff()
+        {
+            throw new NotImplementedException();
+        }
+
         public int RemovePopup(int popupID)
         {
             _popupService = new PopupServiceClient();
@@ -60,6 +83,11 @@ namespace SmoothPOS_Beta_
         }
 
         public int RemoveProduct(int productID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int RemoveStaff(int staffID)
         {
             throw new NotImplementedException();
         }
@@ -73,6 +101,10 @@ namespace SmoothPOS_Beta_
         {
             throw new NotImplementedException();
         }
-        #endregion
+
+        public int UpdatStaff(string staff)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

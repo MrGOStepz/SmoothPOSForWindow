@@ -30,6 +30,7 @@
         {
             this.txtPW = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnEnter = new System.Windows.Forms.Button();
             this.btn0 = new System.Windows.Forms.Button();
             this.btn9 = new System.Windows.Forms.Button();
             this.btn8 = new System.Windows.Forms.Button();
@@ -43,7 +44,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnClockOut = new System.Windows.Forms.Button();
             this.btnClockIn = new System.Windows.Forms.Button();
-            this.btnEnter = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -53,12 +54,13 @@
             this.txtPW.Location = new System.Drawing.Point(401, 159);
             this.txtPW.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPW.Name = "txtPW";
-            this.txtPW.Size = new System.Drawing.Size(261, 27);
+            this.txtPW.Size = new System.Drawing.Size(261, 37);
             this.txtPW.TabIndex = 0;
             this.txtPW.UseSystemPasswordChar = true;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnEnter);
             this.panel1.Controls.Add(this.btn0);
             this.panel1.Controls.Add(this.btn9);
@@ -76,9 +78,20 @@
             this.panel1.Size = new System.Drawing.Size(322, 438);
             this.panel1.TabIndex = 1;
             // 
+            // btnEnter
+            // 
+            this.btnEnter.Location = new System.Drawing.Point(215, 328);
+            this.btnEnter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnEnter.Name = "btnEnter";
+            this.btnEnter.Size = new System.Drawing.Size(100, 100);
+            this.btnEnter.TabIndex = 5;
+            this.btnEnter.Text = "Enter";
+            this.btnEnter.UseVisualStyleBackColor = true;
+            this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
+            // 
             // btn0
             // 
-            this.btn0.Location = new System.Drawing.Point(3, 328);
+            this.btn0.Location = new System.Drawing.Point(109, 328);
             this.btn0.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn0.Name = "btn0";
             this.btn0.Size = new System.Drawing.Size(100, 100);
@@ -193,7 +206,7 @@
             this.panel2.Location = new System.Drawing.Point(704, 212);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(150, 144);
+            this.panel2.Size = new System.Drawing.Size(229, 144);
             this.panel2.TabIndex = 2;
             // 
             // btnClockOut
@@ -201,7 +214,7 @@
             this.btnClockOut.Location = new System.Drawing.Point(23, 79);
             this.btnClockOut.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClockOut.Name = "btnClockOut";
-            this.btnClockOut.Size = new System.Drawing.Size(115, 47);
+            this.btnClockOut.Size = new System.Drawing.Size(150, 50);
             this.btnClockOut.TabIndex = 4;
             this.btnClockOut.Text = "Clock Out";
             this.btnClockOut.UseVisualStyleBackColor = true;
@@ -211,27 +224,27 @@
             this.btnClockIn.Location = new System.Drawing.Point(23, 16);
             this.btnClockIn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClockIn.Name = "btnClockIn";
-            this.btnClockIn.Size = new System.Drawing.Size(115, 47);
+            this.btnClockIn.Size = new System.Drawing.Size(150, 50);
             this.btnClockIn.TabIndex = 3;
             this.btnClockIn.Text = "Clock In";
             this.btnClockIn.UseVisualStyleBackColor = true;
             // 
-            // btnEnter
+            // btnDelete
             // 
-            this.btnEnter.Location = new System.Drawing.Point(109, 328);
-            this.btnEnter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnEnter.Name = "btnEnter";
-            this.btnEnter.Size = new System.Drawing.Size(206, 100);
-            this.btnEnter.TabIndex = 5;
-            this.btnEnter.Text = "Enter";
-            this.btnEnter.UseVisualStyleBackColor = true;
-            this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
+            this.btnDelete.Location = new System.Drawing.Point(3, 328);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(100, 100);
+            this.btnDelete.TabIndex = 12;
+            this.btnDelete.Text = "<";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.ClientSize = new System.Drawing.Size(1002, 712);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtPW);
@@ -240,7 +253,6 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoginForm";
-            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -266,5 +278,6 @@
         private System.Windows.Forms.Button btnClockOut;
         private System.Windows.Forms.Button btnClockIn;
         private System.Windows.Forms.Button btnEnter;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

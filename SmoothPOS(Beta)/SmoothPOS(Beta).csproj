@@ -84,6 +84,11 @@
     <Compile Include="BackForm\Printer\AddPrinterForm.Designer.cs">
       <DependentUpon>AddPrinterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\EmployeeService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\PopupService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,10 +156,10 @@
     <Compile Include="Ingredients.cs" />
     <Compile Include="InitializeApplicationcs.cs" />
     <Compile Include="IPrinter.cs" />
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Front Form\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Front Form\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -165,6 +170,12 @@
     </Compile>
     <Compile Include="Options.cs" />
     <Compile Include="Models\PopupModel.cs" />
+    <Compile Include="PayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PayControl.Designer.cs">
+      <DependentUpon>PayControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,7 +291,7 @@
       <DependentUpon>SearchProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="Users.cs" />
+    <Compile Include="Models\EmployeeModel.cs" />
     <EmbeddedResource Include="BackForm.resx">
       <DependentUpon>BackForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,11 +316,14 @@
     <EmbeddedResource Include="BackForm\Product\UpdateProductForm.resx">
       <DependentUpon>UpdateProductForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Front Form\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayControl.resx">
+      <DependentUpon>PayControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PayForm.resx">
       <DependentUpon>PayForm.cs</DependentUpon>
@@ -329,6 +343,13 @@
     <EmbeddedResource Include="SearchProductForm.resx">
       <DependentUpon>SearchProductForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Connected Services\EmployeeService\EmployeeService.wsdl" />
+    <None Include="Connected Services\EmployeeService\EmployeeService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmployeeService\EmployeeService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\PopupService\PopupService.wsdl" />
     <None Include="Connected Services\PopupService\PopupService.xsd">
       <SubType>Designer</SubType>
@@ -362,6 +383,13 @@
     <Folder Include="Interface\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\EmployeeService\EmployeeService.disco" />
+    <None Include="Connected Services\EmployeeService\configuration91.svcinfo" />
+    <None Include="Connected Services\EmployeeService\configuration.svcinfo" />
+    <None Include="Connected Services\EmployeeService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Resources\Images\Images\10-dollar-note.jpg" />
     <Content Include="Resources\Images\Images\100-dollar-note.jpg" />
     <Content Include="Resources\Images\Images\20-dollar-note.jpg" />
@@ -457,6 +485,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\EmployeeService\" />
     <WCFMetadataStorage Include="Connected Services\PopupService\" />
     <WCFMetadataStorage Include="Connected Services\ProductService\" />
   </ItemGroup>

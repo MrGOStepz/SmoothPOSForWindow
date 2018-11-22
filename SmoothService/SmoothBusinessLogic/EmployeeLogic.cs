@@ -96,27 +96,36 @@ namespace SmoothBusinessLogic
         {
             try
             {
-                ListPopup popupDetail = new ListPopup();
-                PopupModel popupModel = new PopupModel();
+                EmployeeModel employeeModel = new EmployeeModel();
+                DataTable dataTable = new DataTable();
+                dataTable = _employeeDAO.GetEmployeeDetailByPassword(Password);
 
-                lstDataTables = _popupDAO.GetPopupDetail(PopupID);
-
-                //lstDataTables Index 0 = Main Popup
-                foreach (DataRow row in lstDataTables[0].Rows)
+                if (dataTable != null)
                 {
-                    popupModel = new PopupModel();
-                    popupModel.PopupID = (int)row["popup_id"];
-                    popupModel.Name = row["name"].ToString();
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        employeeModel = new EmployeeModel();
+                        employeeModel.EmployeeID = (int)row["employee_id"];
+                        employeeModel.FirstName = row["first_name"].ToString();
+                        employeeModel.LastName = row["last_name"].ToString();
+                        employeeModel.Phone = row["phone"].ToString();
+                        employeeModel.Email = row["email"].ToString();
+                        employeeModel.StatusID = (int)row["status_id"];
+                        employeeModel.LevelID = (int)row["level_id"];
+                    }
 
+                    string stringJSON = JsonConvert.SerializeObject(employeeModel);
+
+                    return stringJSON;
                 }
-
-                string stringJSON = JsonConvert.SerializeObject(popupModel);
-
-                return stringJSON;
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {
-                log.Error("BussicnessLogic => AddProduct" + ex.Message);
+                log.Error("BussicnessLogic => GetEmployeeDetailByPassword" + ex.Message);
                 return null;
             }
         }

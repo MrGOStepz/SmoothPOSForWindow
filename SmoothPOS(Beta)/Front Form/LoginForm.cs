@@ -65,22 +65,17 @@ namespace SmoothPOS_Beta_
 
         private void btnEnter_Click(object sender, EventArgs e)
         {
-            //Thread thread = new Thread(RunMainForm);
-            //thread.Start();
-            //this.Close();
-            
-            //TODO Check in database
-            if(txtPW.Text == "1234")
+            DatabaseHandle dbHandle = new DatabaseHandle();
+
+            if(dbHandle.GetStaffDetailByPassword(txtPW.Text) != null)
             {
                 MainForm mainForm = new MainForm();
-                mainForm.Show();
+                mainForm.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Password is incorrecet!");
             }
-
-            
 
         }
 
@@ -90,9 +85,9 @@ namespace SmoothPOS_Beta_
             mainFm.Show();
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            txtPW.Text = txtPW.Text.Remove(txtPW.Text.Length - 1);
         }
     }
 }

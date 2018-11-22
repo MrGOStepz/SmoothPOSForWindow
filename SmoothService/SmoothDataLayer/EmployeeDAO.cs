@@ -20,8 +20,7 @@ namespace SmoothDataLayer
 
         private void DatabaseOpen()
         {
-            string connectionPath = "server=localhost;port=3310;user id=root;persistsecurityinfo=True;database=smoothdb;password=JuJ90507;";
-            //string connectionPath = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            string connectionPath = ConfigurationManager.ConnectionStrings["SmoothDB"].ConnectionString;
             _conn = new MySqlConnection(connectionPath);
             _conn.Open();
         }
@@ -191,7 +190,7 @@ namespace SmoothDataLayer
                 StringBuilder stringSQL = new StringBuilder();
 
                 DatabaseOpen();
-                stringSQL.Append("SELECT first_name, last_name, nick_name, phone, email, level_id, status_id ");
+                stringSQL.Append("SELECT employee_id, first_name, last_name, nick_name, phone, email, level_id, status_id ");
                 stringSQL.Append("FROM ");
                 stringSQL.Append(TABLE_EMPLOYEE);
                 stringSQL.Append(" WHERE password LIKE @Password");
@@ -202,8 +201,15 @@ namespace SmoothDataLayer
 
                 MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
 
+
                 DataTable dt = new DataTable();
                 adp.Fill(dt);
+
+                if(dt.Rows.Count == 0)
+                {
+                    return null;
+                }
+
                 cmd.Dispose();
                 DatabaseClose();
 

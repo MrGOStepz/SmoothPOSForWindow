@@ -10,7 +10,7 @@ namespace SmoothPOS_Beta_
 {
     public static class GlobalHelper
     {
-        public static Users Users;
+        public static EmployeeModel EmployeeDetail;
 
         public static DataTable ToDataTable<T>(this IList<T> data)
         {

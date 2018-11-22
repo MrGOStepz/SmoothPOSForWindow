@@ -48,6 +48,7 @@ namespace SmoothPOS_Beta_
         int RemoveStaff(int staffID);
         string ListOfStaff();
         string FilterOfStaff(string staff);
+        string GetStaffDetailByPassword(string password);
     }
 
     interface IRoster

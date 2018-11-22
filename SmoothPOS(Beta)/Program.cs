@@ -17,8 +17,8 @@ namespace SmoothPOS_Beta_
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BackForm());
-            //Application.Run(new LoginForm());
+            //Application.Run(new BackForm());
+            Application.Run(new LoginForm());
         }
     }
 }

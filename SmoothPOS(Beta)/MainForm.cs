@@ -31,5 +31,11 @@ namespace SmoothPOS_Beta_
         {
             lbTime.Text = DateTime.Now.ToLongTimeString();
         }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            GlobalHelper.EmployeeDetail = null;
+            this.Close();
+        }
     }
 }
