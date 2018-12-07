@@ -13,9 +13,16 @@ namespace SmoothPOS_Beta_
 {
     public partial class LoginForm : Form
     {
+        public bool _ExitApp { get; set; }
+
         public LoginForm()
         {
+            this.WindowState = FormWindowState.Normal;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Bounds = Screen.PrimaryScreen.Bounds;
+
             InitializeComponent();
+            _ExitApp = false;
 
             //DT When finish
             txtPW.Text = "1234";
@@ -69,8 +76,7 @@ namespace SmoothPOS_Beta_
 
             if(dbHandle.GetStaffDetailByPassword(txtPW.Text) != null)
             {
-                MainForm mainForm = new MainForm();
-                mainForm.ShowDialog();
+                this.Close();
             }
             else
             {
@@ -79,15 +85,15 @@ namespace SmoothPOS_Beta_
 
         }
 
-        private void RunMainForm()
-        {
-            MainForm mainFm = new MainForm();
-            mainFm.Show();
-        }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             txtPW.Text = txtPW.Text.Remove(txtPW.Text.Length - 1);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            _ExitApp = true;
+            this.Close();
         }
     }
 }

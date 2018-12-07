@@ -45,5 +45,10 @@ namespace SmoothPOS_Beta_
             searchPopupForm.ShowDialog();
 
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

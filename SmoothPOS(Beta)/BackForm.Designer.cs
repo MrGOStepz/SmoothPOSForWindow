@@ -46,6 +46,10 @@
             this.btnComboSet = new System.Windows.Forms.Button();
             this.btnAddComboSet = new System.Windows.Forms.Button();
             this.gbStaffs = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.gbStaff = new System.Windows.Forms.GroupBox();
             this.btnDeleteStaff = new System.Windows.Forms.Button();
             this.btnUpdateStaff = new System.Windows.Forms.Button();
@@ -63,12 +67,14 @@
             this.gbPrinter = new System.Windows.Forms.GroupBox();
             this.btnRemovePrinter = new System.Windows.Forms.Button();
             this.btnAddPrinter = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.gbProduct.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbIngredient.SuspendLayout();
             this.gbProducts.SuspendLayout();
             this.gbComboSet.SuspendLayout();
             this.gbStaffs.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.gbStaff.SuspendLayout();
             this.gbWages.SuspendLayout();
             this.gbRoster.SuspendLayout();
@@ -252,6 +258,7 @@
             // 
             // gbStaffs
             // 
+            this.gbStaffs.Controls.Add(this.groupBox2);
             this.gbStaffs.Controls.Add(this.gbStaff);
             this.gbStaffs.Controls.Add(this.gbWages);
             this.gbStaffs.Controls.Add(this.gbRoster);
@@ -263,6 +270,45 @@
             this.gbStaffs.TabIndex = 6;
             this.gbStaffs.TabStop = false;
             this.gbStaffs.Text = "Staff";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Location = new System.Drawing.Point(624, 21);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 223);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Clock In/Out";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(6, 152);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(188, 60);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Remove Clock In/Out";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 85);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(188, 60);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "Update Clock In/Out";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 19);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(188, 60);
+            this.button4.TabIndex = 0;
+            this.button4.Text = "Add Clock In/Out";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // gbStaff
             // 
@@ -429,12 +475,23 @@
             this.btnAddPrinter.Text = "Add Printer";
             this.btnAddPrinter.UseVisualStyleBackColor = true;
             // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(808, 657);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(188, 60);
+            this.btnExit.TabIndex = 2;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // BackForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.gbPrinter);
             this.Controls.Add(this.gbReport);
             this.Controls.Add(this.gbStaffs);
@@ -448,6 +505,7 @@
             this.gbProducts.ResumeLayout(false);
             this.gbComboSet.ResumeLayout(false);
             this.gbStaffs.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.gbStaff.ResumeLayout(false);
             this.gbWages.ResumeLayout(false);
             this.gbRoster.ResumeLayout(false);
@@ -494,5 +552,10 @@
         private System.Windows.Forms.GroupBox gbPrinter;
         private System.Windows.Forms.Button btnRemovePrinter;
         private System.Windows.Forms.Button btnAddPrinter;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnExit;
     }
 }

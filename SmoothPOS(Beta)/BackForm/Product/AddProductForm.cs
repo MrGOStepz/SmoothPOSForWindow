@@ -19,6 +19,8 @@ namespace SmoothPOS_Beta_
             InitializeComponent();
             InitializeEvent();
             InitializeData();
+
+            cbPopup.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void InitializeEvent()
@@ -37,6 +39,23 @@ namespace SmoothPOS_Beta_
             txtTax.Text = Options.Tax.ToString();
             txtPrice.Text = "0";
             txtPriceInc.Text = "0";
+
+            DatabaseHandle dbHandle = new DatabaseHandle();
+
+            string jsonString = dbHandle.ListOfPopup();
+
+            if (jsonString != null)
+            {
+                List<PopupModel> lstPopupModel = JsonConvert.DeserializeObject<List<PopupModel>>(jsonString);
+
+                for (int i = 0; i < lstPopupModel.Count; i++)
+                {
+                    cbPopup.Items.Add(new { Name = lstPopupModel[i].Name, PopupID = lstPopupModel[i].PopupID });
+                }
+                cbPopup.DisplayMember = "Name";
+                cbPopup.ValueMember = "PopupID";
+            }
+
 
             //TODO Database Get list of Priter
             //TODO Database Get list of Ingredients for Product
@@ -247,5 +266,10 @@ namespace SmoothPOS_Beta_
             ofd = null;
         }
 
+        private void btnAddPopup_Click(object sender, EventArgs e)
+        {
+            AddPopupForm appPopupForm = new AddPopupForm();
+            appPopupForm.ShowDialog();
+        }
     }
 }

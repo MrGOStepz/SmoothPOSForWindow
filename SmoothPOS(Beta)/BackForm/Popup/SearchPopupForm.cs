@@ -45,9 +45,7 @@ namespace SmoothPOS_Beta_
 
         private void SearchPopupForm_Load(object sender, EventArgs e)
         {
-
             RefreshTable();
-
         }
 
         private void RefreshTable()

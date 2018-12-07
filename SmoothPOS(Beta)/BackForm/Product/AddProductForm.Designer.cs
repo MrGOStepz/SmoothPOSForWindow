@@ -263,6 +263,7 @@
             this.btnAddPopup.TabIndex = 18;
             this.btnAddPopup.Text = "+";
             this.btnAddPopup.UseVisualStyleBackColor = true;
+            this.btnAddPopup.Click += new System.EventHandler(this.btnAddPopup_Click);
             // 
             // label7
             // 

@@ -30,6 +30,7 @@
         {
             this.txtPW = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnEnter = new System.Windows.Forms.Button();
             this.btn0 = new System.Windows.Forms.Button();
             this.btn9 = new System.Windows.Forms.Button();
@@ -44,7 +45,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnClockOut = new System.Windows.Forms.Button();
             this.btnClockIn = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +55,7 @@
             this.txtPW.Location = new System.Drawing.Point(401, 159);
             this.txtPW.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPW.Name = "txtPW";
-            this.txtPW.Size = new System.Drawing.Size(261, 37);
+            this.txtPW.Size = new System.Drawing.Size(261, 27);
             this.txtPW.TabIndex = 0;
             this.txtPW.UseSystemPasswordChar = true;
             // 
@@ -77,6 +78,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(322, 438);
             this.panel1.TabIndex = 1;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(3, 328);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(100, 100);
+            this.btnDelete.TabIndex = 12;
+            this.btnDelete.Text = "<";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEnter
             // 
@@ -229,22 +241,22 @@
             this.btnClockIn.Text = "Clock In";
             this.btnClockIn.UseVisualStyleBackColor = true;
             // 
-            // btnDelete
+            // btnExit
             // 
-            this.btnDelete.Location = new System.Drawing.Point(3, 328);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(100, 100);
-            this.btnDelete.TabIndex = 12;
-            this.btnDelete.Text = "<";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnExit.Location = new System.Drawing.Point(921, 12);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 35);
+            this.btnExit.TabIndex = 3;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 30F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1002, 712);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtPW);
@@ -279,5 +291,6 @@
         private System.Windows.Forms.Button btnClockIn;
         private System.Windows.Forms.Button btnEnter;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnExit;
     }
 }

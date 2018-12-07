@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SmoothPOS_Beta_
+namespace Clock_IO
 {
-    public partial class PayForm : Form
+    public partial class RegisterForm : Form
     {
-        public PayForm()
+        public RegisterForm()
         {
             InitializeComponent();
         }

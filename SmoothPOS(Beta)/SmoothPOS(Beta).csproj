@@ -176,12 +176,6 @@
     <Compile Include="PayControl.Designer.cs">
       <DependentUpon>PayControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PayForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PayForm.Designer.cs">
-      <DependentUpon>PayForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Popups.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="Models\ProductModel.cs" />
@@ -292,6 +286,12 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="TableControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TableControl.Designer.cs">
+      <DependentUpon>TableControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="BackForm.resx">
       <DependentUpon>BackForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -325,9 +325,6 @@
     <EmbeddedResource Include="PayControl.resx">
       <DependentUpon>PayControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PayForm.resx">
-      <DependentUpon>PayForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -342,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SearchProductForm.resx">
       <DependentUpon>SearchProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableControl.resx">
+      <DependentUpon>TableControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Connected Services\EmployeeService\EmployeeService.wsdl" />
     <None Include="Connected Services\EmployeeService\EmployeeService.xsd">

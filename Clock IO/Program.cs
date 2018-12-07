@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SmoothPOS_Beta_
+namespace Clock_IO
 {
     static class Program
     {
@@ -17,7 +16,6 @@ namespace SmoothPOS_Beta_
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new BackForm());
             Application.Run(new MainForm());
         }
     }

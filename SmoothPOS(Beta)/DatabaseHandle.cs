@@ -17,14 +17,30 @@ namespace SmoothPOS_Beta_
 
         public int AddPopup(string popup)
         {
-            _popupService = new PopupServiceClient();
-            return _popupService.AddPopup(popup);
+            try
+            {
+                _popupService = new PopupServiceClient();
+                return _popupService.AddPopup(popup);
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+           
         }
 
         public int AddProduct(string productDetail)
         {
-            _productService = new ProductServiceClient();
-            return _productService.AddProduct(productDetail);
+            try
+            {
+                _productService = new ProductServiceClient();
+                return _productService.AddProduct(productDetail);
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+
         }
 
         public int AddStaff(string staff)
@@ -44,42 +60,96 @@ namespace SmoothPOS_Beta_
 
         public string GetPopupDetail(int popupID)
         {
-            _popupService = new PopupServiceClient();
-            return _popupService.GetPopupDetail(popupID);
+            try
+            {
+                _popupService = new PopupServiceClient();
+                return _popupService.GetPopupDetail(popupID);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
         public string GetStaffDetailByPassword(string password)
         {
-            _employeeService = new EmployeeServiceClient();
-            return _employeeService.GetEmployeeDetailByPassword(password);
+            try
+            {
+                _employeeService = new EmployeeServiceClient();
+                return _employeeService.GetEmployeeDetailByPassword(password);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
         public string ListOfPopup()
         {
-            _popupService = new PopupServiceClient();
-            return _popupService.ListOfPopup();
+            try
+            {
+                _popupService = new PopupServiceClient();
+                return _popupService.ListOfPopup();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public string ListOfPopupFilter(string name)
         {
-            _popupService = new PopupServiceClient();
-            return _popupService.FilterOfPopup(name);
+            try
+            {
+                _popupService = new PopupServiceClient();
+                return _popupService.FilterOfPopup(name);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
         public string ListOfProduct()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public string ListOfStaff()
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public int RemovePopup(int popupID)
         {
-            _popupService = new PopupServiceClient();
-            return _popupService.RemovePopup(popupID);
+            try
+            {
+                _popupService = new PopupServiceClient();
+                return _popupService.RemovePopup(popupID);
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
         }
 
         public int RemoveProduct(int productID)
