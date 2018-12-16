@@ -152,6 +152,8 @@ namespace SmoothPOS_Beta_
                     MessageBox.Show("Something Wrong!");
                 }
 
+                dbHandle = null;
+
             }
             catch(Exception ex)
             {

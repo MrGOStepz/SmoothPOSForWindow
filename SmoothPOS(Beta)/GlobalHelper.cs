@@ -10,6 +10,9 @@ namespace SmoothPOS_Beta_
 {
     public static class GlobalHelper
     {
+        //TODO Move to option setting.
+        public const string DatabaseServiceName = "MySQL80";
+
         public static EmployeeModel EmployeeDetail;
 
         public static DataTable ToDataTable<T>(this IList<T> data)
@@ -33,6 +36,16 @@ namespace SmoothPOS_Beta_
             }
             return table;
         }
+    }
+
+    public enum ServiceStatus
+    {
+        Running,
+        Stopped,
+        Paused,
+        Stoping,
+        Starting,
+        Changing
     }
 
 }

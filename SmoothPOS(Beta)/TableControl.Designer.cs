@@ -110,7 +110,7 @@
             this.tpSectionFont.Padding = new System.Windows.Forms.Padding(3);
             this.tpSectionFont.Size = new System.Drawing.Size(692, 478);
             this.tpSectionFont.TabIndex = 0;
-            this.tpSectionFont.Text = "Front";
+            this.tpSectionFont.Text = "Front                    ";
             this.tpSectionFont.UseVisualStyleBackColor = true;
             // 
             // btnT3
@@ -164,9 +164,9 @@
             this.tpSectionMain.Location = new System.Drawing.Point(4, 54);
             this.tpSectionMain.Name = "tpSectionMain";
             this.tpSectionMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tpSectionMain.Size = new System.Drawing.Size(692, 439);
+            this.tpSectionMain.Size = new System.Drawing.Size(692, 478);
             this.tpSectionMain.TabIndex = 1;
-            this.tpSectionMain.Text = "Main";
+            this.tpSectionMain.Text = "Main                    ";
             this.tpSectionMain.UseVisualStyleBackColor = true;
             // 
             // tpSectionBack
@@ -174,9 +174,9 @@
             this.tpSectionBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tpSectionBack.Location = new System.Drawing.Point(4, 54);
             this.tpSectionBack.Name = "tpSectionBack";
-            this.tpSectionBack.Size = new System.Drawing.Size(692, 439);
+            this.tpSectionBack.Size = new System.Drawing.Size(692, 478);
             this.tpSectionBack.TabIndex = 2;
-            this.tpSectionBack.Text = "Back";
+            this.tpSectionBack.Text = "Back                    ";
             this.tpSectionBack.UseVisualStyleBackColor = true;
             // 
             // panel4
@@ -297,7 +297,7 @@
             this.tpTakeaway.Location = new System.Drawing.Point(4, 22);
             this.tpTakeaway.Name = "tpTakeaway";
             this.tpTakeaway.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTakeaway.Size = new System.Drawing.Size(706, 625);
+            this.tpTakeaway.Size = new System.Drawing.Size(706, 664);
             this.tpTakeaway.TabIndex = 1;
             this.tpTakeaway.Text = "Takeaway";
             this.tpTakeaway.UseVisualStyleBackColor = true;
@@ -306,7 +306,7 @@
             // 
             this.tpDelivery.Location = new System.Drawing.Point(4, 22);
             this.tpDelivery.Name = "tpDelivery";
-            this.tpDelivery.Size = new System.Drawing.Size(706, 625);
+            this.tpDelivery.Size = new System.Drawing.Size(706, 664);
             this.tpDelivery.TabIndex = 2;
             this.tpDelivery.Text = "Delivery";
             this.tpDelivery.UseVisualStyleBackColor = true;

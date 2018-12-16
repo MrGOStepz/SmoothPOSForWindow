@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ServiceProcess;
 
 namespace SmoothPOS_Beta_
 {
@@ -27,12 +28,42 @@ namespace SmoothPOS_Beta_
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            //Check Database Service
+            if (ServiceStatus.Stopped == DatabaseServiceStatus(GlobalHelper.DatabaseServiceName))
+            {
+                MessageBox.Show("Service Running");
+            }
+
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
             if (loginForm._ExitApp == true)
             {
                 this.Close();
             }
+        }
+
+        private ServiceStatus DatabaseServiceStatus(string serviceName)
+        {
+            //Change Service is running
+            ServiceController sc = new ServiceController(serviceName);
+
+            switch (sc.Status)
+            {
+                //case ServiceControllerStatus.Running:
+                //    return ServiceStatus.Running;
+                case ServiceControllerStatus.Stopped:
+                    sc.Start();
+                    sc.WaitForStatus(ServiceControllerStatus.Running);
+                    return ServiceStatus.Stopped;
+                //case ServiceControllerStatus.Paused:
+                //    return ServiceStatus.Paused;
+                //case ServiceControllerStatus.StopPending:
+                //    return ServiceStatus.Stoping;
+                //case ServiceControllerStatus.StartPending:
+                //    return ServiceStatus.Starting;
+                default:
+                    return ServiceStatus.Changing;
+            }          
         }
 
         private void InitializeForm()
