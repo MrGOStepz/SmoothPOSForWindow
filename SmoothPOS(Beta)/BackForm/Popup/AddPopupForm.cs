@@ -174,7 +174,8 @@ namespace SmoothPOS_Beta_
             txtPopName.Text = "";
             txtPopupPrice.Text = "0";
             pbImage.Image = null;
-            _imageList = null;
+            _imageList = new ImageList();
+            _imageList.ImageSize = new Size(50, 50);
             lsvSubPopup.Items.Clear();
 
         }

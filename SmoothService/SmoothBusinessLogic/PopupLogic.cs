@@ -15,7 +15,7 @@ namespace SmoothBusinessLogic
     public class PopupLogic
     {
         private PopupDAO _popupDAO;
-        const string IMAGE_FOLDER = @"D:\Images\";
+        const string IMAGE_FOLDER = @"C:\Images\";
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(EmployeeLogic));
 
         public PopupLogic()

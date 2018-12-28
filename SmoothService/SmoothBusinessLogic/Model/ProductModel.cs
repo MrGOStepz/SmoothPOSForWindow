@@ -17,7 +17,8 @@ namespace SmoothBusinessLogic
         private int popupID;
         private int stock;
         private float price;
-        private string imagePath;   
+        private string imagePath;
+        private int typeOfFood;
         private List<int> printerID;
 
         public int ProductID
@@ -78,6 +79,18 @@ namespace SmoothBusinessLogic
         {
             get { return imagePath; }
             set { imagePath = value; }
+        }
+
+        public int TypeOfFood
+        {
+            get { return typeOfFood; }
+            set
+            {
+                if (value < 1)
+                    typeOfFood = 5;
+                else
+                    typeOfFood = value;
+            }
         }
 
         public List<int> PrinterID

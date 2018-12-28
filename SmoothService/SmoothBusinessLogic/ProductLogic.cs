@@ -25,7 +25,7 @@ namespace SmoothBusinessLogic
             {
                 log.Info("BusinessLogic => AddProduct - Begin");
                 ProductModel productModel = JsonConvert.DeserializeObject<ProductModel>(stringJSON);
-                return _productDAO.AddProduct(productModel.Name, productModel.ShortName, productModel.Description, productModel.PopupID, productModel.Price, productModel.Stock, productModel.Avaliable, productModel.ProductOfIngredientID, productModel.ImagePath);
+                return _productDAO.AddProduct(productModel.Name, productModel.ShortName, productModel.Description, productModel.PopupID, productModel.Price, productModel.Stock, productModel.Avaliable, productModel.ProductOfIngredientID, productModel.TypeOfFood, productModel.ImagePath);
             }
             catch (Exception ex)
             {
@@ -40,7 +40,7 @@ namespace SmoothBusinessLogic
             {
                 log.Info("BusinessLogic => Update Product - Begin");
                 ProductModel productModel = JsonConvert.DeserializeObject<ProductModel>(stringJSON);
-                return _productDAO.UpdateProduct(productModel.ProductID, productModel.Name, productModel.ShortName, productModel.Description, productModel.PopupID, productModel.Price, productModel.Stock, productModel.Avaliable, productModel.ProductOfIngredientID, productModel.ImagePath);
+                return _productDAO.UpdateProduct(productModel.ProductID, productModel.Name, productModel.ShortName, productModel.Description, productModel.PopupID, productModel.Price, productModel.Stock, productModel.Avaliable, productModel.ProductOfIngredientID, productModel.TypeOfFood, productModel.ImagePath);
             }
             catch (Exception ex)
             {

@@ -18,6 +18,7 @@ namespace SmoothPOS_Beta_
         private int stock;
         private float price;
         private string imagePath;
+        private int typeOfFood;
         private List<int> printerID;
 
         public int ProductID
@@ -78,6 +79,18 @@ namespace SmoothPOS_Beta_
         {
             get { return imagePath; }
             set { imagePath = value; }
+        }
+
+        public int TypeOfFood
+        {
+            get { return typeOfFood; }
+            set
+            {
+                if (value < 1)
+                    typeOfFood = 5;
+                else
+                    typeOfFood = value;
+            }
         }
 
         public List<int> PrinterID

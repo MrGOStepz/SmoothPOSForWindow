@@ -38,6 +38,12 @@
             this.btnUploadImage = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gbDetail = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbTypeOther = new System.Windows.Forms.RadioButton();
+            this.rbDessert = new System.Windows.Forms.RadioButton();
+            this.rbBeverage = new System.Windows.Forms.RadioButton();
+            this.rbMain = new System.Windows.Forms.RadioButton();
+            this.rbEntree = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -71,6 +77,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDetail.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gbIngredients.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -176,6 +183,7 @@
             // 
             // gbDetail
             // 
+            this.gbDetail.Controls.Add(this.groupBox2);
             this.gbDetail.Controls.Add(this.groupBox3);
             this.gbDetail.Controls.Add(this.cbPopup);
             this.gbDetail.Controls.Add(this.btnAddPopup);
@@ -197,6 +205,72 @@
             this.gbDetail.TabIndex = 6;
             this.gbDetail.TabStop = false;
             this.gbDetail.Text = "Product Detail";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rbTypeOther);
+            this.groupBox2.Controls.Add(this.rbDessert);
+            this.groupBox2.Controls.Add(this.rbBeverage);
+            this.groupBox2.Controls.Add(this.rbMain);
+            this.groupBox2.Controls.Add(this.rbEntree);
+            this.groupBox2.Location = new System.Drawing.Point(285, 311);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(194, 115);
+            this.groupBox2.TabIndex = 26;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Type";
+            // 
+            // rbTypeOther
+            // 
+            this.rbTypeOther.AutoSize = true;
+            this.rbTypeOther.Checked = true;
+            this.rbTypeOther.Location = new System.Drawing.Point(110, 46);
+            this.rbTypeOther.Name = "rbTypeOther";
+            this.rbTypeOther.Size = new System.Drawing.Size(63, 22);
+            this.rbTypeOther.TabIndex = 4;
+            this.rbTypeOther.TabStop = true;
+            this.rbTypeOther.Text = "Other";
+            this.rbTypeOther.UseVisualStyleBackColor = true;
+            // 
+            // rbDessert
+            // 
+            this.rbDessert.AutoSize = true;
+            this.rbDessert.Location = new System.Drawing.Point(110, 22);
+            this.rbDessert.Name = "rbDessert";
+            this.rbDessert.Size = new System.Drawing.Size(78, 22);
+            this.rbDessert.TabIndex = 3;
+            this.rbDessert.Text = "Dessert";
+            this.rbDessert.UseVisualStyleBackColor = true;
+            // 
+            // rbBeverage
+            // 
+            this.rbBeverage.AutoSize = true;
+            this.rbBeverage.Location = new System.Drawing.Point(6, 76);
+            this.rbBeverage.Name = "rbBeverage";
+            this.rbBeverage.Size = new System.Drawing.Size(88, 22);
+            this.rbBeverage.TabIndex = 2;
+            this.rbBeverage.Text = "Beverage";
+            this.rbBeverage.UseVisualStyleBackColor = true;
+            // 
+            // rbMain
+            // 
+            this.rbMain.AutoSize = true;
+            this.rbMain.Location = new System.Drawing.Point(6, 49);
+            this.rbMain.Name = "rbMain";
+            this.rbMain.Size = new System.Drawing.Size(58, 22);
+            this.rbMain.TabIndex = 1;
+            this.rbMain.Text = "Main";
+            this.rbMain.UseVisualStyleBackColor = true;
+            // 
+            // rbEntree
+            // 
+            this.rbEntree.AutoSize = true;
+            this.rbEntree.Location = new System.Drawing.Point(6, 22);
+            this.rbEntree.Name = "rbEntree";
+            this.rbEntree.Size = new System.Drawing.Size(69, 22);
+            this.rbEntree.TabIndex = 0;
+            this.rbEntree.Text = "Entree";
+            this.rbEntree.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -280,7 +354,7 @@
             this.gbIngredients.Controls.Add(this.btnIngredients);
             this.gbIngredients.Location = new System.Drawing.Point(282, 17);
             this.gbIngredients.Name = "gbIngredients";
-            this.gbIngredients.Size = new System.Drawing.Size(200, 413);
+            this.gbIngredients.Size = new System.Drawing.Size(200, 288);
             this.gbIngredients.TabIndex = 13;
             this.gbIngredients.TabStop = false;
             this.gbIngredients.Text = "Ingredients";
@@ -290,14 +364,14 @@
             this.lvIngredients.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvIngredients.Location = new System.Drawing.Point(3, 20);
             this.lvIngredients.Name = "lvIngredients";
-            this.lvIngredients.Size = new System.Drawing.Size(194, 358);
+            this.lvIngredients.Size = new System.Drawing.Size(194, 233);
             this.lvIngredients.TabIndex = 1;
             this.lvIngredients.UseCompatibleStateImageBehavior = false;
             // 
             // btnIngredients
             // 
             this.btnIngredients.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnIngredients.Location = new System.Drawing.Point(3, 378);
+            this.btnIngredients.Location = new System.Drawing.Point(3, 253);
             this.btnIngredients.Name = "btnIngredients";
             this.btnIngredients.Size = new System.Drawing.Size(194, 32);
             this.btnIngredients.TabIndex = 9;
@@ -461,6 +535,8 @@
             this.panel1.ResumeLayout(false);
             this.gbDetail.ResumeLayout(false);
             this.gbDetail.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.gbIngredients.ResumeLayout(false);
@@ -508,5 +584,11 @@
         private System.Windows.Forms.Button btnIngredients;
         private System.Windows.Forms.TextBox txtPriceInc;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rbTypeOther;
+        private System.Windows.Forms.RadioButton rbDessert;
+        private System.Windows.Forms.RadioButton rbBeverage;
+        private System.Windows.Forms.RadioButton rbMain;
+        private System.Windows.Forms.RadioButton rbEntree;
     }
 }

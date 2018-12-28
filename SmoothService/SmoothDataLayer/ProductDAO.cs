@@ -43,7 +43,7 @@ namespace SmoothDataLayer
         /// <param name="PdInID"> Product of Ingredient ID</param>
         /// <param name="ImagePath"></param>
         /// <returns></returns>
-        public int AddProduct(string Name, string Sname, string Description, int PopupID, float PriceInc, int Stock, int Avaliable, int PdInID, string ImagePath)
+        public int AddProduct(string Name, string Sname, string Description, int PopupID, float PriceInc, int Stock, int Avaliable, int PdInID, int TypeOfFood, string ImagePath)
         {
             try
             {
@@ -52,8 +52,8 @@ namespace SmoothDataLayer
                 DatabaseOpen();
                 stringSQL.Append("INSERT INTO ");
                 stringSQL.Append(TABLE_PRODUCT);
-                stringSQL.Append(" (name, short_name, description, avaliable, product_ingredient_id, popup_id, stock, price, image_path)");
-                stringSQL.Append(" VALUES (@Name, @ShortName, @Description, @Avaliable, @PdInID, @PopupID, @Stock, @Price, @ImagePath);");
+                stringSQL.Append(" (name, short_name, description, avaliable, product_ingredient_id, popup_id, stock, price, image_path, type_food_id)");
+                stringSQL.Append(" VALUES (@Name, @ShortName, @Description, @Avaliable, @PdInID, @PopupID, @Stock, @Price, @ImagePath, @TypeOfFood);");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
                 cmd.Parameters.AddWithValue("@Name", Name);
@@ -65,6 +65,7 @@ namespace SmoothDataLayer
                 cmd.Parameters.AddWithValue("@Stock", Stock);
                 cmd.Parameters.AddWithValue("@Price", PriceInc);
                 cmd.Parameters.AddWithValue("@ImagePath", ImagePath);
+                cmd.Parameters.AddWithValue("@TypeOfFood", TypeOfFood);
 
                 cmd.ExecuteNonQuery();
 
@@ -79,7 +80,7 @@ namespace SmoothDataLayer
             }
         }
 
-        public int UpdateProduct(int ProductID, string Name, string Sname, string Description, int PopupID, float PriceInc, int Stock, int Avaliable, int PdInID, string ImagePath)
+        public int UpdateProduct(int ProductID, string Name, string Sname, string Description, int PopupID, float PriceInc, int Stock, int Avaliable, int PdInID, int typeOfFood, string ImagePath)
         {
             try
             {
@@ -88,7 +89,7 @@ namespace SmoothDataLayer
                 DatabaseOpen();
                 stringSQL.Append("UPDATE ");
                 stringSQL.Append(TABLE_PRODUCT);
-                stringSQL.Append(" SET (name = @Name, short_name = @ShortName, description = @Description, avaliable = @Avaliable, product_ingredient_id = @PdInID, popup_id = @PopupID, stock = @Stock, price = @Price, image_path = @ImagePath)");
+                stringSQL.Append(" SET (name = @Name, short_name = @ShortName, description = @Description, avaliable = @Avaliable, product_ingredient_id = @PdInID, popup_id = @PopupID, stock = @Stock, price = @Price, image_path = @ImagePath, type_food_id = @TypeOfFood)");
                 stringSQL.Append(" WHERE product_id = @ProductID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
@@ -102,6 +103,7 @@ namespace SmoothDataLayer
                 cmd.Parameters.AddWithValue("@Stock", Stock);
                 cmd.Parameters.AddWithValue("@Price", PriceInc);
                 cmd.Parameters.AddWithValue("@ImagePath", ImagePath);
+                cmd.Parameters.AddWithValue("@TypeOfFood", typeOfFood);
 
                 cmd.ExecuteNonQuery();
 

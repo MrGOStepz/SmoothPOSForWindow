@@ -30,15 +30,28 @@ namespace SmoothPOS_Beta_
             txtTax.TextChanged += new System.EventHandler(this.txtTax_TextChanged);
         }
 
-        private void InitializeData()
+        private void ResetForm()
         {
-            //TODO Database Get Last row for Table Product
             int LastRow = 0;
             txtProductID.Text = LastRow.ToString();
 
             txtTax.Text = Options.Tax.ToString();
             txtPrice.Text = "0";
             txtPriceInc.Text = "0";
+            txtName.Text = "";
+            txtSCName.Text = "";
+            txtStock.Text = "";
+            cbAvaliable.Checked = true;
+            rbTypeOther.Checked = true;
+            lvIngredients.Items.Clear();
+            pbImage = null;
+        }
+
+        private void InitializeData()
+        {
+            //TODO Database Get Last row for Table Product
+            ResetForm();
+
 
             DatabaseHandle dbHandle = new DatabaseHandle();
 
@@ -48,12 +61,11 @@ namespace SmoothPOS_Beta_
             {
                 List<PopupModel> lstPopupModel = JsonConvert.DeserializeObject<List<PopupModel>>(jsonString);
 
-                for (int i = 0; i < lstPopupModel.Count; i++)
-                {
-                    cbPopup.Items.Add(new { Name = lstPopupModel[i].Name, PopupID = lstPopupModel[i].PopupID });
-                }
+                var dbSource = lstPopupModel.Select(x => new { x.Name, x.PopupID }).ToList();
+               
                 cbPopup.DisplayMember = "Name";
                 cbPopup.ValueMember = "PopupID";
+                cbPopup.DataSource = dbSource;
             }
 
 
@@ -93,7 +105,7 @@ namespace SmoothPOS_Beta_
                 }
                 else
                 {
-                    product.PopupID = int.Parse(cbPopup.ValueMember);
+                    product.PopupID = int.Parse(cbPopup.SelectedValue.ToString());
                 }
 
                 //Textbox PriceInc 
@@ -139,6 +151,28 @@ namespace SmoothPOS_Beta_
                 //Checkbox Avaliable
                 product.Avaliable = cbAvaliable.Checked == true ? 1 : 0;
 
+                //Type of Food
+                if(rbEntree.Checked == true)
+                {
+                    product.TypeOfFood = 1;
+                }
+                else if(rbMain.Checked == true)
+                {
+                    product.TypeOfFood = 2;
+                }
+                else if(rbBeverage.Checked == true)
+                {
+                    product.TypeOfFood = 3;
+                }
+                else if (rbDessert.Checked == true)
+                {
+                    product.TypeOfFood = 4;
+                }
+                else
+                {
+                    product.TypeOfFood = 5;
+                }
+
                 string json = JsonConvert.SerializeObject(product);
 
                 DatabaseHandle dbHandle = new DatabaseHandle();
@@ -153,6 +187,7 @@ namespace SmoothPOS_Beta_
                 }
 
                 dbHandle = null;
+                ResetForm();
 
             }
             catch(Exception ex)
