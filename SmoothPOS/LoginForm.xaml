@@ -18,7 +18,7 @@
               Height="300"
               VerticalAlignment="Center"
               Width="300">
-        <!--<Grid>-->
+            <!--<Grid>-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
@@ -91,24 +91,27 @@
                     Grid.Row="2"
                     Grid.Column="2"
                     Click="btnNumber_Click"></Button>
+
             <Button x:Name="btnDelete"
-                    Content=""
                     FontSize="16"
                     Grid.Row="3"
                     Grid.Column="0"
-                    Click="btnDelete_Click"></Button>
+                    Click="btnDelete_Click">
+                <Image Source="Images/Icons/Delete.png"></Image>
+            </Button>
             <Button x:Name="btn0"
                     Content="0"
                     FontSize="16"
                     Grid.Row="3"
                     Grid.Column="1"
                     Click="btnNumber_Click"></Button>
-            <Button x:Name="btnLogin"                
+
+            <Button x:Name="btnLogin"
                     FontSize="16"
                     Grid.Row="3"
                     Grid.Column="2"
                     Click="btnLogin_Click">
-                <!--<Image Source="Images\Login.png"></Image>-->
+                <Image Source="Images/Icons/Login.png"></Image>
             </Button>
         </Grid>
         <PasswordBox x:Name="pwBox"
@@ -116,5 +119,29 @@
                      Margin="362,193,0,0"
                      VerticalAlignment="Top"
                      Width="300" />
+
+        <Button x:Name="btnCI"
+                Content="Clock In"
+                HorizontalAlignment="Left"
+                Margin="773,219,0,0"
+                VerticalAlignment="Top"
+                Width="185"
+                Height="50" />
+        <Button x:Name="btnCO"
+                Content="Clock Out"
+                HorizontalAlignment="Left"
+                Margin="773,273,0,0"
+                VerticalAlignment="Top"
+                Width="185"
+                Height="50" />
+
+        <Button x:Name="btnBackOffice"
+                Content="Back Office"
+                HorizontalAlignment="Left"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Width="185"
+                Height="50"
+                Click="BtnBackOffice_Click" />
     </Grid>
 </Window>

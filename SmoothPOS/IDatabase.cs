@@ -6,64 +6,82 @@ using System.Threading.Tasks;
 
 namespace SmoothPOS
 {
-    interface IProductDB
+    interface IProduct
     {
-        int AddProduct(string productDetail);
-        int UpdateProduct(string productDetail);
-
-        ProductDetail GetProductDetail(int productID);
-        List<ProductDetail> GetListProduct();
-        
-
-        int DeleteProduct(int productID);
-    }
-
-    interface IIngedientDB
-    {
-        int AddIngedient(string ingedientDetail);
-        int UpdateIngedient(string ingedientDetail);
-
-        string GetListIngedient();
-
-        int DeleteIngedient(int ingedientID);
-
+        int AddProduct(string product);
+        int UpdateProduct(string product);
+        int RemoveProduct(int productID);
+        string ListOfProduct();
+        string FilterOfProduct(string product);
     }
 
     interface IPopup
     {
-        int AddPopup(string popupDetail);
-        int UpdatePopup(string popupDetail);
-        int DeletePopup(string popupDetail);
-
-        string GetListPopup();
+        int AddPopup(string popup);
+        int UpdatPopup(string popup);
+        int RemovePopup(int popupID);
+        string GetPopupDetail(int popupID);
+        string ListOfPopup();
+        string ListOfPopupFilter(string name);
     }
 
-    interface IUserDB
+    interface IIngredient
     {
-        int AddUser(string userDetail);
-        int UpdateUser(string userDetail);
-        int UpdateLevelUser(int userID, int userLevel);
+        int AddIngredient(string ingredient);
+        int UpdatIngredient(string ingredient);
+        int RemoveIngredient(int ingredientID);
+        string ListOfIngredient();
+    }
+
+    interface IComboSet
+    {
+        int AddComboSet(string comboSet);
+        int UpdatComboSet(string comboSet);
+        int RemoveComboSet(int comboSetID);
+        string ListOfComboSet();
+    }
+
+    interface IStaff
+    {
+        int AddStaff(string staff);
+        int UpdatStaff(string staff);
+        int RemoveStaff(int staffID);
+        string ListOfStaff();
+        string FilterOfStaff(string staff);
+        string GetStaffDetailByPassword(string password);
+    }
+
+    interface IRoster
+    {
+        int AddRoster(string roster);
+        int UpdatRoster(string roster);
+        int RemoveRoster(int rosterID);
+    }
+
+    interface IWages
+    {
+        int AddWages(string wages);
+        int UpdatWages(string wages);
+        int RemoveWages(int wagesID);
+        string ListOfWeges();
+    }
+
+    interface IPrinterLog
+    {
+        int AddPrinter(string printer);
+        int RemovePrinter(int printerID);
+        string ListOfPrinter();
+
+        int AddPrintReceiptLog(int receiptID);
+        int AddPrintLog(int printOrderID);
 
     }
 
-    interface IPrinterDB
+    interface IReport
     {
-        int AddPrinter(string printerDetail);
-        int UpdatePrinter(string printerDetail);
-        int DeletePrinter(int pritnerID);
-        string GetListPrinter();
-    }
-
-    interface ITableDB
-    {
-        string GetTableDetail();
-    }
-
-    interface IReceiptDB
-    {
-        int AddReceipt(string receiptDetail);
-        int UpdateRecipt(string receiptDetail);
-        int MergeRecipt(string receipt1, string receipt2);
-
+        string ListOfReport(int rowTotal);
+        string ViewReceiptDetail(int receiptID);
+        string FilterReport(string dateFrom, string dateTo);
+        int DeleteReceipt(int receiptID);
     }
 }

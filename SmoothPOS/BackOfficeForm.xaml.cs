@@ -10,19 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SmoothPOS
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BackOffice.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BackOfficeForm : Window
     {
-        public MainWindow()
+        public BackOfficeForm()
         {
             InitializeComponent();
+        }
+
+        private void BtnAddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            AddProductControl addProductUC = new AddProductControl();
+            backOfficeMainForm.Children.Add(addProductUC);
         }
     }
 }

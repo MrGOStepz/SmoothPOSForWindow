@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace SmoothPOS
 {
-    public class Setting
+    public static class Setting
     {
-
+        public static float Vat;
+        public static string ImagePath;
+        
     }
 }

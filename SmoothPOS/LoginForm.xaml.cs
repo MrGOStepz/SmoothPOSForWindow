@@ -68,10 +68,15 @@ namespace SmoothPOS
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (pwBox.Password == "1234")
+            DatabaseHandle dbHandle = new DatabaseHandle();
+
+            if (dbHandle.GetStaffDetailByPassword(pwBox.Password) != null)
+            {               
+                this.Close();
+            }
+            else
             {
-                MainWindow mainForm = new MainWindow();
-                mainForm.Show();
+                MessageBox.Show("Password is incorrect!", "Error", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
         }
 
@@ -88,6 +93,13 @@ namespace SmoothPOS
                 return;
             }
 
+        }
+
+        private void BtnBackOffice_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO Check Permission User.
+            BackOfficeForm backOfficeForm = new BackOfficeForm();
+            backOfficeForm.ShowDialog();
         }
     }
 }

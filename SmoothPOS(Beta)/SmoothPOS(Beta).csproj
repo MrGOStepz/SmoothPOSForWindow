@@ -60,8 +60,8 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -291,7 +291,6 @@
     <Compile Include="SearchProductForm.Designer.cs">
       <DependentUpon>SearchProductForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="TableControl.cs">
       <SubType>UserControl</SubType>
@@ -386,7 +385,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppData\" />
@@ -409,19 +410,6 @@
     <Content Include="Resources\Images\Images\Eftpos.png" />
     <Content Include="Resources\Images\Images\MasterCard.png" />
     <Content Include="Resources\Images\Images\Visa.png" />
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Connected Services\ProductService\ProductService.disco" />
     <None Include="Connected Services\ProductService\configuration91.svcinfo" />
     <None Include="Connected Services\ProductService\configuration.svcinfo" />
@@ -498,6 +486,12 @@
     <WCFMetadataStorage Include="Connected Services\EmployeeService\" />
     <WCFMetadataStorage Include="Connected Services\PopupService\" />
     <WCFMetadataStorage Include="Connected Services\ProductService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SmoothDataBaseControl\SmoothDataBaseControl.csproj">
+      <Project>{cf517c7a-6706-40bd-ab00-f894aef53000}</Project>
+      <Name>SmoothDataBaseControl</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

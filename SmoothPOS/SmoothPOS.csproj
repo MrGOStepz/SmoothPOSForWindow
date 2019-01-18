@@ -37,12 +37,15 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,12 +64,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BackOffice.xaml.cs">
-      <DependentUpon>BackOffice.xaml</DependentUpon>
+    <Compile Include="AddPopupControl.xaml.cs">
+      <DependentUpon>AddPopupControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddProductControl.xaml.cs">
+      <DependentUpon>AddProductControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BackOfficeForm.xaml.cs">
+      <DependentUpon>BackOfficeForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConvertDataTable.cs" />
     <Compile Include="DatabaseHandle.cs" />
     <Compile Include="GlobalHelper.cs" />
     <Compile Include="IDatabase.cs" />
+    <Compile Include="ItemDetailControl.xaml.cs">
+      <DependentUpon>ItemDetailControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\EmployeeModel.cs" />
+    <Compile Include="Modals\IngredientModel.cs" />
+    <Compile Include="Modals\PopupModel.cs" />
+    <Compile Include="Modals\ProductModel.cs" />
+    <Compile Include="SearchProductControl.xaml.cs">
+      <DependentUpon>SearchProductControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\TableControl.xaml.cs">
+      <DependentUpon>TableControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PayUserControl.xaml.cs">
+      <DependentUpon>PayUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popup.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="ProductCRUDForm.xaml.cs">
@@ -77,7 +103,19 @@
       <DependentUpon>SettingForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
-    <Page Include="BackOffice.xaml">
+    <Page Include="AddPopupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddProductControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BackOfficeForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ItemDetailControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -85,7 +123,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="SearchProductControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\TableControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\PayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SmoothPOS.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -97,8 +147,8 @@
     <Compile Include="LoginForm.xaml.cs">
       <DependentUpon>LoginForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="SmoothPOS.xaml.cs">
+      <DependentUpon>SmoothPOS.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ProductCRUDForm.xaml">
@@ -140,10 +190,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BackOfficeUserControl\" />
     <Folder Include="Backoffice\" />
     <Folder Include="Class\" />
     <Folder Include="Interface\" />
-    <Folder Include="Modal\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +214,12 @@
     <Resource Include="Images\Icons\Send.png" />
     <Resource Include="Images\Icons\Setting.png" />
     <Resource Include="Images\Icons\Update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SmoothDataBaseControl\SmoothDataBaseControl.csproj">
+      <Project>{cf517c7a-6706-40bd-ab00-f894aef53000}</Project>
+      <Name>SmoothDataBaseControl</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SmoothPOS
 {
     /// <summary>
-    /// Interaction logic for BackOffice.xaml
+    /// Interaction logic for AddPopupControl.xaml
     /// </summary>
-    public partial class BackOffice : Window
+    public partial class AddPopupControl : UserControl
     {
-        public BackOffice()
+        public AddPopupControl()
         {
             InitializeComponent();
         }

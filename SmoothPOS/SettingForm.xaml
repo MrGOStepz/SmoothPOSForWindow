@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmoothPOS"
         mc:Ignorable="d"
-        Title="SettingForm" Height="1024" Width="678">
+        Title="SettingForm"
+        Height="768"
+        Width="1024">
     <Grid>
         <DockPanel HorizontalAlignment="Left"
-                   Height="1024"
+                   Height="727"
                    LastChildFill="False"
                    VerticalAlignment="Top"
-                   Width="671"
-                   Margin="0,0,0,-29.333">
-            <TabControl Height="1024"
+                   Width="671">
+            <TabControl Height="500"
                         VerticalAlignment="Top"
                         Width="669">
                 <TabItem Header="TabItem">

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SmoothPOS
 {
-    public static class GlobalHelper
+    public class IngredientModel
     {
-        public static EmployeeModel EmployeeDetail;
-        public static EmployeeLevel EmployeeLevel;
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Image { get; set; }
     }
 }
