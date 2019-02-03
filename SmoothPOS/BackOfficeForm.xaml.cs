@@ -26,8 +26,29 @@ namespace SmoothPOS
 
         private void BtnAddProduct_Click(object sender, RoutedEventArgs e)
         {
+            backOfficeMainForm.Children.Clear();
             AddProductControl addProductUC = new AddProductControl();
             backOfficeMainForm.Children.Add(addProductUC);
+        }
+
+        private void BtnSearchPopup_Click(object sender, RoutedEventArgs e)
+        {
+            backOfficeMainForm.Children.Clear();
+            PopupSearchControl popupSearchUC = new PopupSearchControl();
+            backOfficeMainForm.Children.Add(popupSearchUC);
+
+        }
+
+        private void BtnSearchProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnAddPopup_Click(object sender, RoutedEventArgs e)
+        {
+            backOfficeMainForm.Children.Clear();
+            AddPopupControl addPopupUC = new AddPopupControl();
+            backOfficeMainForm.Children.Add(addPopupUC);
         }
     }
 }

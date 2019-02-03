@@ -11,4 +11,14 @@ namespace SmoothPOS
         public static EmployeeModel EmployeeDetail;
         public static EmployeeLevel EmployeeLevel;
     }
+
+    public enum ServiceStatus
+    {
+        Running,
+        Stopped,
+        Paused,
+        Stoping,
+        Starting,
+        Changing
+    }
 }

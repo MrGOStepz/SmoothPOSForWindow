@@ -10,6 +10,7 @@ namespace SmoothPOS
     {
         public static float Vat;
         public static string ImagePath;
-        
+        public static string DatabaseServiceName = "MySQL80";
+
     }
 }

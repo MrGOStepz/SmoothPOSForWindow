@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SmoothPOS.SearchProductControl"
+﻿<UserControl x:Class="SmoothPOS.PopupSearchControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -22,13 +22,14 @@
             </Grid.ColumnDefinitions>
 
 
-            <Label Content="Search Product"
+            <Label Content="Search Popup"
                    Grid.Column="0"
                    FontSize="25"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center">
 
             </Label>
+
 
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
@@ -44,18 +45,24 @@
                         Height="50"
                         Margin="10"></Button>
             </Grid>
-        
 
-        <Button x:Name="btnDeleteProduct"
-                Content="Delete Product"
-                Grid.Column="3"
-                Margin="10"
-                ></Button>
-            
+
+            <Button x:Name="btnDeletePopup"
+                    Content="Delete Popup"
+                    Grid.Column="3"
+                    Margin="10"></Button>
+
         </Grid>
-        <DataGrid x:Name="dgvProduct"
-                  Grid.Row="1"></DataGrid>
-        
-            
+        <DataGrid x:Name="dgvPopup"
+                  Grid.Row="1">
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick"
+                                 Handler="Row_DoubleClick" />
+                </Style>
+            </DataGrid.ItemContainerStyle>
+        </DataGrid>
+
+
     </Grid>
 </UserControl>

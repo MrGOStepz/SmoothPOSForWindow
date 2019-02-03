@@ -29,25 +29,72 @@
                     Grid.Column="0"
                     BorderThickness="2"
                     BorderBrush="Black">
-                
             </Border>
 
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-            <Button x:Name="btnLogout"
-                    Content="Logout"
-                    FontSize="16"
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="175.333,10,10,10"
-                    Click="BtnLogout_Click"></Button>
-            
-            <Label x:Name="lbTime"
-                   Content="0:00"
-                   FontSize="30"
-                   Grid.Column="1"
-                   HorizontalAlignment="Left"
-                   Margin="10,10,0,0"
-                   VerticalAlignment="Top" />
+                <Label x:Name="lbName"
+                       Content="Name"
+                       FontSize="18"
+                       Grid.Column="1"
+                       VerticalContentAlignment="Center"></Label>
+                
+                <Button x:Name="btnHome"
+                        Content="Home"
+                        Click="BtnHome_Click"
+                        Grid.Column="0"
+                        Margin="5"></Button>
+                
+                <Button x:Name="btnCookStatus"
+                        Content="Cook"
+                        Click="BtnCookStatus_Click"
+                        Grid.Column="3"
+                        Margin="5"></Button>
+
+                <Button x:Name="btnResendOrder"
+                        Content="ReOrder"
+                        Click="BtnResendOrder_Click"
+                        Grid.Column="4"
+                        Margin="5"></Button>
+
+                <Button x:Name="btnReprintReceipt"
+                        Content="Receipt"
+                        Click="BtnReprintReceipt_Click"
+                        Grid.Column="5"
+                        Margin="5"></Button>
+            </Grid>
+
+                <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"></ColumnDefinition>
+                    <ColumnDefinition Width="5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="lbTime"
+                       Content="0:00"
+                       FontSize="25"
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       Margin="10,10,0,0"
+                       VerticalAlignment="Top" />
+                
+                <Button x:Name="btnLogout"
+                        Content="Logout"
+                        FontSize="16"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="10"
+                        Click="BtnLogout_Click"></Button>
+            </Grid>
+
 
         </Grid>
 
@@ -158,7 +205,7 @@
                             <ColumnDefinition Width="5*"></ColumnDefinition>
                             <ColumnDefinition Width="5*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
+
                         <Border BorderThickness="2"
                                 BorderBrush="Black"
                                 Grid.Column="0"
@@ -174,7 +221,7 @@
                                 Grid.Row="0"
                                 Margin="1,1,1,1">
                         </Button>
-                        
+
                         <Button x:Name="btnPrint"
                                 Content="Print"
                                 Grid.Column="1"
@@ -182,11 +229,7 @@
                                 Margin="1,1,1,1">
                         </Button>
 
-                        
                     </Grid>
-
-
-
                 </Grid>
                 
             </Border>

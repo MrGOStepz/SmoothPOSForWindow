@@ -16,12 +16,14 @@ namespace SmoothDataBaseControl
         private EmployeeDAO _employeeDAO;
         private PopupDAO _popupDAO;
         private ProductDAO _productDAO;
+        private TableDAO _tableDAO;
 
         public BusinessLogic()
         {
             _employeeDAO = new EmployeeDAO();
             _popupDAO = new PopupDAO();
             _productDAO = new ProductDAO();
+            _tableDAO = new TableDAO();
         }
         
 
@@ -140,10 +142,36 @@ namespace SmoothDataBaseControl
                 return null;
             }
         }
+
+        public int UpdateStaffStatus(int staffID, int StatusID)
+        {
+            try
+            {
+                return _employeeDAO.UpdateStaffStatus(staffID, StatusID);
+            }
+            catch (Exception ex)
+            {   
+
+                return -1;
+            }
+        }
+
+        public int CheckStaffStatus(int staffID)
+        {
+            try
+            {
+                return _employeeDAO.CheckStaffStatus(staffID);
+            }
+            catch (Exception ex)
+            {
+
+                return -1;
+            }
+        }
         #endregion
 
         #region Popup
-        
+
         const string IMAGE_FOLDER = @"C:\Images\";
 
         public int AddNewPopupLogic(string stringJSON)
@@ -389,5 +417,97 @@ namespace SmoothDataBaseControl
         }
         #endregion
 
+        #region Table
+        //TODO Business
+        //public int AddTable(string stringJSON)
+        //{
+        //    try
+        //    {
+        //        log.Info("BusinessLogic => AddTable - Begin");
+        //        TableModal tableModel = JsonConvert.DeserializeObject<TableModal>(stringJSON);
+
+        //        return _tableDAO.AddTable(productModel.Name, lstName, lstPrice, lstImagePath);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.Error("BussicnessLogic => AddProduct" + ex.Message);
+        //        return -1;
+        //    }
+        //}
+
+        //public int UpdatePopup(string stringJSON)
+        //{
+        //    try
+        //    {
+        //        PopupModel popupModel = JsonConvert.DeserializeObject<PopupModel>(stringJSON);
+
+        //        List<int> lstSubpPopupID = new List<int>();
+        //        List<string> lstSubPopupName = new List<string>();
+        //        List<float> lstSubPopupPrice = new List<float>();
+        //        List<string> lstSubpopupImagePath = new List<string>();
+
+        //        lstSubpPopupID = popupModel.ListSubPopup.Select(x => x.SubPopUpID).ToList();
+        //        lstSubPopupName = popupModel.ListSubPopup.Select(x => x.Name).ToList();
+        //        lstSubPopupPrice = popupModel.ListSubPopup.Select(x => x.Price).ToList();
+        //        lstSubpopupImagePath = popupModel.ListSubPopup.Select(x => x.Image64).ToList();
+
+        //        return _popupDAO.UpdatePopup(popupModel.PopupID, popupModel.Name, lstSubpPopupID, lstSubPopupName, lstSubPopupPrice, lstSubpopupImagePath);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.Error("BussicnessLogic => AddProduct" + ex.Message);
+        //        return -1;
+        //    }
+        //}
+
+        //public int DeletePopup(int PopupID)
+        //{
+        //    try
+        //    {
+        //        if (PopupID != 1)
+        //        {
+        //            return _popupDAO.DeletePopup(PopupID);
+        //        }
+        //        else
+        //        {
+        //            return -1;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.Error("BussicnessLogic => DeletePopup" + ex.Message);
+        //        return -1;
+        //    }
+        //}
+
+        //public string GetListOfPopup()
+        //{
+        //    try
+        //    {
+        //        DataTable dt = new DataTable();
+        //        List<PopupModel> lstPopupModel = new List<PopupModel>();
+        //        PopupModel popupModel = new PopupModel();
+        //        dt = _popupDAO.GetListOfPopup();
+
+        //        foreach (DataRow row in dt.Rows)
+        //        {
+        //            popupModel = new PopupModel();
+        //            popupModel.PopupID = (int)row["popup_id"];
+        //            popupModel.Name = row["name"].ToString();
+
+        //            lstPopupModel.Add(popupModel);
+        //        }
+
+        //        string stringJSON = JsonConvert.SerializeObject(lstPopupModel);
+
+        //        return stringJSON;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.Error("BussicnessLogic => AddProduct" + ex.Message);
+        //        return null;
+        //    }
+        //}
+        #endregion
     }
 }

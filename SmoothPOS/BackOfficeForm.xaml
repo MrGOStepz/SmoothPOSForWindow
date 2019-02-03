@@ -74,6 +74,10 @@
                 <Expander Header="Product"
                           Margin="1,1,5,5">
                     <StackPanel>
+                        <Button x:Name="btnSearchProduct"
+                                Content="Search Product"
+                                Margin="5,5,2,2"
+                                Click="BtnSearchProduct_Click"></Button>
                         <Button x:Name="btnAddProduct"
                                 Content="Add Product"
                                 Margin="5,5,2,2"
@@ -88,11 +92,17 @@
                 </Expander>
 
                 <Expander Header="Popup"
-                          Margin="1,1,5,5">
+                          Margin="1,1,5,5"
+                          >
                     <StackPanel>
+                        <Button x:Name="btnSearchPopup"
+                                Content="Search Popup"
+                                Margin="5,5,2,2"
+                                Click="BtnSearchPopup_Click"></Button>
                         <Button x:Name="btnAddPopup"
                                 Content="Add Popup"
-                                Margin="5,5,2,2"></Button>
+                                Margin="5,5,2,2"
+                                Click="BtnAddPopup_Click"></Button>
                         <Button x:Name="btnEditPopup"
                                 Content="Edit Popup"
                                 Margin="5,5,2,2"></Button>

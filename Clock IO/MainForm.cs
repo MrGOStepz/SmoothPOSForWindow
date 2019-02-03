@@ -188,37 +188,39 @@ namespace Clock_IO
 
         private void PrintDoc_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            DatabaseHandle dbHandle = new DatabaseHandle();
-            DateTime dtFrom = new DateTime();
-            DateTime dtTo = new DateTime();
+            //DatabaseHandle dbHandle = new DatabaseHandle();
+            //DateTime dtFrom = new DateTime();
+            //DateTime dtTo = new DateTime();
 
-            dtFrom = dtpFrom.Value;
-            dtTo = dtpEnd.Value;
+            //dtFrom = dtpFrom.Value;
+            //dtTo = dtpEnd.Value;
 
-            List<EmployeeTimeSheet> lstEmployeeTimeSheets = new List<EmployeeTimeSheet>();
-            lstEmployeeTimeSheets = dbHandle.GetEmployeeTimeSheet(cbName.Text, dtFrom, dtTo);
+            //List<EmployeeTimeSheet> lstEmployeeTimeSheets = new List<EmployeeTimeSheet>();
+            //lstEmployeeTimeSheets = dbHandle.GetEmployeeTimeSheet(cbName.Text, dtFrom, dtTo);
 
             try
             {
-                int y = 0;
-                long totalTime = 0;
-                if (lstEmployeeTimeSheets != null && lstEmployeeTimeSheets.Count != 0)
-                {
-                    e.Graphics.DrawString(lstEmployeeTimeSheets[0].Name + " | " + dtFrom.ToShortDateString() + " - " + dtTo.ToShortDateString(), new Font("Arial", 10), Brushes.Black, 5, 5, new StringFormat());
 
-                    for (int i = 0; i < lstEmployeeTimeSheets.Count; i++)
-                    {
-                        long timeTick = lstEmployeeTimeSheets[i].DateTo.Ticks - lstEmployeeTimeSheets[i].DateFrom.Ticks;
-                        totalTime += timeTick;
-                        TimeSpan elapsedSpan = new TimeSpan(timeTick);
-                        e.Graphics.DrawString(lstEmployeeTimeSheets[0].DateTo.ToShortDateString() + " | " + lstEmployeeTimeSheets[i].DateFrom.ToShortTimeString() + " - " + lstEmployeeTimeSheets[i].DateTo.ToShortTimeString() + " | " + String.Format("{0} hr, {1} m", 
-                   elapsedSpan.Hours, elapsedSpan.Minutes), new Font("Arial", 7), Brushes.Black, 5, 10 + ((i+1)*13), new StringFormat());
-                        y = 10 + ((i + 1) * 15);
-                    }
+                e.Graphics.DrawString("Total Helllooooooooooooooooooooooooooooooo", new Font("Arial", 7), Brushes.Black, 5, 10 + ((1 + 1) * 13), new StringFormat());
+                //int y = 0;
+                //long totalTime = 0;
+                //if (lstEmployeeTimeSheets != null && lstEmployeeTimeSheets.Count != 0)
+                //{
+                //    e.Graphics.DrawString(lstEmployeeTimeSheets[0].Name + " | " + dtFrom.ToShortDateString() + " - " + dtTo.ToShortDateString(), new Font("Arial", 10), Brushes.Black, 5, 5, new StringFormat());
 
-                    TimeSpan eSpan = new TimeSpan(totalTime);
-                    e.Graphics.DrawString("Total " + String.Format("{0} hr, {1} m", eSpan.Hours, eSpan.Minutes), new Font("Arial", 8), Brushes.Black, 5, y + 8, new StringFormat());
-                }
+                //    for (int i = 0; i < lstEmployeeTimeSheets.Count; i++)
+                //    {
+                //        long timeTick = lstEmployeeTimeSheets[i].DateTo.Ticks - lstEmployeeTimeSheets[i].DateFrom.Ticks;
+                //        totalTime += timeTick;
+                //        TimeSpan elapsedSpan = new TimeSpan(timeTick);
+                //        e.Graphics.DrawString(lstEmployeeTimeSheets[0].DateTo.ToShortDateString() + " | " + lstEmployeeTimeSheets[i].DateFrom.ToShortTimeString() + " - " + lstEmployeeTimeSheets[i].DateTo.ToShortTimeString() + " | " + String.Format("{0} hr, {1} m", 
+                //   elapsedSpan.Hours, elapsedSpan.Minutes), new Font("Arial", 7), Brushes.Black, 5, 10 + ((i+1)*13), new StringFormat());
+                //        y = 10 + ((i + 1) * 15);
+                //    }
+
+                //    TimeSpan eSpan = new TimeSpan(totalTime);
+                //    e.Graphics.DrawString("Total " + String.Format("{0} hr, {1} m", eSpan.Hours, eSpan.Minutes), new Font("Arial", 8), Brushes.Black, 5, y + 8, new StringFormat());
+                //}
 
 
             }

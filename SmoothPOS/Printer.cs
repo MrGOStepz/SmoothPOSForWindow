@@ -24,5 +24,9 @@ namespace SmoothPOS
             set { printerID = value; }
         }
 
+        public int PrintRecript()
+        {
+            return 1;
+        }
     }
 }

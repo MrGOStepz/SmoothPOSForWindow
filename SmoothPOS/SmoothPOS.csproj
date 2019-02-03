@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
@@ -64,18 +65,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddPopupControl.xaml.cs">
+    <Compile Include="ConvertControlImageToBitmapImage.cs" />
+    <Compile Include="PrinterPOS.cs" />
+    <Compile Include="TableDialog.xaml.cs">
+      <DependentUpon>TableDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TableModal.cs" />
+    <Compile Include="TableSection.cs" />
+    <Compile Include="TableSettingControl.xaml.cs">
+      <DependentUpon>TableSettingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddPopupControl.xaml.cs">
       <DependentUpon>AddPopupControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddProductControl.xaml.cs">
+    <Compile Include="UserControl\AddProductControl.xaml.cs">
       <DependentUpon>AddProductControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="BackOfficeForm.xaml.cs">
       <DependentUpon>BackOfficeForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConvertDataTable.cs" />
+    <Compile Include="Class\ConvertDataTable.cs" />
     <Compile Include="DatabaseHandle.cs" />
-    <Compile Include="GlobalHelper.cs" />
+    <Compile Include="Class\GlobalHelper.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="ItemDetailControl.xaml.cs">
       <DependentUpon>ItemDetailControl.xaml</DependentUpon>
@@ -84,8 +95,12 @@
     <Compile Include="Modals\IngredientModel.cs" />
     <Compile Include="Modals\PopupModel.cs" />
     <Compile Include="Modals\ProductModel.cs" />
-    <Compile Include="SearchProductControl.xaml.cs">
-      <DependentUpon>SearchProductControl.xaml</DependentUpon>
+    <Compile Include="Class\ProductStatic.cs" />
+    <Compile Include="UserControl\PopupSearchControl.xaml.cs">
+      <DependentUpon>PopupSearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ProductSearchControl.xaml.cs">
+      <DependentUpon>ProductSearchControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControl\TableControl.xaml.cs">
       <DependentUpon>TableControl.xaml</DependentUpon>
@@ -93,7 +108,6 @@
     <Compile Include="UserControl\PayUserControl.xaml.cs">
       <DependentUpon>PayUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Popup.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="ProductCRUDForm.xaml.cs">
       <DependentUpon>ProductCRUDForm.xaml</DependentUpon>
@@ -102,12 +116,20 @@
     <Compile Include="SettingForm.xaml.cs">
       <DependentUpon>SettingForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
-    <Page Include="AddPopupControl.xaml">
+    <Compile Include="Class\UserStatic.cs" />
+    <Page Include="TableDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddProductControl.xaml">
+    <Page Include="TableSettingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\AddPopupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\AddProductControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,7 +145,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SearchProductControl.xaml">
+    <Page Include="UserControl\PopupSearchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\ProductSearchControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,11 +216,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BackOfficeUserControl\" />
     <Folder Include="Backoffice\" />
-    <Folder Include="Class\" />
     <Folder Include="Interface\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\Add.png" />
@@ -220,6 +243,15 @@
       <Project>{cf517c7a-6706-40bd-ab00-f894aef53000}</Project>
       <Name>SmoothDataBaseControl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logo\20413.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logo\Logo.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

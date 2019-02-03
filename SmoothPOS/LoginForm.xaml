@@ -126,14 +126,16 @@
                 Margin="773,219,0,0"
                 VerticalAlignment="Top"
                 Width="185"
-                Height="50" />
+                Height="50"
+                Click="BtnCI_Click" />
         <Button x:Name="btnCO"
                 Content="Clock Out"
                 HorizontalAlignment="Left"
                 Margin="773,273,0,0"
                 VerticalAlignment="Top"
                 Width="185"
-                Height="50" />
+                Height="50"
+                Click="BtnCO_Click" />
 
         <Button x:Name="btnBackOffice"
                 Content="Back Office"
@@ -143,5 +145,13 @@
                 Width="185"
                 Height="50"
                 Click="BtnBackOffice_Click" />
+        <Button x:Name="btnTestPrint"
+                Content="Back Office"
+                HorizontalAlignment="Left"
+                Margin="10,163,0,0"
+                VerticalAlignment="Top"
+                Width="185"
+                Height="50"
+                Click="BtnTestPrint_Click" />
     </Grid>
 </Window>

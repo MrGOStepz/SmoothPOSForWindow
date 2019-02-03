@@ -46,6 +46,8 @@ namespace SmoothPOS
         int AddStaff(string staff);
         int UpdatStaff(string staff);
         int RemoveStaff(int staffID);
+        int UpdateStaffStatus(int staffID, int status);
+        int CheckStaffStatus(int staffID);
         string ListOfStaff();
         string FilterOfStaff(string staff);
         string GetStaffDetailByPassword(string password);
@@ -83,5 +85,11 @@ namespace SmoothPOS
         string ViewReceiptDetail(int receiptID);
         string FilterReport(string dateFrom, string dateTo);
         int DeleteReceipt(int receiptID);
+    }
+
+    interface ITable
+    {
+        int AddTable(string tableDetail);
+        int RemoveTable(int tableID);
     }
 }

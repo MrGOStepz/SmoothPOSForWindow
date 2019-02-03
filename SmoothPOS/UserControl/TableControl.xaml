@@ -8,7 +8,7 @@
              Height="714"
              Width="690">
 
-    <Grid>
+    <Grid Background="Azure">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -20,12 +20,105 @@
         <Border Grid.Row="0"
                 Grid.Column="0"
                 BorderThickness="2"
-                BorderBrush="Black"></Border>
+                BorderBrush="Black">
+
+        </Border>
 
         <Border Grid.Row="1"
                 Grid.Column="0"
                 BorderThickness="2"
                 BorderBrush="Black"></Border>
+        <TabControl x:Name="tcTable"
+                    Grid.Row="0">
+            <TabItem Header="Front"
+                     Width="100"
+                     Height="50">
+                <Grid x:Name="sectionFront"
+                      AllowDrop="True">
+                    
+                    <Button x:Name="btnTest"
+                            Content="test"
+                            HorizontalAlignment="Left"
+                            Margin="195,113,0,0"
+                            VerticalAlignment="Top"
+                            Width="75" 
+                            MouseLeftButtonUp="Button_MouseLeftButtonUp"
+                            MouseMove="Button_MouseMove"
+                            MouseUp="Button_MouseUp"/>
+                    
+                    <Button x:Name="btnTest2"
+                            Content="test2"
+                            HorizontalAlignment="Left"
+                            Margin="195,258,0,0"
+                            VerticalAlignment="Top"
+                            Width="75"
+                            MouseLeftButtonUp="Button_MouseLeftButtonUp"
+                            MouseMove="Button_MouseMove"
+                            MouseUp="Button_MouseUp" />
+
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Main"
+                     Width="100"
+                     Height="50">
+                <Grid x:Name="sectionMain">
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Black"
+                     Width="100"
+                     Height="50">
+                <Grid x:Name="sectionBack">
+                </Grid>
+            </TabItem>
+
+
+
+        </TabControl>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnEditTable"
+                    Content="Edit Table"
+                    Grid.Column="0"
+                    Click="BtnEditTable_Click"
+                    Margin="5"
+                    Tag="1"></Button>
+            
+            <Button x:Name="btnAddTable"
+                    Content="Add Table"
+                    Grid.Column="1"
+                    Click="BtnAddTable_Click"
+                    Margin="5"
+                    Visibility="Hidden"></Button>
+
+            <Button x:Name="btnRemoveTable"
+                    Content="Edit Table"
+                    Grid.Column="2"
+                    Click="BtnRemoveTable_Click"
+                    Margin="5"
+                    Visibility="Hidden"></Button>
+
+
+            <Button x:Name="btnMergeTable"
+                    Content="Merge Table"
+                    Grid.Column="4"
+                    Click="BtnMergeTable_Click"
+                    Margin="5"></Button>
+
+
+        </Grid>
+        
 
     </Grid>
 </UserControl>

@@ -16,22 +16,19 @@ using System.Windows.Shapes;
 namespace SmoothPOS
 {
     /// <summary>
-    /// Interaction logic for SearchProductControl.xaml
+    /// Interaction logic for TableSettingControl.xaml
     /// </summary>
-    public partial class SearchProductControl : UserControl
+    public partial class TableSettingControl : UserControl
     {
-        public SearchProductControl()
+        public TableSettingControl()
         {
             InitializeComponent();
-            Loaded += SearchProductControl_Loaded;
         }
 
-        private void SearchProductControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            //DatabaseHandle dbHandle = new DatabaseHandle();
 
-            //ProductModel productModel = new ProductModel();
-            //productModel = dbHandle.GetPro
+        private void BtnEditTable_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -36,16 +36,19 @@ namespace SmoothPOS_Beta_
             }
             return table;
         }
+
+        public enum ServiceStatus
+        {
+            Running,
+            Stopped,
+            Paused,
+            Stoping,
+            Starting,
+            Changing
+        }
+
     }
 
-    public enum ServiceStatus
-    {
-        Running,
-        Stopped,
-        Paused,
-        Stoping,
-        Starting,
-        Changing
-    }
+
 
 }

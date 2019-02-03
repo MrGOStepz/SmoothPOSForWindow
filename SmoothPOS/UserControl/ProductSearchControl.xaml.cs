@@ -16,13 +16,22 @@ using System.Windows.Shapes;
 namespace SmoothPOS
 {
     /// <summary>
-    /// Interaction logic for AddPopupControl.xaml
+    /// Interaction logic for SearchProductControl.xaml
     /// </summary>
-    public partial class AddPopupControl : UserControl
+    public partial class ProductSearchControl : UserControl
     {
-        public AddPopupControl()
+        public ProductSearchControl()
         {
             InitializeComponent();
+            Loaded += ProductSearchControl_Loaded;
+        }
+
+        private void ProductSearchControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            //DatabaseHandle dbHandle = new DatabaseHandle();
+
+            //ProductModel productModel = new ProductModel();
+            //productModel = dbHandle.GetPro
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ServiceProcess;
 
 namespace SmoothPOS
 {
@@ -21,35 +22,77 @@ namespace SmoothPOS
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Border _UIProperies;
+
         public MainWindow()
         {
             InitializeComponent();
             lbTime.Content = DateTime.Now.ToLongTimeString();
             Loaded += MainWindow_Loaded;
+            _UIProperies = (Border)mainPanel.Children
+                        .Cast<UIElement>()
+                        .First(x => Grid.GetRow(x) == 0 && Grid.GetColumn(x) == 0);
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            LoginForm loginForm = new LoginForm();
-            loginForm.ShowDialog();
+            //Check Database Service
+            try
+            {
+                if (ServiceStatus.Stopped == DatabaseServiceStatus(Setting.DatabaseServiceName))
+                {
+                    MessageBox.Show("Service is running");
+                }
 
-            //System.Windows.Controls.Border
-            Border UIProteries =  (Border)mainPanel.Children
-                        .Cast<UIElement>()
-                        .First(x => Grid.GetRow(x) == 0 && Grid.GetColumn(x) == 0);
+                LoginForm loginForm = new LoginForm();
+                loginForm.ShowDialog();
+                
 
-            //Set UserControl Size
-            TableControl tbControl = new TableControl();
-            tbControl.Height = UIProteries.ActualHeight;
-            tbControl.Width = UIProteries.ActualWidth;
-            mainPanelLeft.Children.Add(tbControl);
+                
+                //Set UserControl Size
+                TableControl tbControl = new TableControl();
+                tbControl.Height = _UIProperies.ActualHeight;
+                tbControl.Width = _UIProperies.ActualWidth;
+                mainPanelLeft.Children.Add(tbControl);
+                
+                //Time
+                DispatcherTimer dispatcherClockTimer = new DispatcherTimer();
+                dispatcherClockTimer.Tick += DispatcherClockTimer_Tick;
+                dispatcherClockTimer.Interval = new TimeSpan(0, 0, 1);
+                dispatcherClockTimer.Start();
+                
+            }
+            catch (Exception ex)
+            {
+                //TODO Exception Service
+                MessageBox.Show(ex.Message);
+            }
 
-            //Time
-            DispatcherTimer dispatcherClockTimer = new DispatcherTimer();
-            dispatcherClockTimer.Tick += DispatcherClockTimer_Tick;
-            dispatcherClockTimer.Interval = new TimeSpan(0, 0, 1);
-            dispatcherClockTimer.Start();
 
+        }
+
+        private ServiceStatus DatabaseServiceStatus(string serviceName)
+        {
+            //Change Service is running
+            ServiceController sc = new ServiceController(serviceName);
+
+            switch (sc.Status)
+            {
+                //case ServiceControllerStatus.Running:
+                //    return ServiceStatus.Running;
+                case ServiceControllerStatus.Stopped:
+                    sc.Start();
+                    sc.WaitForStatus(ServiceControllerStatus.Running);
+                    return ServiceStatus.Stopped;
+                //case ServiceControllerStatus.Paused:
+                //    return ServiceStatus.Paused;
+                //case ServiceControllerStatus.StopPending:
+                //    return ServiceStatus.Stoping;
+                //case ServiceControllerStatus.StartPending:
+                //    return ServiceStatus.Starting;
+                default:
+                    return ServiceStatus.Changing;
+            }
         }
 
         private void DispatcherClockTimer_Tick(object sender, EventArgs e)
@@ -61,6 +104,30 @@ namespace SmoothPOS
         {
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
+        }
+
+        private void BtnHome_Click(object sender, RoutedEventArgs e)
+        {
+            mainPanelLeft.Children.Clear();
+            TableControl tbControl = new TableControl();
+            tbControl.Height = _UIProperies.ActualHeight;
+            tbControl.Width = _UIProperies.ActualWidth;
+            mainPanelLeft.Children.Add(tbControl);
+        }
+
+        private void BtnCookStatus_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnResendOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnReprintReceipt_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

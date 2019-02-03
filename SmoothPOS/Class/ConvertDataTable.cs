@@ -34,5 +34,6 @@ namespace SmoothPOS
             //return JsonConvert.SerializeObject(rows);
             return serializer.Serialize(rows);
         }
+
     }
 }

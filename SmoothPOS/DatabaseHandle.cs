@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmoothPOS
 {
-    public class DatabaseHandle : IProduct, IPopup, IStaff
+    public class DatabaseHandle : IProduct, IPopup, IStaff, ITable
     {
         BusinessLogic _businessLogic;
 
@@ -45,6 +45,24 @@ namespace SmoothPOS
         public int AddStaff(string staff)
         {
             throw new NotImplementedException();
+        }
+
+        public int AddTable(string tableDetail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int CheckStaffStatus(int staffID)
+        {
+            try
+            {
+                return _businessLogic.CheckStaffStatus(staffID);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public string FilterOfProduct(string product)
@@ -156,9 +174,27 @@ namespace SmoothPOS
             throw new NotImplementedException();
         }
 
+        public int RemoveTable(int tableID)
+        {
+            throw new NotImplementedException();
+        }
+
         public int UpdateProduct(string product)
         {
             throw new NotImplementedException();
+        }
+
+        public int UpdateStaffStatus(int staffID, int statusID)
+        {
+            try
+            {
+                return _businessLogic.UpdateStaffStatus(staffID, statusID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         public int UpdatPopup(string popup)
