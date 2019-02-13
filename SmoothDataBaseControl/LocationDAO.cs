@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace SmoothDataBaseControl
 {
-    public class TableDAO
+    public class LocationDAO
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(PopupDAO));
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(LocationDAO));
 
         private MySqlConnection _conn;
 
-        private const string TABLE_TABLE_SECTION = "tb_table_section";
-        private const string TABLE_SECTION = "tb_section";
+        private const string TABLE_LOCATION_MENU = "tb_location_menu";
+        private const string TABLE_LOCATION_TAB = "tb_location_tab";
 
         private void DatabaseOpen()
         {
@@ -30,7 +30,7 @@ namespace SmoothDataBaseControl
             _conn.Close();
         }
 
-        public int AddSectionTable(string Name)
+        public int AddLocationTab(string Name)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
                 stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_SECTION);
+                stringSQL.Append(TABLE_LOCATION_TAB);
                 stringSQL.Append(" (name)");
                 stringSQL.Append(" VALUES (@Name);");
 
@@ -49,17 +49,17 @@ namespace SmoothDataBaseControl
                 DatabaseClose();
 
                 
-                log.Info("SmoothDataLayer -- AddSectionTable Success");
+                log.Info("SmoothDataLayer -- AddLocationTab Success");
                 return 1;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => AddTable(): " + ex.Message);
+                log.Error("SmoothDataLayer => AddLocationTab(): " + ex.Message);
                 return -1;
             }
         }
 
-        public int UpdateSectiontable(int SectionID, string Name)
+        public int UpdateLocationTab(int LocationTabID, string Name)
         {
             try
             {
@@ -67,12 +67,12 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
                 stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
+                stringSQL.Append(TABLE_LOCATION_TAB);
                 stringSQL.Append(" SET name = @Name");
-                stringSQL.Append(" WHERE section_id = @SectionID;");
+                stringSQL.Append(" WHERE location_tab_id = @LocationTabID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@SectionID", SectionID);
+                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
                 cmd.Parameters.AddWithValue("@Name", Name);
 
 
@@ -89,7 +89,7 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public int RemoveSectionTable(int SectionID)
+        public int RemoveLocationTab(int LocationTabID)
         {
             try
             {
@@ -97,26 +97,26 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
                 stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
+                stringSQL.Append(TABLE_LOCATION_TAB);
                 stringSQL.Append(" SET is_active = 0");
-                stringSQL.Append(" WHERE section_id = @SectionID;");
+                stringSQL.Append(" WHERE location_tab_id = @LocationTabID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@SectionID", SectionID);
+                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
                 cmd.ExecuteNonQuery();
 
                 DatabaseClose();
-                log.Info("SmoothDataLayer -- RemoveSectionTable Success");
+                log.Info("SmoothDataLayer -- RemoveLocationTab Success");
                 return 1;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => RemoveSectionTable(): " + ex.Message);
+                log.Error("SmoothDataLayer => RemoveLocationTab: " + ex.Message);
                 return -1;
             }
         }
 
-        public DataTable GetListOfSection()
+        public DataTable GetListOfLocationTab()
         {
             try
             {
@@ -124,9 +124,9 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
 
-                stringSQL.Append("SELECT section_id, name, is_active ");
+                stringSQL.Append("SELECT location_tab_id, name, is_active ");
                 stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
+                stringSQL.Append(TABLE_LOCATION_TAB);
                 stringSQL.Append(" WHERE is_active = 1; ");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
@@ -136,17 +136,17 @@ namespace SmoothDataBaseControl
                 adp.Fill(dt);
                 cmd.Dispose();
                 DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListTable Success");
+                log.Info("SmoothDataLayer -- GetListOfLocationTab Success");
                 return dt;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => GetListTable(): " + ex.Message);
+                log.Error("SmoothDataLayer => GetListOfLocationTab(): " + ex.Message);
                 return null;
             }
         }
 
-        public int AddTable(string UName, string Name, int SectionID, float MarginTop, float MarginBot, float MarginLeft, float MarginRight)
+        public int AddLocationMenu(int ProductID, int LocationTabID, int Column, int Row)
         {
             try
             {
@@ -154,18 +154,15 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
                 stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
-                stringSQL.Append(" (u_name, name, section_id, margin_top, margin_bottom, margin_right, margin_left, height, width, is_active)");
-                stringSQL.Append(" VALUES (@UName, @Name, @SectionID, @MarginTop, @MarginBot, @MarginLeft, @MarginRight, 75, 75, 1);");
+                stringSQL.Append(TABLE_LOCATION_MENU);
+                stringSQL.Append(" (product_id, location_tab_id, column_no, row_no)");
+                stringSQL.Append(" VALUES (@ProductID, @LocationTabID, @Column, @Row);");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@UName", UName);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                cmd.Parameters.AddWithValue("@SectionID", SectionID);
-                cmd.Parameters.AddWithValue("@MarginTop", MarginTop);
-                cmd.Parameters.AddWithValue("@MarginBot", MarginBot);
-                cmd.Parameters.AddWithValue("@MarginLeft", MarginLeft);
-                cmd.Parameters.AddWithValue("@MarginRight", MarginRight);
+                cmd.Parameters.AddWithValue("@ProductID", ProductID);
+                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
+                cmd.Parameters.AddWithValue("@Column", Column);
+                cmd.Parameters.AddWithValue("@Row", Row);
 
                 cmd.ExecuteNonQuery();
 
@@ -175,17 +172,18 @@ namespace SmoothDataBaseControl
                 int tID = int.Parse(tableID);
 
                 
-                log.Info("SmoothDataLayer -- AddTable Success");
+                log.Info("SmoothDataLayer -- AddLocationMenu Success");
                 return tID;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => AddTable(): " + ex.Message);
+                log.Error("SmoothDataLayer => AddLocationMenu: " + ex.Message);
                 return -1;
             }
         }
 
-        public int UpdateTable(int TableID, float MarginTop, float MarginBot, float MarginLeft, float MarginRight)
+        //TODO Review
+        public int UpdateLocationMenu(int TableID, float MarginTop, float MarginBot, float MarginLeft, float MarginRight)
         {
             try
             {
@@ -218,7 +216,7 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public int RemoveTable(int TableID)
+        public int RemoveLocationMenu(int LocationMenuID)
         {
             try
             {
@@ -227,11 +225,11 @@ namespace SmoothDataBaseControl
                 DatabaseOpen();
 
                 stringSQL.Append("DELETE FROM ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
-                stringSQL.Append(" WHERE table_section_id = @TableID;");
+                stringSQL.Append(TABLE_LOCATION_MENU);
+                stringSQL.Append(" WHERE location_menu_id = @LocationMenuID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@TableID", TableID);
+                cmd.Parameters.AddWithValue("@LocationMenuID", LocationMenuID);
 
                 cmd.ExecuteNonQuery();
 
@@ -246,7 +244,7 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListTable()
+        public DataTable GetListLocationMenu()
         {
             try
             {
@@ -254,9 +252,9 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
 
-                stringSQL.Append("SELECT table_section_id, u_name, name, section_id, margin_top, margin_bottom, margin_right, margin_left, height, width, is_active ");
+                stringSQL.Append("SELECT location_menu_id, product_id, location_tab_id, column_on, row_on ");
                 stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_TABLE_SECTION + ";");
+                stringSQL.Append(TABLE_LOCATION_MENU + ";");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
                 MySqlDataAdapter adp = new MySqlDataAdapter(cmd);

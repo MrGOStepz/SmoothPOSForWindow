@@ -17,6 +17,7 @@ namespace SmoothDataBaseControl
         private PopupDAO _popupDAO;
         private ProductDAO _productDAO;
         private TableDAO _tableDAO;
+        private LocationDAO _locationDAO;
 
         public BusinessLogic()
         {
@@ -24,6 +25,8 @@ namespace SmoothDataBaseControl
             _popupDAO = new PopupDAO();
             _productDAO = new ProductDAO();
             _tableDAO = new TableDAO();
+            _locationDAO = new LocationDAO();
+            
         }
         
 
@@ -417,97 +420,322 @@ namespace SmoothDataBaseControl
         }
         #endregion
 
-        #region Table
+        #region Table And Section
         //TODO Business
-        //public int AddTable(string stringJSON)
-        //{
-        //    try
-        //    {
-        //        log.Info("BusinessLogic => AddTable - Begin");
-        //        TableModal tableModel = JsonConvert.DeserializeObject<TableModal>(stringJSON);
 
-        //        return _tableDAO.AddTable(productModel.Name, lstName, lstPrice, lstImagePath);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error("BussicnessLogic => AddProduct" + ex.Message);
-        //        return -1;
-        //    }
-        //}
+        public int AddSectionTable(string Name)
+        {
+           try
+           {
+               log.Info("BusinessLogic => AddSectionTable - Begin");
+               return _tableDAO.AddSectionTable(Name);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => AddTable" + ex.Message);
+               return -1;
+           }
+        }
 
-        //public int UpdatePopup(string stringJSON)
-        //{
-        //    try
-        //    {
-        //        PopupModel popupModel = JsonConvert.DeserializeObject<PopupModel>(stringJSON);
+        public int UpdateSectionTable(string stringJSON)
+        {
+           try
+           { 
+               log.Info("BusinessLogic => UpdateSectionTable - Begin");
+               SectionModel sectionModel = JsonConvert.DeserializeObject<SectionModel>(stringJSON);
+               return _tableDAO.UpdateSectiontable(sectionModel.SectionID, sectionModel.Name);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => UpdateSectionTable" + ex.Message);
+               return -1;
+           }
+        }
 
-        //        List<int> lstSubpPopupID = new List<int>();
-        //        List<string> lstSubPopupName = new List<string>();
-        //        List<float> lstSubPopupPrice = new List<float>();
-        //        List<string> lstSubpopupImagePath = new List<string>();
+        public int RemoveSectionTable(int SectionID)
+        {
+           try
+           { 
+               log.Info("BusinessLogic => UpdateSectionTable - Begin");
+               return sectionModel.RemoveSectionTable(SectionID);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => UpdateSectionTable" + ex.Message);
+               return -1;
+           }
+        }
 
-        //        lstSubpPopupID = popupModel.ListSubPopup.Select(x => x.SubPopUpID).ToList();
-        //        lstSubPopupName = popupModel.ListSubPopup.Select(x => x.Name).ToList();
-        //        lstSubPopupPrice = popupModel.ListSubPopup.Select(x => x.Price).ToList();
-        //        lstSubpopupImagePath = popupModel.ListSubPopup.Select(x => x.Image64).ToList();
+        public DataTable GetListOfSection()
+        {
+           try
+           {
+               DataTable dt = new DataTable();
+               List<SectionModel> lstSectionModel = new List<SectionModel>();
+               SectionModel sectionModel = new TableModal();
+               dt = _tableDAO.GetListOfSection();
 
-        //        return _popupDAO.UpdatePopup(popupModel.PopupID, popupModel.Name, lstSubpPopupID, lstSubPopupName, lstSubPopupPrice, lstSubpopupImagePath);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error("BussicnessLogic => AddProduct" + ex.Message);
-        //        return -1;
-        //    }
-        //}
+               foreach (DataRow row in dt.Rows)
+               {
+                    sectionModel = new SectionModel();
+                    sectionModel.TableID = (int)row["section_id"];
+                    sectionModel.uniName = row["name"].ToString();
+                    sectionModel.is_active = (int)row["is_active"];
+                    
+                    lstSectionModel.Add(sectionModel);
+               }
 
-        //public int DeletePopup(int PopupID)
-        //{
-        //    try
-        //    {
-        //        if (PopupID != 1)
-        //        {
-        //            return _popupDAO.DeletePopup(PopupID);
-        //        }
-        //        else
-        //        {
-        //            return -1;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error("BussicnessLogic => DeletePopup" + ex.Message);
-        //        return -1;
-        //    }
-        //}
+               string stringJSON = JsonConvert.SerializeObject(lstSectionModel);
 
-        //public string GetListOfPopup()
-        //{
-        //    try
-        //    {
-        //        DataTable dt = new DataTable();
-        //        List<PopupModel> lstPopupModel = new List<PopupModel>();
-        //        PopupModel popupModel = new PopupModel();
-        //        dt = _popupDAO.GetListOfPopup();
+               return stringJSON;
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => GetListOfTable" + ex.Message);
+               return null;
+           }
+        }
 
-        //        foreach (DataRow row in dt.Rows)
-        //        {
-        //            popupModel = new PopupModel();
-        //            popupModel.PopupID = (int)row["popup_id"];
-        //            popupModel.Name = row["name"].ToString();
+        public int AddTable(string UName, string Name, int SectionID, float MarginTop, float MarginBot, float MarginLeft, float MarginRight)
+        {
+           try
+           {
+               log.Info("BusinessLogic => AddTable - Begin");
+               TableModal tableModel = JsonConvert.DeserializeObject<TableModal>(stringJSON);
 
-        //            lstPopupModel.Add(popupModel);
-        //        }
+               return _tableDAO.AddTable(tableModel.UName, tableModel.Name, tableModel.SectionID, tableModel.MarginTop, tableModel.MarginBot, tableModel.MarginLeft, tableModel.MarginRight);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => AddTable" + ex.Message);
+               return -1;
+           }
+        }
 
-        //        string stringJSON = JsonConvert.SerializeObject(lstPopupModel);
+        public int UpdateTable(int TableID, float MarginTop, float MarginBot, float MarginLeft, float MarginRight)
+        {
+           try
+           {
+               TableModal tableModel = JsonConvert.DeserializeObject<TableModal>(stringJSON);
 
-        //        return stringJSON;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error("BussicnessLogic => AddProduct" + ex.Message);
-        //        return null;
-        //    }
-        //}
+               return _tableDAO.UpdateTable(tableModel.TableID, tableModel.MarginTop, tableModel.MarginBottom, tableModel.MarginLeft, tableModel.MarginRight);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => UpdateTable" + ex.Message);
+               return -1;
+           }
+        }
+
+        public int RemoveTable(int TableID)
+        {
+           try
+           {
+               return _tableDAO.RemoveTable(TableID);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => DeletePopup" + ex.Message);
+               return -1;
+           }
+        }
+
+        public string GetListOfTable()
+        {
+           try
+           {
+               DataTable dt = new DataTable();
+               List<TableModal> lstTableModel = new List<TableModal>();
+               TableModal tableModel = new TableModal();
+               dt = _tableDAO.GetListTable();
+
+               foreach (DataRow row in dt.Rows)
+               {
+                    tableModel = new TableModal();
+                    tableModel.TableID = (int)row["table_section_id"];
+                    tableModel.uniName = row["u_name"].ToString();
+                    tableModel.name = row["name"].ToString();
+                    tableModel.SectionID = (int)row["section_id"];
+                    tableModel.MarginTop = (float)row["margin_top"];
+                    tableModel.MarginBottom = (float)row["margin_bottom"];
+                    tableModel.MarginRight = (float)row["margin_right"];
+                    tableModel.MarginLeft = (float)row["margin_left"];
+                    tableModel.Height = (float)row["height"];
+                    tableModel.Width = (float)row["width"];
+                    tableModel.is_active = (int)row["is_active"];
+                    
+                    lstTableModel.Add(tableModel);
+               }
+
+               string stringJSON = JsonConvert.SerializeObject(lstPopupModel);
+
+               return stringJSON;
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => GetListOfTable" + ex.Message);
+               return null;
+           }
+        }
+        #endregion
+
+        #region Location Menu
+        public int AddLocationTab(string Name)
+        {
+           try
+           {
+               log.Info("BusinessLogic => AddLocationTab - Begin");
+               return _locationDAO.AddLocationTab(Name);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => AddLocationTab" + ex.Message);
+               return -1;
+           }
+        }
+
+        public int UpdateLocationTab(string stringJSON)
+        {
+           try
+           { 
+               log.Info("BusinessLogic => UpdateLocationTab - Begin");
+               LocationTab locationTabModel = JsonConvert.DeserializeObject<LocationTab>(stringJSON);
+               return _locationDAO.UpdateLocationTab(locationTabModel.LocationTabID, locationTabModel.Name);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => UpdateLocationTab" + ex.Message);
+               return -1;
+           }
+        }
+
+        public int RemoveSectionTable(int SectionID)
+        {
+           try
+           { 
+               log.Info("BusinessLogic => UpdateSectionTable - Begin");
+               return sectionModel.RemoveSectionTable(SectionID);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => UpdateSectionTable" + ex.Message);
+               return -1;
+           }
+        }
+
+        public DataTable GetListOfSection()
+        {
+           try
+           {
+               DataTable dt = new DataTable();
+               List<SectionModel> lstSectionModel = new List<SectionModel>();
+               SectionModel sectionModel = new TableModal();
+               dt = _tableDAO.GetListOfSection();
+
+               foreach (DataRow row in dt.Rows)
+               {
+                    sectionModel = new SectionModel();
+                    sectionModel.TableID = (int)row["section_id"];
+                    sectionModel.uniName = row["name"].ToString();
+                    sectionModel.is_active = (int)row["is_active"];
+                    
+                    lstSectionModel.Add(sectionModel);
+               }
+
+               string stringJSON = JsonConvert.SerializeObject(lstSectionModel);
+
+               return stringJSON;
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => GetListOfTable" + ex.Message);
+               return null;
+           }
+        }
+
+        public int AddTable(string UName, string Name, int SectionID, float MarginTop, float MarginBot, float MarginLeft, float MarginRight)
+        {
+           try
+           {
+               log.Info("BusinessLogic => AddTable - Begin");
+               TableModal tableModel = JsonConvert.DeserializeObject<TableModal>(stringJSON);
+
+               return _tableDAO.AddTable(tableModel.UName, tableModel.Name, tableModel.SectionID, tableModel.MarginTop, tableModel.MarginBot, tableModel.MarginLeft, tableModel.MarginRight);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => AddTable" + ex.Message);
+               return -1;
+           }
+        }
+
+        public int UpdateTable(int TableID, float MarginTop, float MarginBot, float MarginLeft, float MarginRight)
+        {
+           try
+           {
+               TableModal tableModel = JsonConvert.DeserializeObject<TableModal>(stringJSON);
+
+               return tableModel.UpdateTable(tableModel.TableID, tableModel.MarginTop, tableModel.MarginBottom, tableModel.MarginLeft, tableModel.MarginRight);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => UpdateTable" + ex.Message);
+               return -1;
+           }
+        }
+
+        public int RemoveTable(int TableID)
+        {
+           try
+           {
+               return _tableDAO.RemoveTable(TableID);
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => DeletePopup" + ex.Message);
+               return -1;
+           }
+        }
+
+        public string GetListOfTable()
+        {
+           try
+           {
+               DataTable dt = new DataTable();
+               List<TableModal> lstTableModel = new List<TableModal>();
+               TableModal tableModel = new TableModal();
+               dt = _tableDAO.GetListTable();
+
+               foreach (DataRow row in dt.Rows)
+               {
+                    tableModel = new TableModal();
+                    tableModel.TableID = (int)row["table_section_id"];
+                    tableModel.uniName = row["u_name"].ToString();
+                    tableModel.name = row["name"].ToString();
+                    tableModel.SectionID = (int)row["section_id"];
+                    tableModel.MarginTop = (float)row["margin_top"];
+                    tableModel.MarginBottom = (float)row["margin_bottom"];
+                    tableModel.MarginRight = (float)row["margin_right"];
+                    tableModel.MarginLeft = (float)row["margin_left"];
+                    tableModel.Height = (float)row["height"];
+                    tableModel.Width = (float)row["width"];
+                    tableModel.is_active = (int)row["is_active"];
+                    
+                    lstTableModel.Add(tableModel);
+               }
+
+               string stringJSON = JsonConvert.SerializeObject(lstPopupModel);
+
+               return stringJSON;
+           }
+           catch (Exception ex)
+           {
+               log.Error("BussicnessLogic => GetListOfTable" + ex.Message);
+               return null;
+           }
+        }
+
+
         #endregion
     }
 }
