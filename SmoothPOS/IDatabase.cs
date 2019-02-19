@@ -71,6 +71,7 @@ namespace SmoothPOS
     interface IPrinterLog
     {
         int AddPrinter(string printer);
+        int UpdatPrinter(int printerID, string name);
         int RemovePrinter(int printerID);
         string ListOfPrinter();
 
@@ -90,6 +91,32 @@ namespace SmoothPOS
     interface ITable
     {
         int AddTable(string tableDetail);
+        int UpdateTable(string tableDetail);
         int RemoveTable(int tableID);
+        string GetListTable();
+    }
+
+    interface ISection
+    {
+        int AddSectionTable(string name);
+        int UpdateSectiontable(int sectionID, string name);
+        int RemoveSectionTable(int sectionID);
+        string GetListOfSection();
+    }
+
+    interface ILocationMenu
+    {
+        int AddLocationMenu(string locationMenuDetail);
+        int UpdateLocationMenu(string locationMenuDetail);
+        int RemoveLocationMenu(int LocationMenuID);
+        string GetListLocationMenu();
+    }
+
+    interface ILocationTab
+    {
+        string AddLocationTab(string name);
+        int UpdateLocationTab(int locationTabID, string name);
+        int RemoveLocationTab(int locationID);
+        string GetListOfLocationTab();
     }
 }

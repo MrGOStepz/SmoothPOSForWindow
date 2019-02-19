@@ -19,6 +19,7 @@ namespace SmoothDataBaseControl
     {
         public int LocationTabID { get; set; }
         public string Name { get; set; }
+        public int IsActive { get; set; }
     }
 }
 

@@ -172,7 +172,7 @@ namespace SmoothDataBaseControl
                 long tableID = cmd.LastInsertedId;
                 DatabaseClose();
 
-                int tID = int.Parse(tableID);
+                int tID = (int)tableID;
 
                 
                 log.Info("SmoothDataLayer -- AddTable Success");

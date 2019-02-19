@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace SmoothDataBaseControl
 {
-    public class LocationDAO
+    public class PrinterDAO
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(LocationDAO));
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(PrinterDAO));
 
         private MySqlConnection _conn;
 
-        private const string TABLE_LOCATION_MENU = "tb_location_menu";
-        private const string TABLE_LOCATION_TAB = "tb_location_tab";
+        private const string TABLE_PRINTER_PRODUCT = "tb_printer_product";
+        private const string TABLE_PRINTER = "tb_printer";
+        private const string TABLE_PRINTER_LOG = "tb_printer_log";
 
         private void DatabaseOpen()
         {
@@ -30,7 +31,7 @@ namespace SmoothDataBaseControl
             _conn.Close();
         }
 
-        public int AddLocationTab(string Name)
+        public int AddPrinter(string Name,string PrinterIP, string PritnerPort)
         {
             try
             {
@@ -38,28 +39,30 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
                 stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_LOCATION_TAB);
-                stringSQL.Append(" (name)");
-                stringSQL.Append(" VALUES (@Name);");
+                stringSQL.Append(TABLE_PRINTER);
+                stringSQL.Append(" (name, printer_ip, printer_port)");
+                stringSQL.Append(" VALUES (@Name, @PrinterIP, @PritnerPort);");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
                 cmd.Parameters.AddWithValue("@Name", Name);
+                cmd.Parameters.AddWithValue("@PrinterIP", PrinterIP);
+                cmd.Parameters.AddWithValue("@PritnerPort", PritnerPort);
 
                 cmd.ExecuteNonQuery();
                 DatabaseClose();
 
-                
-                log.Info("SmoothDataLayer -- AddLocationTab Success");
+
+                log.Info("SmoothDataLayer -- AddPrinter Success");
                 return 1;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => AddLocationTab(): " + ex.Message);
+                log.Error("SmoothDataLayer => AddPrinter(): " + ex.Message);
                 return -1;
             }
         }
 
-        public int UpdateLocationTab(int LocationTabID, string Name)
+        public int UpdatePrinter(int PrinterID, string Name)
         {
             try
             {
@@ -67,29 +70,28 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
                 stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_LOCATION_TAB);
+                stringSQL.Append(TABLE_PRINTER);
                 stringSQL.Append(" SET name = @Name");
-                stringSQL.Append(" WHERE location_tab_id = @LocationTabID;");
+                stringSQL.Append(" WHERE printer_id = @PrinterID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
+                cmd.Parameters.AddWithValue("@PrinterID", PrinterID);
                 cmd.Parameters.AddWithValue("@Name", Name);
-
 
                 cmd.ExecuteNonQuery();
 
                 DatabaseClose();
-                log.Info("SmoothDataLayer -- UpdateSectionStable Success");
+                log.Info("SmoothDataLayer -- UpdatePrinter Success");
                 return 1;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => UpdateSectionStable(): " + ex.Message);
+                log.Error("SmoothDataLayer => UpdatePrinter(): " + ex.Message);
                 return -1;
             }
         }
 
-        public int RemoveLocationTab(int LocationTabID)
+        public int RemovePrinter(int PrinterID)
         {
             try
             {
@@ -97,26 +99,26 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
                 stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_LOCATION_TAB);
+                stringSQL.Append(TABLE_PRINTER);
                 stringSQL.Append(" SET is_active = 0");
-                stringSQL.Append(" WHERE location_tab_id = @LocationTabID;");
+                stringSQL.Append(" WHERE printer_id = @PrinterID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
+                cmd.Parameters.AddWithValue("@PrinterID", PrinterID);
                 cmd.ExecuteNonQuery();
 
                 DatabaseClose();
-                log.Info("SmoothDataLayer -- RemoveLocationTab Success");
+                log.Info("SmoothDataLayer -- RemovePrinter Success");
                 return 1;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => RemoveLocationTab: " + ex.Message);
+                log.Error("SmoothDataLayer => RemovePrinter(): " + ex.Message);
                 return -1;
             }
         }
 
-        public DataTable GetListOfLocationTab()
+        public DataTable GetListOfPrinter()
         {
             try
             {
@@ -124,9 +126,9 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
 
-                stringSQL.Append("SELECT location_tab_id, name, is_active ");
+                stringSQL.Append("SELECT printer_id, name, printer_ip, printer_port ");
                 stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_LOCATION_TAB);
+                stringSQL.Append(TABLE_PRINTER);
                 stringSQL.Append(" WHERE is_active = 1; ");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
@@ -136,17 +138,17 @@ namespace SmoothDataBaseControl
                 adp.Fill(dt);
                 cmd.Dispose();
                 DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListOfLocationTab Success");
+                log.Info("SmoothDataLayer -- GetListOfPrinter Success");
                 return dt;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => GetListOfLocationTab(): " + ex.Message);
+                log.Error("SmoothDataLayer => GetListOfPrinter(): " + ex.Message);
                 return null;
             }
         }
 
-        public int AddLocationMenu(int ProductID, int LocationTabID, int Column, int Row)
+        public int AddPrinterProduct(int PrinterID, int ProdudctID)
         {
             try
             {
@@ -154,15 +156,13 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
                 stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_LOCATION_MENU);
-                stringSQL.Append(" (product_id, location_tab_id, column_no, row_no)");
-                stringSQL.Append(" VALUES (@ProductID, @LocationTabID, @Column, @Row);");
+                stringSQL.Append(TABLE_PRINTER);
+                stringSQL.Append(" (product_id, printer_id)");
+                stringSQL.Append(" VALUES (@PrinterID, @ProdudctID);");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@ProductID", ProductID);
-                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
-                cmd.Parameters.AddWithValue("@Column", Column);
-                cmd.Parameters.AddWithValue("@Row", Row);
+                cmd.Parameters.AddWithValue("@PrinterID", PrinterID);
+                cmd.Parameters.AddWithValue("@ProdudctID", ProdudctID);
 
                 cmd.ExecuteNonQuery();
 
@@ -171,80 +171,77 @@ namespace SmoothDataBaseControl
 
                 int tID = (int)tableID;
 
-                
-                log.Info("SmoothDataLayer -- AddLocationMenu Success");
+
+                log.Info("SmoothDataLayer -- AddPrinterProduct Success");
                 return tID;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => AddLocationMenu: " + ex.Message);
+                log.Error("SmoothDataLayer => AddPrinterProduct(): " + ex.Message);
                 return -1;
             }
         }
 
-        //TODO Review
-        public int UpdateLocationMenu(int LocationMenuID, int ProductID, int LocationTabID, int Column, int Row)
-        {
-            try
-            {
-
-                StringBuilder stringSQL = new StringBuilder();
-
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_LOCATION_MENU);
-                stringSQL.Append(" SET product_id = @ProductID, tb_location_tab_id = @LocationTabID, column_no = @Column, row_no = @Row");
-                stringSQL.Append(" WHERE tb_location_menu_id = @LocationMenuID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@LocationMenuID", LocationMenuID);
-                cmd.Parameters.AddWithValue("@ProductID", ProductID);
-                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
-                cmd.Parameters.AddWithValue("@Column", Column);
-                cmd.Parameters.AddWithValue("@Row", Row);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- UpdateLocationMenu Success");
-                return 1;
-            }
-            catch (Exception ex)
-            {
-                log.Error("SmoothDataLayer => UpdateLocationMenu(): " + ex.Message);
-                return -1;
-            }
-        }
-
-        public int RemoveLocationMenu(int LocationMenuID)
+        public int RemovePrinterProduct(int PrinterID, int ProductID)
         {
             try
             {
                 StringBuilder stringSQL = new StringBuilder();
 
                 DatabaseOpen();
-
                 stringSQL.Append("DELETE FROM ");
-                stringSQL.Append(TABLE_LOCATION_MENU);
-                stringSQL.Append(" WHERE location_menu_id = @LocationMenuID;");
+                stringSQL.Append(TABLE_PRINTER);
+                stringSQL.Append(" WHERE product_id = @PrinterID AND printer_id = @ProductID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@LocationMenuID", LocationMenuID);
+                cmd.Parameters.AddWithValue("@PrinterID", PrinterID);
+                cmd.Parameters.AddWithValue("@ProductID", ProductID);
 
                 cmd.ExecuteNonQuery();
 
                 DatabaseClose();
-                log.Info("SmoothDataLayer -- RemoveTable Success");
+                log.Info("SmoothDataLayer -- RemovePrinterProduct Success");
                 return 1;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => RemoveTable(): " + ex.Message);
+                log.Error("SmoothDataLayer => RemovePrinterProduct(): " + ex.Message);
                 return -1;
             }
         }
 
-        public DataTable GetListLocationMenu()
+        public int AddPrinterLog(int PrinterID, string DT, string stringJson)
+        {
+            try
+            {
+                StringBuilder stringSQL = new StringBuilder();
+
+                DatabaseOpen();
+                stringSQL.Append("INSERT INTO ");
+                stringSQL.Append(TABLE_PRINTER_LOG);
+                stringSQL.Append(" (printer_id, print_dt, printer_detail)");
+                stringSQL.Append(" VALUES (@PrinterID, @DT, @stringJson);");
+
+                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
+                cmd.Parameters.AddWithValue("@PrinterID", PrinterID);
+                cmd.Parameters.AddWithValue("@DT", DT);
+                cmd.Parameters.AddWithValue("@stringJson", stringJson);
+
+                cmd.ExecuteNonQuery();
+                DatabaseClose();
+
+
+                log.Info("SmoothDataLayer -- AddPrinterLog Success");
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                log.Error("SmoothDataLayer => AddPrinterLog(): " + ex.Message);
+                return -1;
+            }
+        }
+
+        public DataTable GetListOfPrinterLog()
         {
             try
             {
@@ -252,9 +249,10 @@ namespace SmoothDataBaseControl
 
                 DatabaseOpen();
 
-                stringSQL.Append("SELECT location_menu_id, product_id, location_tab_id, column_on, row_on ");
+                stringSQL.Append("SELECT TOP 50 printer_log_id, printer_id, print_dt, printer_detail ");
                 stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_LOCATION_MENU + ";");
+                stringSQL.Append(TABLE_PRINTER_LOG);
+                stringSQL.Append(" ORDER BY printer_log_id DESC");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
                 MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
@@ -263,15 +261,15 @@ namespace SmoothDataBaseControl
                 adp.Fill(dt);
                 cmd.Dispose();
                 DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListTable Success");
+                log.Info("SmoothDataLayer -- GetListOfPrinterLog Success");
                 return dt;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => GetListTable(): " + ex.Message);
+                log.Error("SmoothDataLayer => GetListOfPrinterLog(): " + ex.Message);
                 return null;
             }
         }
-    }
 
+    }
 }

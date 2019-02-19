@@ -25,5 +25,6 @@ namespace SmoothDataBaseControl
     {
         public int SectionID { get; set; }  
         public string Name { get; set; }       
+        public int IsActive { get; set; }
     }
 }

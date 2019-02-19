@@ -66,6 +66,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConvertControlImageToBitmapImage.cs" />
+    <Compile Include="ItemOrderControl.xaml.cs">
+      <DependentUpon>ItemOrderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrderComment.xaml.cs">
+      <DependentUpon>OrderComment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrderCommentDetail.cs" />
     <Compile Include="PrinterPOS.cs" />
     <Compile Include="TableDialog.xaml.cs">
       <DependentUpon>TableDialog.xaml</DependentUpon>
@@ -117,6 +124,14 @@
       <DependentUpon>SettingForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\UserStatic.cs" />
+    <Page Include="ItemOrderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OrderComment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TableDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
