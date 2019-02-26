@@ -68,15 +68,21 @@ namespace SmoothPOS
         string ListOfWeges();
     }
 
+    interface IPrinter
+    {
+        int AddPrinter(string stringJSON);
+        int UpdatePrinter(string stringJSON);
+        int RemovePrinter(int PritnerID);
+        string GetListOfPrinter();
+    }
+
     interface IPrinterLog
     {
-        int AddPrinter(string printer);
-        int UpdatPrinter(int printerID, string name);
-        int RemovePrinter(int printerID);
-        string ListOfPrinter();
+        int AddPrinterProduct(string stringJSON);
+        int RemovePrinterProduct(int PritnerID, int ProductID);
+        string GetListOfPrinterLog();
 
         int AddPrintReceiptLog(int receiptID);
-        int AddPrintLog(int printOrderID);
 
     }
 
@@ -88,7 +94,7 @@ namespace SmoothPOS
         int DeleteReceipt(int receiptID);
     }
 
-    interface ITable
+    interface IReport
     {
         int AddTable(string tableDetail);
         int UpdateTable(string tableDetail);
@@ -114,7 +120,7 @@ namespace SmoothPOS
 
     interface ILocationTab
     {
-        string AddLocationTab(string name);
+        int AddLocationTab(string name);
         int UpdateLocationTab(int locationTabID, string name);
         int RemoveLocationTab(int locationID);
         string GetListOfLocationTab();

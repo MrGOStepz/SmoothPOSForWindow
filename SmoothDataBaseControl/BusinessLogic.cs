@@ -19,6 +19,7 @@ namespace SmoothDataBaseControl
         private TableDAO _tableDAO;
         private LocationDAO _locationDAO;
         private PrinterDAO _printerDAO;
+        private ReportDAO _reportDAO;
         
         public BusinessLogic()
         {
@@ -28,6 +29,7 @@ namespace SmoothDataBaseControl
             _tableDAO = new TableDAO();
             _locationDAO = new LocationDAO();
             _printerDAO = new PrinterDAO();
+            _reportDAO = new ReportDAO();
         }
         
 
@@ -580,7 +582,7 @@ namespace SmoothDataBaseControl
         #endregion
 
         #region Location Menu
-        public int AddLocationTab(string Name)
+        public int GetListOfPrinterLog(string Name)
         {
             try
             {
@@ -886,6 +888,23 @@ namespace SmoothDataBaseControl
             {
                 log.Error("BussicnessLogic => GetListOfLocationTab" + ex.Message);
                 return null;
+            }
+        }
+        #endregion
+
+        #region Report
+        public int AddPrinterLog(string stringJSON)
+        {
+            try
+            {
+                log.Info("BusinessLogic => AddPrinter - Begin");
+                PrinterLogModel printerLogModel = JsonConvert.DeserializeObject<PrinterLogModel>(stringJSON);
+                return _printerDAO.AddPrinterLog(printerLogModel.PrinterID, printerLogModel.PrinterDateTime.ToShortDateString(), printerLogModel.PrinterDetail);
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => AddPrinter" + ex.Message);
+                return -1;
             }
         }
         #endregion
