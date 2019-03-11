@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="smoothdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SmoothDBModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tb_cook_status">
           <Key>
             <PropertyRef Name="cook_status_id" />
@@ -423,7 +423,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="smoothdbModelStoreContainer">
+        <EntityContainer Name="SmoothDBModelStoreContainer">
           <EntitySet Name="tb_cook_status" EntityType="Self.tb_cook_status" Schema="smoothdb" store:Type="Tables" />
           <EntitySet Name="tb_customer" EntityType="Self.tb_customer" Schema="smoothdb" store:Type="Tables" />
           <EntitySet Name="tb_employee" EntityType="Self.tb_employee" Schema="smoothdb" store:Type="Tables" />
@@ -510,10 +510,11 @@
             <End Role="tb_employee" EntitySet="tb_employee" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="smoothdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SmoothDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="tb_cook_status">
           <Key>
             <PropertyRef Name="cook_status_id" />
@@ -703,8 +704,8 @@
           <Property Name="printer_log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="printer_id" Type="Int32" Nullable="false" />
           <Property Name="print_dt" Type="DateTime" Nullable="false" />
+          <Property Name="printer_detail" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tb_printer" Relationship="Self.FK_printerlog_printer" FromRole="tb_printer_log" ToRole="tb_printer" />
-          <Property Name="printer_detail" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_printer_product">
           <Key>
@@ -734,6 +735,14 @@
           <NavigationProperty Name="tb_order_detail" Relationship="Self.FK_product_orderdetail" FromRole="tb_product" ToRole="tb_order_detail" />
           <NavigationProperty Name="tb_popup" Relationship="Self.FK_popup_product" FromRole="tb_product" ToRole="tb_popup" />
           <NavigationProperty Name="tb_printer_product" Relationship="Self.FK_product_printerproudct" FromRole="tb_product" ToRole="tb_printer_product" />
+        </EntityType>
+        <EntityType Name="tb_product_ingredient">
+          <Key>
+            <PropertyRef Name="product_ingredient_id" />
+          </Key>
+          <Property Name="product_ingredient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="ingredient_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_section">
           <Key>
@@ -773,16 +782,6 @@
           </Key>
           <Property Name="type_food_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tb_product_ingredient">
-          <Key>
-            <PropertyRef Name="product_id" />
-            <PropertyRef Name="ingredient_id" />
-            <PropertyRef Name="product_ingredient_id" />
-          </Key>
-          <Property Name="product_id" Type="Int32" Nullable="false" />
-          <Property Name="ingredient_id" Type="Int32" Nullable="false" />
-          <Property Name="product_ingredient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <Association Name="FK_customer_order">
           <End Role="tb_customer" Type="Self.tb_customer" Multiplicity="0..1" />
@@ -964,7 +963,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="smoothdbEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SmoothDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tb_cook_status" EntityType="Self.tb_cook_status" />
           <EntitySet Name="tb_customer" EntityType="Self.tb_customer" />
           <EntitySet Name="tb_employee" EntityType="Self.tb_employee" />
@@ -985,11 +984,11 @@
           <EntitySet Name="tb_printer_log" EntityType="Self.tb_printer_log" />
           <EntitySet Name="tb_printer_product" EntityType="Self.tb_printer_product" />
           <EntitySet Name="tb_product" EntityType="Self.tb_product" />
+          <EntitySet Name="tb_product_ingredient" EntityType="Self.tb_product_ingredient" />
           <EntitySet Name="tb_section" EntityType="Self.tb_section" />
           <EntitySet Name="tb_setting" EntityType="Self.tb_setting" />
           <EntitySet Name="tb_table_section" EntityType="Self.tb_table_section" />
           <EntitySet Name="tb_type_food" EntityType="Self.tb_type_food" />
-          <EntitySet Name="tb_product_ingredient" EntityType="Self.tb_product_ingredient" />
           <AssociationSet Name="FK_customer_order" Association="Self.FK_customer_order">
             <End Role="tb_customer" EntitySet="tb_customer" />
             <End Role="tb_order" EntitySet="tb_order" />
@@ -1056,9 +1055,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="smoothdbModelStoreContainer" CdmEntityContainer="smoothdbEntities">
+        <EntityContainerMapping StorageEntityContainer="SmoothDBModelStoreContainer" CdmEntityContainer="SmoothDBEntities">
           <EntitySetMapping Name="tb_cook_status">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_cook_status">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_cook_status">
               <MappingFragment StoreEntitySet="tb_cook_status">
                 <ScalarProperty Name="cook_status_id" ColumnName="cook_status_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1066,7 +1065,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_customer">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_customer">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_customer">
               <MappingFragment StoreEntitySet="tb_customer">
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
@@ -1082,7 +1081,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_employee">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_employee">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_employee">
               <MappingFragment StoreEntitySet="tb_employee">
                 <ScalarProperty Name="employee_id" ColumnName="employee_id" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
@@ -1097,7 +1096,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_employee_status">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_employee_status">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_employee_status">
               <MappingFragment StoreEntitySet="tb_employee_status">
                 <ScalarProperty Name="tb_status_id" ColumnName="tb_status_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1105,7 +1104,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_employee_time_sheet">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_employee_time_sheet">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_employee_time_sheet">
               <MappingFragment StoreEntitySet="tb_employee_time_sheet">
                 <ScalarProperty Name="employee_time_sheet_id" ColumnName="employee_time_sheet_id" />
                 <ScalarProperty Name="employee_id" ColumnName="employee_id" />
@@ -1115,7 +1114,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_ingredient">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_ingredient">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_ingredient">
               <MappingFragment StoreEntitySet="tb_ingredient">
                 <ScalarProperty Name="ingredient_id" ColumnName="ingredient_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1123,7 +1122,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_level">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_level">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_level">
               <MappingFragment StoreEntitySet="tb_level">
                 <ScalarProperty Name="level_id" ColumnName="level_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1131,7 +1130,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_location_menu">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_location_menu">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_location_menu">
               <MappingFragment StoreEntitySet="tb_location_menu">
                 <ScalarProperty Name="tb_location_menu_id" ColumnName="tb_location_menu_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
@@ -1142,7 +1141,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_location_tab">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_location_tab">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_location_tab">
               <MappingFragment StoreEntitySet="tb_location_tab">
                 <ScalarProperty Name="location_tab_id" ColumnName="location_tab_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1151,7 +1150,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_order">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_order">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_order">
               <MappingFragment StoreEntitySet="tb_order">
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="order_at" ColumnName="order_at" />
@@ -1165,7 +1164,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_order_detail">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_order_detail">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_order_detail">
               <MappingFragment StoreEntitySet="tb_order_detail">
                 <ScalarProperty Name="order_detail_id" ColumnName="order_detail_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
@@ -1179,7 +1178,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_order_status">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_order_status">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_order_status">
               <MappingFragment StoreEntitySet="tb_order_status">
                 <ScalarProperty Name="order_status_id" ColumnName="order_status_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1187,7 +1186,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_order_type">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_order_type">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_order_type">
               <MappingFragment StoreEntitySet="tb_order_type">
                 <ScalarProperty Name="tb_order_type_id" ColumnName="tb_order_type_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1195,7 +1194,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_payment_type">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_payment_type">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_payment_type">
               <MappingFragment StoreEntitySet="tb_payment_type">
                 <ScalarProperty Name="payment_id" ColumnName="payment_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1203,7 +1202,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_popup">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_popup">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_popup">
               <MappingFragment StoreEntitySet="tb_popup">
                 <ScalarProperty Name="popup_id" ColumnName="popup_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1211,7 +1210,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_popup_item">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_popup_item">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_popup_item">
               <MappingFragment StoreEntitySet="tb_popup_item">
                 <ScalarProperty Name="popup_item_id" ColumnName="popup_item_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1222,7 +1221,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_printer">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_printer">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_printer">
               <MappingFragment StoreEntitySet="tb_printer">
                 <ScalarProperty Name="printer_id" ColumnName="printer_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1233,17 +1232,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_printer_log">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_printer_log">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_printer_log">
               <MappingFragment StoreEntitySet="tb_printer_log">
-                <ScalarProperty Name="printer_detail" ColumnName="printer_detail" />
                 <ScalarProperty Name="printer_log_id" ColumnName="printer_log_id" />
                 <ScalarProperty Name="printer_id" ColumnName="printer_id" />
                 <ScalarProperty Name="print_dt" ColumnName="print_dt" />
+                <ScalarProperty Name="printer_detail" ColumnName="printer_detail" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_printer_product">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_printer_product">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_printer_product">
               <MappingFragment StoreEntitySet="tb_printer_product">
                 <ScalarProperty Name="printer_product_id" ColumnName="printer_product_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
@@ -1252,7 +1251,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_product">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_product">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_product">
               <MappingFragment StoreEntitySet="tb_product">
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1268,8 +1267,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tb_product_ingredient">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_product_ingredient">
+              <MappingFragment StoreEntitySet="tb_product_ingredient">
+                <ScalarProperty Name="product_ingredient_id" ColumnName="product_ingredient_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="ingredient_id" ColumnName="ingredient_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tb_section">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_section">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_section">
               <MappingFragment StoreEntitySet="tb_section">
                 <ScalarProperty Name="section_id" ColumnName="section_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1278,7 +1286,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_setting">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_setting">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_setting">
               <MappingFragment StoreEntitySet="tb_setting">
                 <ScalarProperty Name="setting_id" ColumnName="setting_id" />
                 <ScalarProperty Name="key" ColumnName="key" />
@@ -1287,7 +1295,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_table_section">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_table_section">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_table_section">
               <MappingFragment StoreEntitySet="tb_table_section">
                 <ScalarProperty Name="table_section_id" ColumnName="table_section_id" />
                 <ScalarProperty Name="u_name" ColumnName="u_name" />
@@ -1304,19 +1312,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_type_food">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_type_food">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_type_food">
               <MappingFragment StoreEntitySet="tb_type_food">
                 <ScalarProperty Name="type_food_id" ColumnName="type_food_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_product_ingredient">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_product_ingredient">
-              <MappingFragment StoreEntitySet="tb_product_ingredient">
-                <ScalarProperty Name="product_ingredient_id" ColumnName="product_ingredient_id" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="ingredient_id" ColumnName="ingredient_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

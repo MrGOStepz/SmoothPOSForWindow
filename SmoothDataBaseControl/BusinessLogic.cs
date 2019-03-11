@@ -46,7 +46,7 @@ namespace SmoothDataBaseControl
             {
                 log.Info("BusinessLogic => AddNewEmplouee - Begin");
                 EmployeeModel employeeModel = JsonConvert.DeserializeObject<EmployeeModel>(stringJSON);
-                return _employeeDAO.AddNewEmployee(employeeModel.FirstName, employeeModel.LastName, employeeModel.Phone, employeeModel.Email, employeeModel.Password);
+                return _employeeDAO.AddNewEmployee(employeeModel.FirstName, employeeModel.LastName, employeeModel.NickName, employeeModel.Phone, employeeModel.Email, employeeModel.Password);
             }
             catch (Exception ex)
             {
@@ -893,20 +893,20 @@ namespace SmoothDataBaseControl
         #endregion
 
         #region Report
-        public int AddPrinterLog(string stringJSON)
-        {
-            try
-            {
-                log.Info("BusinessLogic => AddPrinter - Begin");
-                PrinterLogModel printerLogModel = JsonConvert.DeserializeObject<PrinterLogModel>(stringJSON);
-                return _printerDAO.AddPrinterLog(printerLogModel.PrinterID, printerLogModel.PrinterDateTime.ToShortDateString(), printerLogModel.PrinterDetail);
-            }
-            catch (Exception ex)
-            {
-                log.Error("BussicnessLogic => AddPrinter" + ex.Message);
-                return -1;
-            }
-        }
+        //public int AddPrinterLog(string stringJSON)
+        //{
+        //    try
+        //    {
+        //        log.Info("BusinessLogic => AddPrinter - Begin");
+        //        PrinterLogModel printerLogModel = JsonConvert.DeserializeObject<PrinterLogModel>(stringJSON);
+        //        return _printerDAO.AddPrinterLog(printerLogModel.PrinterID, printerLogModel.PrinterDateTime.ToShortDateString(), printerLogModel.PrinterDetail);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.Error("BussicnessLogic => AddPrinter" + ex.Message);
+        //        return -1;
+        //    }
+        //}
         #endregion
     }
 }

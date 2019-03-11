@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmoothPOS
 {
-    public class Printer
+    public class PrinterModel
     {
         private int printerID;
         private string printerName;
@@ -29,4 +29,26 @@ namespace SmoothPOS
             return 1;
         }
     }
+
+    public class PrinterSmooth
+    {
+        public List<string> GetListOfPrinter()
+        {
+            try
+            {
+                List<string> lstPrinter = new List<string>();
+                foreach (string printer in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
+                {                
+                    lstPrinter.Add(printer);
+                }
+                return lstPrinter;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+    }
+
 }

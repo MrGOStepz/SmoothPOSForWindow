@@ -31,21 +31,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Data.EntityFramework, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="MySQL.Data.EntityFrameworkCore, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="MySQL.Data.EntityFrameworkCore.Design, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Web, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.12\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -57,6 +67,7 @@
   <ItemGroup>
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="ConvertImage.cs" />
+    <Compile Include="ConvertListToDataTable.cs" />
     <Compile Include="EmployeeDAO.cs" />
     <Compile Include="IngredientDAO.cs" />
     <Compile Include="LocationDAO.cs" />
@@ -72,7 +83,97 @@
     <Compile Include="Model\TableModel.cs" />
     <Compile Include="ReportDAO.cs" />
     <Compile Include="ReportModel.cs" />
+    <Compile Include="SmoothDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SmoothDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SmoothDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SmoothDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SmoothDBModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="TableDAO.cs" />
+    <Compile Include="tb_cook_status.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_customer.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_employee.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_employee_status.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_employee_time_sheet.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_ingredient.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_level.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_location_menu.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_location_tab.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_order.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_order_detail.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_order_status.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_order_type.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_payment_type.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_popup.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_popup_item.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_printer.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_printer_log.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_printer_product.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_product.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_product_ingredient.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_section.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_setting.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_table_section.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_type_food.cs">
+      <DependentUpon>SmoothDBModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -80,6 +181,28 @@
     </None>
     <None Include="log4net.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="SmoothDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SmoothDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SmoothDBModel.edmx.diagram">
+      <DependentUpon>SmoothDBModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SmoothDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SmoothDBModel.edmx</DependentUpon>
+      <LastGenOutput>SmoothDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SmoothDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SmoothDBModel.edmx</DependentUpon>
+      <LastGenOutput>SmoothDBModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

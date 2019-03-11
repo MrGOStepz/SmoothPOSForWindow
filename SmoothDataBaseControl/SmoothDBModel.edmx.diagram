@@ -4,47 +4,47 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e294ec0f00904779be59828a6d9dc3cf" Name="Diagram1">
-        <EntityTypeShape EntityType="smoothdbModel.tb_cook_status" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_customer" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_employee" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_employee_status" Width="1.75" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_employee_time_sheet" Width="1.75" PointX="9.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_ingredient" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_level" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_location_menu" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_location_tab" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_order_detail" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_order_status" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_order_type" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_payment_type" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_popup" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_popup_item" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_printer" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_printer_log" Width="1.75" PointX="7.5" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_printer_product" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_product" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_section" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_setting" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_table_section" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_type_food" Width="1.5" PointX="7.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="smoothdbModel.tb_product_ingredient" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="smoothdbModel.FK_customer_order" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_employy_order" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_level_employee" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_status_employee" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_order" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_orderstatus_order" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_ordertype_order" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_payment_order" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_popupitem_orderdetail" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_product_orderdetail" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_popup_popupitem" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_popup_product" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_printer_printerproduct" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_printerlog_printer" ManuallyRouted="false" />
-        <AssociationConnector Association="smoothdbModel.FK_product_printerproudct" ManuallyRouted="false" />
+      <Diagram DiagramId="b206eb068bc342a4b5b09463e8c33676" Name="Diagram1">
+        <EntityTypeShape EntityType="SmoothDBModel.tb_cook_status" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_customer" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_employee" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_employee_status" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_employee_time_sheet" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_ingredient" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_level" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_location_menu" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_location_tab" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_order_detail" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_order_status" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_order_type" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_payment_type" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_popup" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_popup_item" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_printer" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_printer_log" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_printer_product" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_product" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_product_ingredient" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_section" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_setting" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_table_section" Width="1.5" PointX="7.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_type_food" Width="1.5" PointX="9.75" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="SmoothDBModel.FK_customer_order" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_employy_order" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_level_employee" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_status_employee" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_order" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_orderstatus_order" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_ordertype_order" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_payment_order" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_popupitem_orderdetail" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_product_orderdetail" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_popup_popupitem" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_popup_product" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_printer_printerproduct" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_printerlog_printer" ManuallyRouted="false" />
+        <AssociationConnector Association="SmoothDBModel.FK_product_printerproudct" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

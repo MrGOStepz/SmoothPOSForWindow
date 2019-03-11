@@ -13,26 +13,6 @@ namespace SmoothDataBaseControl
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(EmployeeDAO));
 
-        private MySqlConnection _conn;
-
-        private const string TABLE_EMPLOYEE = "tb_employee";
-
-
-        private void DatabaseOpen()
-        {
-            string connectionPath = ConfigurationManager.ConnectionStrings["SmoothDB"].ConnectionString;
-            //string connectionPath = ConfigurationManager.AppSettings["SmoothDB"].ToString();
-            //string connectionPath = "server=localhost;user id=root;persistsecurityinfo=True;database=smoothdb;password=G4856162651O;";
-
-            _conn = new MySqlConnection(connectionPath);
-            _conn.Open();
-        }
-
-        private void DatabaseClose()
-        {
-            _conn.Close();
-        }
-
         /// <summary>
         /// Add New Employee
         /// </summary>
@@ -42,29 +22,24 @@ namespace SmoothDataBaseControl
         /// <param name="Email"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
-        public int AddNewEmployee(string FirstName, string LastName, string Phone, string Email, string Password)
+        public int AddNewEmployee(string FirstName, string LastName,string NickName, string Phone, string Email, string Password)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = db.tb_employee.Add(new tb_employee()
+                    {
+                        first_name = FirstName,
+                        last_name = LastName,
+                        nick_name = NickName,
+                        phone = Phone,
+                        email = Email,
+                        password = Password
+                    });
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_EMPLOYEE);
-                stringSQL.Append(" (first_name, last_name, phone, email, password)");
-                stringSQL.Append(" VALUES (@FirstName, @LastName, @Phone, @Email, @Password);");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@firstName", FirstName);
-                cmd.Parameters.AddWithValue("@lastName", LastName);
-                cmd.Parameters.AddWithValue("@phone", Phone);
-                cmd.Parameters.AddWithValue("@email", Email);
-                cmd.Parameters.AddWithValue("@password", Password);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- Add Employee Success");
+                    db.SaveChanges();
+                }
                 return 1;
             }
             catch (Exception ex)
@@ -83,28 +58,25 @@ namespace SmoothDataBaseControl
         /// <param name="Phone"></param>
         /// <param name="Email"></param>
         /// <returns></returns>
-        public int UpdateProfileEmployee(int EmployeeID, string FirstName, string LastName, string NickName, string Phone, string Email, string password)
+        public int UpdateProfileEmployee(int EmployeeID, string FirstName, string LastName, string NickName, string Phone, string Email, string Password)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_EMPLOYEE);
-                stringSQL.Append("SET (first_name = @firstName, last_name = @lastName, nick_name = @nickName, phone = @phone, email = @email)");
-                stringSQL.Append(" WHERE employee_id = @employeeID;");
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_employee.Where(o => (o.employee_id == EmployeeID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.first_name = FirstName;
+                        update.last_name = LastName;
+                        update.nick_name = NickName;
+                        update.phone = Phone;
+                        update.email = Email;
+                        update.password = Password;
+                    }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@firstName", FirstName);
-                cmd.Parameters.AddWithValue("@lastName", LastName);
-                cmd.Parameters.AddWithValue("@phone", Phone);
-                cmd.Parameters.AddWithValue("@email", Email);
-                cmd.Parameters.AddWithValue("@employeeID", EmployeeID);
-                cmd.Parameters.AddWithValue("@nickName", NickName);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
+                    db.SaveChanges();
+                }
                 log.Info("Update Profile Employee Success");
                 return 1;
             }
@@ -119,35 +91,26 @@ namespace SmoothDataBaseControl
         /// Get All Data Table Employee
         /// </summary>
         /// <returns></returns>
-        public DataTable GetListOfEmployee()
+        public List<tb_employee> GetListOfEmployee()
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_employee
+                              select c).ToList();
 
-                DatabaseOpen();
-                stringSQL.Append("SELECT first_name, last_name, nick_name, phone, email, level_id, status_id ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_EMPLOYEE + ";");
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                //If you want data for coloumn
-                //MySqlDataReader reader = cmd.ExecuteReader();
-                //while (reader.Read())
-                //{
-                //                              name of column
-                //    EmployeeID = (int)reader["employee_id"];
-                //}
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-
-                log.Info("Get List Of Employee Success");
-
-                return dt;
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("Get List Of Employee Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }     
             }
             catch (Exception ex)
             {
@@ -156,69 +119,23 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public bool FindData(string password, string command)
-        {
-            bool ret = false;
-            try
-            {
-                StringBuilder stringSQL = new StringBuilder();
-                DatabaseOpen();
-                stringSQL.Append("SELECT * ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_EMPLOYEE);
-                stringSQL.Append(" WHERE password LIKE '@password';");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@password", password);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-
-                ret = true;
-            }
-            catch (Exception ex)
-            {
-                log.Error("DataLayer => FindData(): " + ex.Message);
-            }
-
-            log.Info("Log in Status ret = " + ret);
-            return ret;
-        }
-
-        public DataTable GetEmployeeDetailByPassword(string Password)
+        public tb_employee GetEmployeeDetailByPassword(string Password)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
-
-                DatabaseOpen();
-                stringSQL.Append("SELECT employee_id, first_name, last_name, nick_name, phone, email, level_id, status_id ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_EMPLOYEE);
-                stringSQL.Append(" WHERE password LIKE @Password");
-
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Password", Password);
-
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-
-                if (dt.Rows.Count == 0)
+                tb_employee employee = new tb_employee();
+                using (var db = new SmoothDBEntities())
                 {
-                    return null;
+                    var ds = (from c in db.tb_employee
+                              select c).FirstOrDefault();
+
+                    // if found item rows
+                    if (ds != null)
+                    {
+                        return ds;
+                    }
                 }
-
-                cmd.Dispose();
-                DatabaseClose();
-
-                log.Info("Get Employee Detail Success");
-
-                return dt;
+                return null;
             }
             catch (Exception ex)
             {
