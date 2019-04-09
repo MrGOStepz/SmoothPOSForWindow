@@ -23,6 +23,7 @@ namespace SmoothDataBaseControl
     
         public int popup_id { get; set; }
         public string name { get; set; }
+        public int is_active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_popup_item> tb_popup_item { get; set; }

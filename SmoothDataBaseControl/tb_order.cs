@@ -28,6 +28,7 @@ namespace SmoothDataBaseControl
         public Nullable<int> order_status_id { get; set; }
         public Nullable<int> payment_id { get; set; }
         public Nullable<int> customer_id { get; set; }
+        public int is_active { get; set; }
     
         public virtual tb_customer tb_customer { get; set; }
         public virtual tb_employee tb_employee { get; set; }

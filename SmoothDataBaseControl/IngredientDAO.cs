@@ -13,43 +13,31 @@ namespace SmoothDataBaseControl
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(IngredientDAO));
 
-        private MySqlConnection _conn;
-
-        private const string TABLE_INGREDIENT = "tb_ingredient";
-
-        private void DatabaseOpen()
-        {
-            string connectionPath = ConfigurationManager.ConnectionStrings["SmoothDB"].ConnectionString;
-            _conn = new MySqlConnection(connectionPath);
-            _conn.Open();
-        }
-
-        private void DatabaseClose()
-        {
-            _conn.Close();
-        }
-
         public int AddIngredient(string Name, string ImagePath)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_INGREDIENT);
-                stringSQL.Append(" (name, image_path)");
-                stringSQL.Append(" VALUES (@Name, @ImagePath);");
+                try
+                {
+                    using (var db = new SmoothDBEntities())
+                    {
+                        var ds = db.tb_ingredient.Add(new tb_ingredient()
+                        {
+                            name = Name,
+                            image_path = ImagePath
+                        });
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                cmd.Parameters.AddWithValue("@ImagePath", ImagePath);
+                        db.SaveChanges();
+                    }
+                    return 1;
+                }
+                catch (Exception ex)
+                {
+                    log.Error("DataLayer => AppNewEmployee(): " + ex.Message);
+                    return -1;
+                }
 
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- Add Ingredient Success");
-                return 1;
             }
             catch (Exception ex)
             {
@@ -62,23 +50,18 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_ingredient.Where(o => (o.ingredient_id == IngredientID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.name = Name;
+                        update.image_path = ImagePath;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_INGREDIENT);
-                stringSQL.Append(" SET name = @Name, image_path = @ImagePath");
-                stringSQL.Append(" WHERE ingredient_id = @IngredientID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@IngredientID", IngredientID);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                cmd.Parameters.AddWithValue("@ImagePath", ImagePath);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- Update Ingredient Success");
+                    db.SaveChanges();
+                }
+                log.Info("Update UpdateIngredient Success");
                 return 1;
             }
             catch (Exception ex)
@@ -92,21 +75,18 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var del = db.tb_ingredient.Where(o => (o.ingredient_id == IngredientID)).FirstOrDefault();
+                    if (del != null)
+                    {
+                        db.tb_ingredient.Remove(del);
+                    }
 
-                DatabaseOpen();
+                    db.SaveChanges();
+                }
 
-                stringSQL.Append("DELECT FORM ");
-                stringSQL.Append(TABLE_INGREDIENT);
-                stringSQL.Append(" WHERE ingredient_id = @IngredientID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@IngredientID", IngredientID);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- Delete Ingredient ID " + IngredientID + " Success");
+                log.Info("Delete Ingredient Success");
                 return 1;
             }
             catch (Exception ex)
@@ -116,27 +96,27 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfIngreient()
+        public List<tb_ingredient> GetListOfIngreient()
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_ingredient
+                              select c).ToList();
 
-                DatabaseOpen();
-
-                stringSQL.Append("SELECT ingredient_id, name, image_path ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_INGREDIENT + ";");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListOfIngredient Success");
-                return dt;
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("Get List Of Ingredient Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                
             }
             catch (Exception ex)
             {
@@ -145,30 +125,26 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfIngredientFilter(string Name)
+        public List<tb_ingredient> GetListOfIngredientFilter(string Name)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_ingredient
+                              where c.name == Name
+                              select c).ToList();
 
-                DatabaseOpen();
-
-                stringSQL.Append("SELECT ingredient_id, name, image_path ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_INGREDIENT);
-                stringSQL.Append(" WHERE name LIKE @Name;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", "%" + Name + "%");
-
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetLisOfPopupFilter Success");
-                return dt;
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("Get List Of Employee Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
             }
             catch (Exception ex)
             {

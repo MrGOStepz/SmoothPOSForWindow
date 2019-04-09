@@ -145,25 +145,23 @@ namespace SmoothDataBaseControl
 
         }
 
-        public int UpdateStaffStatus(int staffID, int statusID)
+        public int UpdateEmployeeStatus(int employeeID, int statusID)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_EMPLOYEE);
-                stringSQL.Append(" SET status_id = @statusID");
-                stringSQL.Append(" WHERE employee_id = @employeeID;");
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_employee.Where(o => (o.employee_id == employeeID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.status_id = statusID;
+                    }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@statusID", statusID);
-                cmd.Parameters.AddWithValue("@employeeID", staffID);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                return 1;
+                    log.Info("UpdateEmployeeStatus Success");
+                    db.SaveChanges();
+                    return 1;
+                }
+                
             }
             catch (Exception ex)
             {
@@ -172,35 +170,22 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public int CheckStaffStatus(int staffID)
+        public int CheckStaffStatus(int employeeID)
         {
             try
             {
-                int statusID = 0;
-                StringBuilder stringSQL = new StringBuilder();
-
-                DatabaseOpen();
-                stringSQL.Append("SELECT status_id ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_EMPLOYEE);
-                stringSQL.Append(" WHERE employee_id = @employeeID;");
-
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@employeeID", staffID);
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                using (var db = new SmoothDBEntities())
                 {
-                    //name of column
-                    statusID = (int)reader["status_id"];
+                    var ds = (from c in db.tb_employee
+                              where c.employee_id == employeeID
+                              select c).FirstOrDefault();
+
+                    log.Info("Get List Of Employee Success");
+                    if (ds.status_id == null)
+                        return default(int);
+                    else
+                        return -1;
                 }
-                cmd.Dispose();
-                DatabaseClose();
-
-                log.Info("Get Employee Status Success");
-
-                return statusID;
             }
             catch (Exception ex)
             {

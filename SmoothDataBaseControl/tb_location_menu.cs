@@ -19,5 +19,6 @@ namespace SmoothDataBaseControl
         public Nullable<int> tb_location_tab_id { get; set; }
         public Nullable<int> column_no { get; set; }
         public Nullable<int> row_no { get; set; }
+        public int is_active { get; set; }
     }
 }

@@ -13,42 +13,20 @@ namespace SmoothDataBaseControl
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(PopupDAO));
 
-        private MySqlConnection _conn;
-
-        private const string TABLE_TABLE_SECTION = "tb_table_section";
-        private const string TABLE_SECTION = "tb_section";
-
-        private void DatabaseOpen()
-        {
-            string connectionPath = ConfigurationManager.ConnectionStrings["SmoothDB"].ConnectionString;
-            _conn = new MySqlConnection(connectionPath);
-            _conn.Open();
-        }
-
-        private void DatabaseClose()
-        {
-            _conn.Close();
-        }
-
         public int AddSectionTable(string Name)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = db.tb_section.Add(new tb_section()
+                    {
+                        name = Name
+                    });
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_SECTION);
-                stringSQL.Append(" (name)");
-                stringSQL.Append(" VALUES (@Name);");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", Name);
-
-                cmd.ExecuteNonQuery();
-                DatabaseClose();
-
-                
+                    db.SaveChanges();
+                }
+             
                 log.Info("SmoothDataLayer -- AddSectionTable Success");
                 return 1;
             }
@@ -63,22 +41,17 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_table_section.Where(o => (o.section_id == SectionID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.name = Name;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
-                stringSQL.Append(" SET name = @Name");
-                stringSQL.Append(" WHERE section_id = @SectionID;");
+                    db.SaveChanges();
+                }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@SectionID", SectionID);
-                cmd.Parameters.AddWithValue("@Name", Name);
-
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
                 log.Info("SmoothDataLayer -- UpdateSectionStable Success");
                 return 1;
             }
@@ -93,19 +66,17 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_section.Where(o => (o.section_id == SectionID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.is_active = 0;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
-                stringSQL.Append(" SET is_active = 0");
-                stringSQL.Append(" WHERE section_id = @SectionID;");
+                    db.SaveChanges();
+                }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@SectionID", SectionID);
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
                 log.Info("SmoothDataLayer -- RemoveSectionTable Success");
                 return 1;
             }
@@ -116,32 +87,31 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfSection()
+        public List<tb_section> GetListOfSection()
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_section
+                              select c).ToList();
 
-                DatabaseOpen();
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("SmoothDataLayer -- GetListSection Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
 
-                stringSQL.Append("SELECT section_id, name, is_active ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
-                stringSQL.Append(" WHERE is_active = 1; ");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListTable Success");
-                return dt;
             }
             catch (Exception ex)
             {
-                log.Error("SmoothDataLayer => GetListTable(): " + ex.Message);
+                log.Error("SmoothDataLayer => GetListOfSection(): " + ex.Message);
                 return null;
             }
         }
@@ -150,33 +120,28 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
-                stringSQL.Append(" (u_name, name, section_id, margin_top, margin_bottom, margin_right, margin_left, height, width, is_active)");
-                stringSQL.Append(" VALUES (@UName, @Name, @SectionID, @MarginTop, @MarginBot, @MarginLeft, @MarginRight, 75, 75, 1);");
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = db.tb_table_section.Add(new tb_table_section()
+                    {
+                        name = Name,
+                        section_id = SectionID,
+                        margin_top = MarginTop,
+                        margin_bottom = MarginBot,
+                        margin_left = MarginLeft,
+                        margin_right = MarginRight,
+                        height = 75,
+                        width = 75,
+                        is_active = 1
+                        
+                    });
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@UName", UName);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                cmd.Parameters.AddWithValue("@SectionID", SectionID);
-                cmd.Parameters.AddWithValue("@MarginTop", MarginTop);
-                cmd.Parameters.AddWithValue("@MarginBot", MarginBot);
-                cmd.Parameters.AddWithValue("@MarginLeft", MarginLeft);
-                cmd.Parameters.AddWithValue("@MarginRight", MarginRight);
+                    db.SaveChanges();
+                    log.Info("SmoothDataLayer -- AddTable Success");
+                    return ds.table_section_id;
+                }
 
-                cmd.ExecuteNonQuery();
-
-                long tableID = cmd.LastInsertedId;
-                DatabaseClose();
-
-                int tID = (int)tableID;
-
-                
-                log.Info("SmoothDataLayer -- AddTable Success");
-                return tID;
             }
             catch (Exception ex)
             {
@@ -189,27 +154,23 @@ namespace SmoothDataBaseControl
         {
             try
             {
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_table_section.Where(o => (o.table_section_id == TableID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.margin_top = MarginTop;
+                        update.margin_bottom = MarginBot;
+                        update.margin_left = MarginLeft;
+                        update.margin_right = MarginRight;
+                    }
 
-                StringBuilder stringSQL = new StringBuilder();
+                    db.SaveChanges();
+                }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
-                stringSQL.Append(" SET margin_top = @MarginTop, margin_bottom = @MarginBot, margin_right = @MarginRight, margin_left = @MarginLeft");
-                stringSQL.Append(" WHERE table_section_id = @TableID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@TableID", TableID);
-                cmd.Parameters.AddWithValue("@MarginTop", MarginTop);
-                cmd.Parameters.AddWithValue("@MarginBot", MarginBot);
-                cmd.Parameters.AddWithValue("@MarginLeft", MarginLeft);
-                cmd.Parameters.AddWithValue("@MarginRight", MarginRight);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
                 log.Info("SmoothDataLayer -- UpdateTable Success");
                 return 1;
+
             }
             catch (Exception ex)
             {
@@ -222,22 +183,20 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_table_section.Where(o => (o.table_section_id == TableID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.is_active = 0;
+                    }
 
-                DatabaseOpen();
+                    db.SaveChanges();
+                }
 
-                stringSQL.Append("DELETE FROM ");
-                stringSQL.Append(TABLE_TABLE_SECTION);
-                stringSQL.Append(" WHERE table_section_id = @TableID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@TableID", TableID);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
                 log.Info("SmoothDataLayer -- RemoveTable Success");
                 return 1;
+
             }
             catch (Exception ex)
             {
@@ -246,27 +205,27 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListTable()
+        public List<tb_table_section> GetListTable()
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_table_section
+                              select c).ToList();
 
-                DatabaseOpen();
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("SmoothDataLayer -- GetListTable Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
 
-                stringSQL.Append("SELECT table_section_id, u_name, name, section_id, margin_top, margin_bottom, margin_right, margin_left, height, width, is_active ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_TABLE_SECTION + ";");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListTable Success");
-                return dt;
             }
             catch (Exception ex)
             {

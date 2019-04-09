@@ -13,42 +13,20 @@ namespace SmoothDataBaseControl
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(LocationDAO));
 
-        private MySqlConnection _conn;
-
-        private const string TABLE_LOCATION_MENU = "tb_location_menu";
-        private const string TABLE_LOCATION_TAB = "tb_location_tab";
-
-        private void DatabaseOpen()
-        {
-            string connectionPath = ConfigurationManager.ConnectionStrings["SmoothDB"].ConnectionString;
-            _conn = new MySqlConnection(connectionPath);
-            _conn.Open();
-        }
-
-        private void DatabaseClose()
-        {
-            _conn.Close();
-        }
-
         public int AddLocationTab(string Name)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = db.tb_location_tab.Add(new tb_location_tab()
+                    {
+                        name = Name
+                    });
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_LOCATION_TAB);
-                stringSQL.Append(" (name)");
-                stringSQL.Append(" VALUES (@Name);");
+                    db.SaveChanges();
+                }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", Name);
-
-                cmd.ExecuteNonQuery();
-                DatabaseClose();
-
-                
                 log.Info("SmoothDataLayer -- AddLocationTab Success");
                 return 1;
             }
@@ -63,23 +41,17 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_location_tab.Where(o => (o.location_tab_id == LocationTabID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.name = Name;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_LOCATION_TAB);
-                stringSQL.Append(" SET name = @Name");
-                stringSQL.Append(" WHERE location_tab_id = @LocationTabID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
-                cmd.Parameters.AddWithValue("@Name", Name);
-
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- UpdateSectionStable Success");
+                    db.SaveChanges();
+                }
+                log.Info("Update Profile Employee Success");
                 return 1;
             }
             catch (Exception ex)
@@ -93,21 +65,19 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_location_tab.Where(o => (o.location_tab_id == LocationTabID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.is_active = 0;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_LOCATION_TAB);
-                stringSQL.Append(" SET is_active = 0");
-                stringSQL.Append(" WHERE location_tab_id = @LocationTabID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- RemoveLocationTab Success");
+                    db.SaveChanges();
+                }
+                log.Info("Update Profile Employee Success");
                 return 1;
+
             }
             catch (Exception ex)
             {
@@ -116,28 +86,26 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfLocationTab()
+        public List<tb_location_tab> GetListOfLocationTab()
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_location_tab
+                              select c).ToList();
 
-                DatabaseOpen();
-
-                stringSQL.Append("SELECT location_tab_id, name, is_active ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_LOCATION_TAB);
-                stringSQL.Append(" WHERE is_active = 1; ");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListOfLocationTab Success");
-                return dt;
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("Get List Of Employee Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -150,30 +118,23 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    
+                    var ds = db.tb_location_menu.Add(new tb_location_menu()
+                    {
+                        product_id = ProductID,
+                        tb_location_tab_id = LocationTabID,
+                        column_no = Column,
+                        row_no = Row
+                    });
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_LOCATION_MENU);
-                stringSQL.Append(" (product_id, location_tab_id, column_no, row_no)");
-                stringSQL.Append(" VALUES (@ProductID, @LocationTabID, @Column, @Row);");
+                    db.SaveChanges();
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@ProductID", ProductID);
-                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
-                cmd.Parameters.AddWithValue("@Column", Column);
-                cmd.Parameters.AddWithValue("@Row", Row);
+                    return ds.product_id ?? -1;
+                    
+                }
 
-                cmd.ExecuteNonQuery();
-
-                long tableID = cmd.LastInsertedId;
-                DatabaseClose();
-
-                int tID = (int)tableID;
-
-                
-                log.Info("SmoothDataLayer -- AddLocationMenu Success");
-                return tID;
             }
             catch (Exception ex)
             {
@@ -188,24 +149,19 @@ namespace SmoothDataBaseControl
             try
             {
 
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_location_menu.Where(o => (o.tb_location_menu_id == LocationMenuID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.product_id = ProductID;
+                        update.tb_location_tab_id = LocationTabID;
+                        update.column_no = Column;
+                        update.row_no = Row;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_LOCATION_MENU);
-                stringSQL.Append(" SET product_id = @ProductID, tb_location_tab_id = @LocationTabID, column_no = @Column, row_no = @Row");
-                stringSQL.Append(" WHERE tb_location_menu_id = @LocationMenuID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@LocationMenuID", LocationMenuID);
-                cmd.Parameters.AddWithValue("@ProductID", ProductID);
-                cmd.Parameters.AddWithValue("@LocationTabID", LocationTabID);
-                cmd.Parameters.AddWithValue("@Column", Column);
-                cmd.Parameters.AddWithValue("@Row", Row);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
+                    db.SaveChanges();
+                }
                 log.Info("SmoothDataLayer -- UpdateLocationMenu Success");
                 return 1;
             }
@@ -220,21 +176,18 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_location_menu.Where(o => (o.tb_location_menu_id == LocationMenuID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        
+                        update.is_active = 0;
+                    }
 
-                DatabaseOpen();
-
-                stringSQL.Append("DELETE FROM ");
-                stringSQL.Append(TABLE_LOCATION_MENU);
-                stringSQL.Append(" WHERE location_menu_id = @LocationMenuID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@LocationMenuID", LocationMenuID);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- RemoveTable Success");
+                    db.SaveChanges();
+                }
+                log.Info("Update Profile Employee Success");
                 return 1;
             }
             catch (Exception ex)
@@ -244,27 +197,27 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListLocationMenu()
+        public List<tb_location_menu> GetListLocationMenu()
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_location_menu
+                              select c).ToList();
 
-                DatabaseOpen();
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("Get List Of Employee Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
 
-                stringSQL.Append("SELECT location_menu_id, product_id, location_tab_id, column_on, row_on ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_LOCATION_MENU + ";");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListTable Success");
-                return dt;
             }
             catch (Exception ex)
             {

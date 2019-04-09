@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="SmoothDBModel.tb_employee_time_sheet" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_ingredient" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_level" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmoothDBModel.tb_location_menu" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_location_menu" Width="1.5" PointX="9.25" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_location_tab" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_order_detail" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />

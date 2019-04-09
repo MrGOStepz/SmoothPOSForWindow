@@ -34,30 +34,23 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = db.tb_order.Add(new tb_order()
+                    {
+                        order_at = DateTime.Parse(OrderDT),
+                        order_type_id = OrderType,
+                        employee_id = EmployeeID,
+                        table = TableID,
+                        order_status_id = OrderStatusID,
+                        payment_id = Payment_ID,
+                        customer_id = CustomerID
+                    });
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_ORDER);
-                stringSQL.Append(" (order_at, order_type_id, employee_id, table, order_status_id, payment_id, customer_id)");
-                stringSQL.Append(" VALUES (@OrderDT, @OrderType, @EmployeeID, @TableID, @OrderStatusID, @Payment_ID, @CustomerID);");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@OrderDT", OrderDT);
-                cmd.Parameters.AddWithValue("@OrderType", OrderType);
-                cmd.Parameters.AddWithValue("@EmployeeID", EmployeeID);
-                cmd.Parameters.AddWithValue("@TableID", TableID);
-                cmd.Parameters.AddWithValue("@OrderStatusID", OrderStatusID);
-                cmd.Parameters.AddWithValue("@Payment_ID", Payment_ID);
-                cmd.Parameters.AddWithValue("@CustomerID", CustomerID);
-
-                cmd.ExecuteNonQuery();
-                long AddOrderID = cmd.LastInsertedId;
-                DatabaseClose();
-
-
-                log.Info("SmoothDataLayer -- AddOrder Success");
-                return (int)AddOrderID;
+                    db.SaveChanges();
+                    log.Info("SmoothDataLayer -- AddOrder Success");
+                    return ds.order_id;
+                }
             }
             catch (Exception ex)
             {
@@ -70,28 +63,23 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_order.Where(o => (o.order_id == OrderID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.order_at = DateTime.Parse(OrderDT);
+                        update.order_type_id = OrderType;
+                        update.employee_id = EmployeeID;
+                        update.table = TableID;
+                        update.order_status_id = OrderStatusID;
+                        update.payment_id = Payment_ID;
+                        update.customer_id = CustomerID;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_ORDER);
-                stringSQL.Append(" SET order_at = @OrderDT, order_type_id = @OrderType, employee_id = @EmployeeID, table = @TableID, order_status_id = @OrderStatusID, payment_id = @Payment_ID, customer_id = @CustomerID");
-                stringSQL.Append(" WHERE order_id = @OrderID;");
+                    db.SaveChanges();
+                }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@OrderID", OrderID);
-                cmd.Parameters.AddWithValue("@OrderDT", OrderDT);
-                cmd.Parameters.AddWithValue("@OrderType", OrderType);
-                cmd.Parameters.AddWithValue("@EmployeeID", EmployeeID);
-                cmd.Parameters.AddWithValue("@TableID", TableID);
-                cmd.Parameters.AddWithValue("@OrderStatusID", OrderStatusID);
-                cmd.Parameters.AddWithValue("@Payment_ID", Payment_ID);
-                cmd.Parameters.AddWithValue("@CustomerID", CustomerID);
-
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
                 log.Info("SmoothDataLayer -- UpdateOrder Success");
                 return 1;
             }
@@ -106,18 +94,19 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
 
-                DatabaseOpen();
-                stringSQL.Append("DELETE FROM ");
-                stringSQL.Append(TABLE_ORDER);
-                stringSQL.Append(" WHERE order_id = @OrderID;");
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_order.Where(o => (o.order_id == OrderID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        //TODO Add is_active in Order Table
+                        update.is_active = 0;
+                    }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@OrderID", OrderID);
-                cmd.ExecuteNonQuery();
+                    db.SaveChanges();
+                }
 
-                DatabaseClose();
                 log.Info("SmoothDataLayer -- DeleteOrder Success");
                 return 1;
             }
@@ -128,10 +117,29 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfOrder()
+        public List<tb_order> GetListOfOrder()
         {
             try
             {
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_order
+                              where c.is_active == 1
+                              orderby c.order_id descending
+                              select c).ToList();
+
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("SmoothDataLayer -- GetListSection Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+
                 StringBuilder stringSQL = new StringBuilder();
 
                 DatabaseOpen();

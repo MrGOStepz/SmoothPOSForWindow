@@ -32,6 +32,7 @@ namespace SmoothDataBaseControl
         public Nullable<float> price { get; set; }
         public string image_path { get; set; }
         public Nullable<int> type_food_id { get; set; }
+        public Nullable<int> is_active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_order_detail> tb_order_detail { get; set; }
