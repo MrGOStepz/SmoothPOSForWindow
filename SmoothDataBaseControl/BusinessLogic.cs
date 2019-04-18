@@ -80,29 +80,11 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                DataTable dt = new DataTable();
-                dt = _employeeDAO.GetListOfEmployee();
+                List<tb_employee> lstEmploy = new List<tb_employee>();
+                lstEmploy = _employeeDAO.GetListOfEmployee();
 
-                //Convert DataTable to JSON
-                //Add Refernces System.Web.Extension
-                //Import using System.Web.Script.Serialization;
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                return JsonConvert.SerializeObject(lstEmploy);
 
-                List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-                Dictionary<string, object> row;
-                foreach (DataRow dr in dt.Rows)
-                {
-                    row = new Dictionary<string, object>();
-                    foreach (DataColumn col in dt.Columns)
-                    {
-                        row.Add(col.ColumnName, dr[col]);
-                    }
-                    rows.Add(row);
-                }
-
-                //Return to JSON format
-                //return JsonConvert.SerializeObject(rows);
-                return serializer.Serialize(rows);
             }
             catch (Exception ex)
             {
@@ -115,32 +97,10 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                EmployeeModel employeeModel = new EmployeeModel();
-                DataTable dataTable = new DataTable();
-                dataTable = _employeeDAO.GetEmployeeDetailByPassword(Password);
+                tb_employee employeeModel = new tb_employee();
+                employeeModel = _employeeDAO.GetEmployeeDetailByPassword(Password);
 
-                if (dataTable != null)
-                {
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        employeeModel = new EmployeeModel();
-                        employeeModel.EmployeeID = (int)row["employee_id"];
-                        employeeModel.FirstName = row["first_name"].ToString();
-                        employeeModel.LastName = row["last_name"].ToString();
-                        employeeModel.Phone = row["phone"].ToString();
-                        employeeModel.Email = row["email"].ToString();
-                        employeeModel.StatusID = (int)row["status_id"];
-                        employeeModel.LevelID = (int)row["level_id"];
-                    }
-
-                    string stringJSON = JsonConvert.SerializeObject(employeeModel);
-
-                    return stringJSON;
-                }
-                else
-                {
-                    return null;
-                }
+                return JsonConvert.SerializeObject(employeeModel);
             }
             catch (Exception ex)
             {
@@ -149,11 +109,11 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public int UpdateStaffStatus(int staffID, int StatusID)
+        public int UpdateEmployeeStatus(int staffID, int StatusID)
         {
             try
             {
-                return _employeeDAO.UpdateStaffStatus(staffID, StatusID);
+                return _employeeDAO.UpdateEmployeeStatus(staffID, StatusID);
             }
             catch (Exception ex)
             {   
@@ -287,23 +247,10 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                DataTable dt = new DataTable();
-                List<PopupModel> lstPopupModel = new List<PopupModel>();
-                PopupModel popupModel = new PopupModel();
-                dt = _popupDAO.GetListOfPopup();
+                List<tb_popup> lstPopupModel = new List<tb_popup>();
+                lstPopupModel = _popupDAO.GetListOfPopup();
+                return JsonConvert.SerializeObject(lstPopupModel);
 
-                foreach (DataRow row in dt.Rows)
-                {
-                    popupModel = new PopupModel();
-                    popupModel.PopupID = (int)row["popup_id"];
-                    popupModel.Name = row["name"].ToString();
-
-                    lstPopupModel.Add(popupModel);
-                }
-
-                string stringJSON = JsonConvert.SerializeObject(lstPopupModel);
-
-                return stringJSON;
             }
             catch (Exception ex)
             {
@@ -316,23 +263,9 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                DataTable dt = new DataTable();
-                List<PopupModel> lstPopupModel = new List<PopupModel>();
-                PopupModel popupModel = new PopupModel();
-                dt = _popupDAO.GetListOfPopupFilter(name);
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    popupModel = new PopupModel();
-                    popupModel.PopupID = (int)row["popup_id"];
-                    popupModel.Name = row["name"].ToString();
-
-                    lstPopupModel.Add(popupModel);
-                }
-
-                string stringJSON = JsonConvert.SerializeObject(lstPopupModel);
-
-                return stringJSON;
+                List<tb_popup> lstPopupModel = new List<tb_popup>();
+                lstPopupModel = _popupDAO.GetListOfPopupFilter(name);
+                return JsonConvert.SerializeObject(lstPopupModel);
             }
             catch (Exception ex)
             {
@@ -472,24 +405,10 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                DataTable dt = new DataTable();
-                List<SectionModel> lstSectionModel = new List<SectionModel>();
-                SectionModel sectionModel = new SectionModel();
-                dt = _tableDAO.GetListOfSection();
+                List<tb_section> lstSectionModel = new List<tb_section>();
+                lstSectionModel = _tableDAO.GetListOfSection();
+                return JsonConvert.SerializeObject(lstSectionModel);
 
-                foreach (DataRow row in dt.Rows)
-                {
-                    sectionModel = new SectionModel();
-                    sectionModel.SectionID = (int)row["section_id"];
-                    sectionModel.Name = row["name"].ToString();
-                    sectionModel.IsActive = (int)row["is_active"];
-
-                    lstSectionModel.Add(sectionModel);
-                }
-
-                string stringJSON = JsonConvert.SerializeObject(lstSectionModel);
-
-                return stringJSON;
             }
             catch (Exception ex)
             {
@@ -542,36 +461,14 @@ namespace SmoothDataBaseControl
             }
         }
 
+        //TODO Check
         public string GetListOfTable()
         {
             try
             {
-                DataTable dt = new DataTable();
-                List<TableModal> lstTableModel = new List<TableModal>();
-                TableModal tableModel = new TableModal();
-                dt = _tableDAO.GetListTable();
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    tableModel = new TableModal();
-                    tableModel.TableID = (int)row["table_section_id"];
-                    tableModel.uniName = row["u_name"].ToString();
-                    tableModel.Name = row["name"].ToString();
-                    tableModel.SectionID = (int)row["section_id"];
-                    tableModel.MarginTop = (float)row["margin_top"];
-                    tableModel.MarginBottom = (float)row["margin_bottom"];
-                    tableModel.MarginRight = (float)row["margin_right"];
-                    tableModel.MarginLeft = (float)row["margin_left"];
-                    tableModel.Height = (float)row["height"];
-                    tableModel.Width = (float)row["width"];
-                    tableModel.is_active = (int)row["is_active"];
-
-                    lstTableModel.Add(tableModel);
-                }
-
-                string stringJSON = JsonConvert.SerializeObject(lstTableModel);
-
-                return stringJSON;
+                List<tb_table_section> lstTableSection = new List<tb_table_section>();
+                lstTableSection = _tableDAO.GetListTable();
+                return JsonConvert.SerializeObject(lstTableSection);
             }
             catch (Exception ex)
             {
@@ -596,6 +493,19 @@ namespace SmoothDataBaseControl
             }
         }
 
+        public int AddLocationTab(string Name)
+        {
+            try
+            {
+                log.Info("BusinessLogic => AddLocationTab - Begin");
+                return _locationDAO.AddLocationTab(Name);
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => AddLocationMenu" + ex.Message);
+                return -1;
+            }
+        }
         public int UpdateLocationTab(string stringJSON)
         {
             try
@@ -629,24 +539,10 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                DataTable dt = new DataTable();
-                List<LocationTab> lstlocationLab = new List<LocationTab>();
-                LocationTab locationLab = new LocationTab();
-                dt = _locationDAO.GetListOfLocationTab();
+                List<tb_location_tab> lstlocationLab = new List<tb_location_tab>();
+                lstlocationLab = _locationDAO.GetListOfLocationTab();
+                return JsonConvert.SerializeObject(lstlocationLab);
 
-                foreach (DataRow row in dt.Rows)
-                {
-                    locationLab = new LocationTab();
-                    locationLab.LocationTabID = (int)row["location_tab_id"];
-                    locationLab.Name = row["name"].ToString();
-                    locationLab.IsActive = (int)row["is_active"];
-
-                    lstlocationLab.Add(locationLab);
-                }
-
-                string stringJSON = JsonConvert.SerializeObject(lstlocationLab);
-
-                return stringJSON;
             }
             catch (Exception ex)
             {
@@ -703,27 +599,9 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                DataTable dt = new DataTable();
-                List<LocationMenu> lstLocationMenu = new List<LocationMenu>();
-                LocationMenu locationMenu = new LocationMenu();
-                dt = _locationDAO.GetListLocationMenu();
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    locationMenu = new LocationMenu();
-                    locationMenu.LocationMenuID = (int)row["location_menu_id"];
-                    locationMenu.LocationTabID = (int)row["location_tab_id"];
-                    locationMenu.ProductID = (int)row["product_id"];
-                    locationMenu.Row = (int)row["row_on"];
-                    locationMenu.Column = (int)row["column_on"];
-
-
-                    lstLocationMenu.Add(locationMenu);
-                }
-
-                string stringJSON = JsonConvert.SerializeObject(lstLocationMenu);
-
-                return stringJSON;
+                List< tb_location_menu> lstlocationMenu = new List<tb_location_menu>();
+                lstlocationMenu = _locationDAO.GetListLocationMenu();
+                return JsonConvert.SerializeObject(lstlocationMenu);
             }
             catch (Exception ex)
             {
@@ -784,26 +662,9 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                DataTable dt = new DataTable();
-                List<PrinterModel> lstPrinterModel = new List<PrinterModel>();
-                PrinterModel printerModel = new PrinterModel();
-                dt = _printerDAO.GetListOfPrinter();
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    printerModel = new PrinterModel();
-                    printerModel.PrinterID = (int)row["location_tab_id"];
-                    printerModel.Name = row["name"].ToString();
-                    printerModel.PrinterIP = row["printer_ip"].ToString();
-                    printerModel.PrinterPort = row["printer_port"].ToString();
-                    printerModel.IsActive = (int)row["is_active"];
-
-                    lstPrinterModel.Add(printerModel);
-                }
-
-                string stringJSON = JsonConvert.SerializeObject(lstPrinterModel);
-
-                return stringJSON;
+                List<tb_printer> lstPrinterModel = new List<tb_printer>();
+                lstPrinterModel = _printerDAO.GetListOfPrinter();
+                return JsonConvert.SerializeObject(lstPrinterModel);
             }
             catch (Exception ex)
             {
@@ -864,25 +725,10 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                DataTable dt = new DataTable();
-                List<PrinterLogModel> lstPrinterLogModel = new List<PrinterLogModel>();
-                PrinterLogModel printerLogModel = new PrinterLogModel();
-                dt = _printerDAO.GetListOfPrinter();
+                List<tb_printer_log> lstPrinterLogModel = new List<tb_printer_log>();
+                lstPrinterLogModel = _printerDAO.GetListOfPrinterLog();
+                return JsonConvert.SerializeObject(lstPrinterLogModel);
 
-                foreach (DataRow row in dt.Rows)
-                {
-                    printerLogModel = new PrinterLogModel();
-                    printerLogModel.PrinterLogID = (int)row["printer_log_id"];
-                    printerLogModel.PrinterID = (int)row["printer_id"];
-                    printerLogModel.PrinterDateTime = DateTime.Parse(row["print_dt"].ToString());
-                    printerLogModel.PrinterDetail = row["printer_detail"].ToString();
-
-                    lstPrinterLogModel.Add(printerLogModel);
-                }
-
-                string stringJSON = JsonConvert.SerializeObject(lstPrinterLogModel);
-
-                return stringJSON;
             }
             catch (Exception ex)
             {
@@ -907,6 +753,37 @@ namespace SmoothDataBaseControl
         //        return -1;
         //    }
         //}
+
+        public string ListOfReport()
+        {
+            try
+            {
+                List<tb_order> lstOrder = new List<tb_order>();
+                lstOrder = _reportDAO.GetListOfOrder();
+                return JsonConvert.SerializeObject(lstOrder);
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => GetListOfTable" + ex.Message);
+                return null;
+            }
+        }
+
+        public string ListOfReport(int Top)
+        {
+            try
+            {
+                List<tb_order> lstOrder = new List<tb_order>();
+                lstOrder = _reportDAO.GetListOfOrder();
+                return JsonConvert.SerializeObject(lstOrder);
+            }
+            catch (Exception ex)
+            {
+                log.Error("BussicnessLogic => GetListOfTable" + ex.Message);
+                return null;
+            }
+        }
+
         #endregion
     }
 }

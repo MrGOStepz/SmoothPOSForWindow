@@ -22,6 +22,7 @@ namespace SmoothDataBaseControl
         public Nullable<float> amount { get; set; }
         public string comment { get; set; }
         public Nullable<int> cook_status { get; set; }
+        public Nullable<int> is_active { get; set; }
     
         public virtual tb_order tb_order { get; set; }
         public virtual tb_popup_item tb_popup_item { get; set; }

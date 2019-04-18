@@ -25,7 +25,7 @@ namespace SmoothDataBaseControl
         public string name { get; set; }
         public string short_name { get; set; }
         public string description { get; set; }
-        public Nullable<sbyte> avaliable { get; set; }
+        public Nullable<int> avaliable { get; set; }
         public Nullable<int> product_ingredient_id { get; set; }
         public Nullable<int> popup_id { get; set; }
         public Nullable<int> stock { get; set; }

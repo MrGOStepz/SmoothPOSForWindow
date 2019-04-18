@@ -436,7 +436,7 @@ namespace SmoothPOS
         {
             try
             {
-                return _businessLogic.UpdateStaffStatus(staffID, statusID);
+                return _businessLogic.UpdateEmployeeStatus(staffID, statusID);
             }
             catch (Exception)
             {

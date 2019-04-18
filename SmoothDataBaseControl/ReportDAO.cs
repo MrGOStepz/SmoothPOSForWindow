@@ -94,7 +94,6 @@ namespace SmoothDataBaseControl
         {
             try
             {
-
                 using (var db = new SmoothDBEntities())
                 {
                     var update = db.tb_order.Where(o => (o.order_id == OrderID)).FirstOrDefault();
@@ -140,25 +139,6 @@ namespace SmoothDataBaseControl
                     }
                 }
 
-                StringBuilder stringSQL = new StringBuilder();
-
-                DatabaseOpen();
-
-                stringSQL.Append("SELECT  order_id, order_at, order_type_id, employee_id, table, order_status_id, payment_id, customer_id ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_ORDER);
-                stringSQL.Append(" ORDER BY order_id DESC");
-
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListOfOrder Success");
-                return dt;
             }
             catch (Exception ex)
             {
@@ -207,29 +187,25 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_ORDER_DETAIL);
-                stringSQL.Append(" (product_id, popup_item_id, order_id, product_qty, amount, comment, cook_status)");
-                stringSQL.Append(" VALUES (@ProductID, @PopupItemID, @OrderID, @ProductQty, @Amount, @Comment, @CustomerID);");
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = db.tb_order_detail.Add(new tb_order_detail()
+                    {
+                        product_id = ProductID,
+                        popup_item_id = PopupItemID,
+                        order_id = OrderID,
+                        product_qty = ProductQty,
+                        amount = Amount,
+                        comment = Comment,
+                        cook_status = CookStatus
+                    });
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@ProductID", ProductID);
-                cmd.Parameters.AddWithValue("@PopupItemID", PopupItemID);
-                cmd.Parameters.AddWithValue("@OrderID", OrderID);
-                cmd.Parameters.AddWithValue("@ProductQty", ProductQty);
-                cmd.Parameters.AddWithValue("@Amount", Amount);
-                cmd.Parameters.AddWithValue("@Comment", Comment);
-                cmd.Parameters.AddWithValue("@CookStatus", CookStatus);
+                    db.SaveChanges();
+                    log.Info("SmoothDataLayer -- AddOrderDetail Success");
+                    return ds.order_detail_id;
+                }
 
-                cmd.ExecuteNonQuery();
-                DatabaseClose();
-
-
-                log.Info("SmoothDataLayer -- AddOrder Success");
-                return 1;
             }
             catch (Exception ex)
             {
@@ -242,25 +218,20 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_order_detail.Where(o => (o.order_id == OrderID)).Where(o=> (o.product_id == ProductID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.cook_status = CookStatus;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_ORDER_DETAIL);
-                stringSQL.Append(" SET cook_status = @CookStatus");
-                stringSQL.Append(" WHERE product_id = @ProductID AND order_id = @OrderID;");
+                    db.SaveChanges();
+                }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@OrderID", OrderID);
-                cmd.Parameters.AddWithValue("@ProductID", ProductID);
-                cmd.Parameters.AddWithValue("@CookStatus", CookStatus);
-
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- UpdateSectionStable Success");
+                log.Info("SmoothDataLayer -- UpdateOrder Success");
                 return 1;
+
             }
             catch (Exception ex)
             {
@@ -273,29 +244,23 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_order_detail.Where(o => (o.order_detail_id == OrderDetailID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.cook_status = CookStatus;
+                        update.product_id = ProductID;
+                        update.popup_item_id = PopupItemID;
+                        update.order_id = OrderID;
+                        update.product_qty = ProductQty;
+                        update.amount = Amount;
+                        update.comment = Comment;
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_ORDER_DETAIL);
-                stringSQL.Append(" SET product_id = @ProductID, popup_item_id = @PopupItemID, order_id = @OrderID, product_qty = @ProductQty, amount = @Amount, comment = @Comment, cook_status = @CookStatus");
-                stringSQL.Append(" WHERE order_detail_id = @OrderDetailID;");
+                    }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@OrderDetailID", OrderDetailID);
-                cmd.Parameters.AddWithValue("@ProductID", ProductID);
-                cmd.Parameters.AddWithValue("@PopupItemID", PopupItemID);
-                cmd.Parameters.AddWithValue("@OrderID", OrderID);
-                cmd.Parameters.AddWithValue("@ProductQty", ProductQty);
-                cmd.Parameters.AddWithValue("@Amount", Amount);
-                cmd.Parameters.AddWithValue("@Comment", Comment);
-                cmd.Parameters.AddWithValue("@CookStatus", CookStatus);
-
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- UpdateSectionStable Success");
+                    db.SaveChanges();
+                }
                 return 1;
             }
             catch (Exception ex)
@@ -309,20 +274,19 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_order_detail.Where(o => (o.order_detail_id == OrderDetailID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.is_active = 0;
 
-                DatabaseOpen();
-                stringSQL.Append("DELETE FROM ");
-                stringSQL.Append(TABLE_ORDER_DETAIL);
-                stringSQL.Append(" WHERE order_detail_id = @OrderDetailID;");
+                    }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@OrderDetailID", OrderDetailID);
-                cmd.ExecuteNonQuery();
+                    db.SaveChanges();
+                    return 1;
+                }
 
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- DeleteOrderDetail Success");
-                return 1;
             }
             catch (Exception ex)
             {

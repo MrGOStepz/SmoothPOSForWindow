@@ -35,22 +35,17 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = db.tb_printer.Add(new tb_printer()
+                    {
+                        name = Name,
+                        printer_ip = PrinterIP,
+                        printer_port = PritnerPort
+                    });
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_PRINTER);
-                stringSQL.Append(" (name, printer_ip, printer_port)");
-                stringSQL.Append(" VALUES (@Name, @PrinterIP, @PritnerPort);");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                cmd.Parameters.AddWithValue("@PrinterIP", PrinterIP);
-                cmd.Parameters.AddWithValue("@PritnerPort", PritnerPort);
-
-                cmd.ExecuteNonQuery();
-                DatabaseClose();
-
+                    db.SaveChanges();
+                }
 
                 log.Info("SmoothDataLayer -- AddPrinter Success");
                 return 1;
@@ -66,21 +61,17 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_printer.Where(o => (o.printer_id == PrinterID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.name = Name;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_PRINTER);
-                stringSQL.Append(" SET name = @Name");
-                stringSQL.Append(" WHERE printer_id = @PrinterID;");
+                    db.SaveChanges();
+                }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@PrinterID", PrinterID);
-                cmd.Parameters.AddWithValue("@Name", Name);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
                 log.Info("SmoothDataLayer -- UpdatePrinter Success");
                 return 1;
             }
@@ -95,19 +86,17 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_printer.Where(o => (o.printer_id == PrinterID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.is_active = 0;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_PRINTER);
-                stringSQL.Append(" SET is_active = 0");
-                stringSQL.Append(" WHERE printer_id = @PrinterID;");
+                    db.SaveChanges();
+                }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@PrinterID", PrinterID);
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
                 log.Info("SmoothDataLayer -- RemovePrinter Success");
                 return 1;
             }
@@ -118,28 +107,29 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfPrinter()
+        public List<tb_printer> GetListOfPrinter()
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_printer
+                              where c.is_active == 1
+                              select c).ToList();
 
-                DatabaseOpen();
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("SmoothDataLayer -- GetListOfPrinter Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        log.Error("SmoothDataLayer => GetListOfPrinter():");
+                        return null;
+                    }
 
-                stringSQL.Append("SELECT printer_id, name, printer_ip, printer_port ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_PRINTER);
-                stringSQL.Append(" WHERE is_active = 1; ");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListOfPrinter Success");
-                return dt;
+                }
             }
             catch (Exception ex)
             {
@@ -152,28 +142,19 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = db.tb_printer_product.Add(new tb_printer_product()
+                    {
+                        product_id = ProdudctID,
+                        printer_id = PrinterID
+                    });
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_PRINTER);
-                stringSQL.Append(" (product_id, printer_id)");
-                stringSQL.Append(" VALUES (@PrinterID, @ProdudctID);");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@PrinterID", PrinterID);
-                cmd.Parameters.AddWithValue("@ProdudctID", ProdudctID);
-
-                cmd.ExecuteNonQuery();
-
-                long tableID = cmd.LastInsertedId;
-                DatabaseClose();
-
-                int tID = (int)tableID;
-
+                    db.SaveChanges();
+                }
 
                 log.Info("SmoothDataLayer -- AddPrinterProduct Success");
-                return tID;
+                return 1;
             }
             catch (Exception ex)
             {
@@ -186,20 +167,17 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_printer_product.Where(o => (o.printer_id == PrinterID)).Where(o => (o.product_id == ProductID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.is_active = 0;
+                    }
 
-                DatabaseOpen();
-                stringSQL.Append("DELETE FROM ");
-                stringSQL.Append(TABLE_PRINTER);
-                stringSQL.Append(" WHERE product_id = @PrinterID AND printer_id = @ProductID;");
+                    db.SaveChanges();
+                }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@PrinterID", PrinterID);
-                cmd.Parameters.AddWithValue("@ProductID", ProductID);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
                 log.Info("SmoothDataLayer -- RemovePrinterProduct Success");
                 return 1;
             }
@@ -214,22 +192,18 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = db.tb_printer_log.Add(new tb_printer_log()
+                    {
+                        printer_id = PrinterID,
+                        print_dt = DateTime.Parse(DT),
+                        printer_detail = stringJson
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_PRINTER_LOG);
-                stringSQL.Append(" (printer_id, print_dt, printer_detail)");
-                stringSQL.Append(" VALUES (@PrinterID, @DT, @stringJson);");
+                    });
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@PrinterID", PrinterID);
-                cmd.Parameters.AddWithValue("@DT", DT);
-                cmd.Parameters.AddWithValue("@stringJson", stringJson);
-
-                cmd.ExecuteNonQuery();
-                DatabaseClose();
-
+                    db.SaveChanges();
+                }
 
                 log.Info("SmoothDataLayer -- AddPrinterLog Success");
                 return 1;
@@ -241,28 +215,28 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfPrinterLog()
+        public List<tb_printer_log> GetListOfPrinterLog()
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_printer_log
+                              select c).Take(50).ToList();
 
-                DatabaseOpen();
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("SmoothDataLayer -- GetListOfPrinterLog Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        log.Error("SmoothDataLayer => GetListOfPrinter():");
+                        return null;
+                    }
 
-                stringSQL.Append("SELECT TOP 50 printer_log_id, printer_id, print_dt, printer_detail ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_PRINTER_LOG);
-                stringSQL.Append(" ORDER BY printer_log_id DESC");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListOfPrinterLog Success");
-                return dt;
+                }
             }
             catch (Exception ex)
             {

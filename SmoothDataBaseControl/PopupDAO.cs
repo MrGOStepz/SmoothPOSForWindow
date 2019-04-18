@@ -49,43 +49,30 @@ namespace SmoothDataBaseControl
                     return -1;
                 }
 
-                StringBuilder stringSQL = new StringBuilder();
-
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_POPUP);
-                stringSQL.Append(" (name)");
-                stringSQL.Append(" VALUES (@Name);");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", Name);
-
-                cmd.ExecuteNonQuery();
-
-                long popupID = cmd.LastInsertedId;
-                DatabaseClose();
-
-                DatabaseOpen();
-                for (int i = 0; i < lstName.Count; i++)
+                using (var db = new SmoothDBEntities())
                 {
-                    stringSQL = new StringBuilder();
-                    stringSQL.Append("INSERT INTO ");
-                    stringSQL.Append(TABLE_POPUP_ITEM);
-                    stringSQL.Append(" (popup_id, name, price, image_path)");
-                    stringSQL.Append(" VALUES (@PopupID, @Name, @Price, @ImagePath);");
+                    var ds = db.tb_popup.Add(new tb_popup()
+                    {
+                        name = Name
 
-                    cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                    cmd.Parameters.AddWithValue("@PopupID", popupID);
-                    cmd.Parameters.AddWithValue("@Name", lstName[i]);
-                    cmd.Parameters.AddWithValue("@Price", lstPrice[i]);
-                    cmd.Parameters.AddWithValue("@ImagePath", lstImagePath[i]);
+                    });
 
-                    cmd.ExecuteNonQuery();
+                    int tempId = ds.popup_id;
+                    for (int i = 0; i < lstName.Count; i++)
+                    {
+                        var dspop = db.tb_popup_item.Add(new tb_popup_item()
+                        {
+                            popup_id = tempId,
+                            name = lstName[i],
+                            price = lstPrice[i],
+                            image_path = lstImagePath[i]
+                        }) ;
+                    }
+                        db.SaveChanges();
+                    log.Info("SmoothDataLayer -- Add Popup Success");
+                    return ds.popup_id;
                 }
 
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- Add Popup Success");
-                return 1;
             }
             catch (Exception ex)
             {
@@ -99,48 +86,33 @@ namespace SmoothDataBaseControl
         {
             try
             {
-
                 if (lstName.Count != lstPrice.Count && lstPrice.Count != lstImagePath.Count && lstName.Count != lstImagePath.Count)
                 {
                     return -1;
                 }
 
-                StringBuilder stringSQL = new StringBuilder();
-
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_POPUP);
-                stringSQL.Append(" SET name = @Name");
-                stringSQL.Append(" WHERE popup_id = @PopupID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                cmd.Parameters.AddWithValue("@PopupID", PopupID);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-
-                DatabaseOpen();
-                for (int i = 0; i < lstSupPopupID.Count; i++)
+                using (var db = new SmoothDBEntities())
                 {
-                    stringSQL = new StringBuilder();
-                    stringSQL.Append("UPDATE ");
-                    stringSQL.Append(TABLE_POPUP_ITEM);
-                    stringSQL.Append(" SET name = @Name, popup_id = @PopupID, price = @Price, image_path = @ImagePath");
-                    stringSQL.Append(" WHERE popup_item_id = @SupPopupID");
+                    var update = db.tb_popup.Where(o => (o.popup_id == PopupID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.name = Name;
+                    }
 
-                    cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                    cmd.Parameters.AddWithValue("@SupPopupID", lstSupPopupID[i]);
-                    cmd.Parameters.AddWithValue("@Name", lstName[i]);
-                    cmd.Parameters.AddWithValue("@Price", lstPrice[i]);
-                    cmd.Parameters.AddWithValue("@ImagePath", lstImagePath[i]);
-                    cmd.Parameters.AddWithValue("@PopupID", PopupID);
-
-                    cmd.ExecuteNonQuery();
+                    db.SaveChanges();
+                    for (int i = 0; i < lstSupPopupID.Count; i++)
+                    {
+                        var updateItem = db.tb_popup_item.Where(o => (o.popup_id == PopupID)).FirstOrDefault();
+                        if (updateItem != null)
+                        {
+                            updateItem.name = lstName[i];
+                            updateItem.popup_id = PopupID;
+                            updateItem.price = lstPrice[i];
+                            updateItem.image_path = lstImagePath[i];
+                        }
+                    }
                 }
 
-                DatabaseClose();
                 log.Info("SmoothDataLayer -- Update Popup Success");
                 return 1;
             }
@@ -188,27 +160,28 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfPopup()
+        public List<tb_popup> GetListOfPopup()
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_popup
+                              where c.is_active == 1
+                              orderby c.popup_id descending
+                              select c).ToList();
 
-                DatabaseOpen();
-
-                stringSQL.Append("SELECT popup_id, name ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_POPUP + ";");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListOfPopup Success");
-                return dt;
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("SmoothDataLayer -- GetListOfPopup Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -217,30 +190,29 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfPopupFilter(string name)
+        public List<tb_popup> GetListOfPopupFilter(string name)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_popup
+                              where c.name.Contains(name)
+                              where c.is_active == 1                           
+                              orderby c.popup_id descending
+                              select c).ToList();
 
-                DatabaseOpen();
-
-                stringSQL.Append("SELECT popup_id, name ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_POPUP);
-                stringSQL.Append(" WHERE name LIKE @Name;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", "%" + name + "%");
-
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetLisOfPopupFilter Success");
-                return dt;
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("SmoothDataLayer -- GetLisOfPopupFilter Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
             }
             catch (Exception ex)
             {

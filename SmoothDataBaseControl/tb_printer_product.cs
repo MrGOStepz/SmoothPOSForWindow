@@ -17,6 +17,7 @@ namespace SmoothDataBaseControl
         public int printer_product_id { get; set; }
         public int product_id { get; set; }
         public int printer_id { get; set; }
+        public Nullable<int> is_active { get; set; }
     
         public virtual tb_printer tb_printer { get; set; }
         public virtual tb_product tb_product { get; set; }

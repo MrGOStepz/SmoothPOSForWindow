@@ -15,63 +15,28 @@ namespace SmoothDataBaseControl
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(ProductDAO));
 
-        private const string TABLE_PRODUCT = "tb_product";
-
-
-        private void DatabaseOpen()
-        {
-            string connectionPath = ConfigurationManager.ConnectionStrings["SmoothDB"].ConnectionString;  //ConfigurationManager.ConnectionStrings["SmoothDB"].ConnectionString;
-            _conn = new MySqlConnection(connectionPath);
-            _conn.Open();
-        }
-
-        private void DatabaseClose()
-        {
-            _conn.Close();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <param name="Sname"></param>
-        /// <param name="Description"></param>
-        /// <param name="PopupID"></param>
-        /// <param name="PriceInc"> Price Include Tax</param>
-        /// <param name="Stock"></param>
-        /// <param name="Avaliable"></param>
-        /// <param name="PdInID"> Product of Ingredient ID</param>
-        /// <param name="ImagePath"></param>
-        /// <returns></returns>
         public int AddProduct(string Name, string Sname, string Description, int PopupID, float PriceInc, int Stock, int Avaliable, int PdInID, int TypeOfFood, string ImagePath)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = db.tb_product.Add(new tb_product()
+                    {
+                        short_name = Sname,
+                        description = Description,
+                        avaliable = Avaliable,
+                        product_ingredient_id = PdInID,
+                        popup_id = PopupID,
+                        stock = Stock,
+                        price = PriceInc,
+                        image_path = ImagePath,
+                        type_food_id = TypeOfFood
+                    });
 
-                DatabaseOpen();
-                stringSQL.Append("INSERT INTO ");
-                stringSQL.Append(TABLE_PRODUCT);
-                stringSQL.Append(" (name, short_name, description, avaliable, product_ingredient_id, popup_id, stock, price, image_path, type_food_id)");
-                stringSQL.Append(" VALUES (@Name, @ShortName, @Description, @Avaliable, @PdInID, @PopupID, @Stock, @Price, @ImagePath, @TypeOfFood);");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                cmd.Parameters.AddWithValue("@ShortName", Sname);
-                cmd.Parameters.AddWithValue("@Description", Description);
-                cmd.Parameters.AddWithValue("@Avaliable", Avaliable);
-                cmd.Parameters.AddWithValue("@PdInID", PdInID);
-                cmd.Parameters.AddWithValue("@PopupID", PopupID);
-                cmd.Parameters.AddWithValue("@Stock", Stock);
-                cmd.Parameters.AddWithValue("@Price", PriceInc);
-                cmd.Parameters.AddWithValue("@ImagePath", ImagePath);
-                cmd.Parameters.AddWithValue("@TypeOfFood", TypeOfFood);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- Add Product Success");
-                return 1;
+                    db.SaveChanges();
+                    return 1;
+                }
             }
             catch (Exception ex)
             {
@@ -84,36 +49,33 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_product.Where(o => (o.product_id == ProductID)).FirstOrDefault();
+                    if (update != null)
+                    {
 
-                DatabaseOpen();
-                stringSQL.Append("UPDATE ");
-                stringSQL.Append(TABLE_PRODUCT);
-                stringSQL.Append(" SET (name = @Name, short_name = @ShortName, description = @Description, avaliable = @Avaliable, product_ingredient_id = @PdInID, popup_id = @PopupID, stock = @Stock, price = @Price, image_path = @ImagePath, type_food_id = @TypeOfFood)");
-                stringSQL.Append(" WHERE product_id = @ProductID;");
+                        update.name = Name;
+                        update.short_name = Sname;
+                        update.description = Description;
+                        update.avaliable = Avaliable;
+                        update.product_ingredient_id = PdInID;
+                        update.popup_id = PopupID;
+                        update.stock = Stock;
+                        update.price = PriceInc;
+                        update.image_path = ImagePath;
+                        update.type_food_id = typeOfFood;
+                    }
 
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@ProductID", ProductID);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                cmd.Parameters.AddWithValue("@ShortName", Sname);
-                cmd.Parameters.AddWithValue("@Description", Description);
-                cmd.Parameters.AddWithValue("@Avaliable", Avaliable);
-                cmd.Parameters.AddWithValue("@PdInID", PdInID);
-                cmd.Parameters.AddWithValue("@PopupID", PopupID);
-                cmd.Parameters.AddWithValue("@Stock", Stock);
-                cmd.Parameters.AddWithValue("@Price", PriceInc);
-                cmd.Parameters.AddWithValue("@ImagePath", ImagePath);
-                cmd.Parameters.AddWithValue("@TypeOfFood", typeOfFood);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- Update Product Success");
+                    db.SaveChanges();
+                    
+                }
+                log.Info("Update UpdateProduct Success");
                 return 1;
             }
             catch (Exception ex)
             {
-                log.Error("DataLayer => UpdatProduct(): " + ex.Message);
+                log.Error("DataLayer => UpdateProduct(): " + ex.Message);
                 return -1;
             }
         }
@@ -122,20 +84,17 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var update = db.tb_product.Where(o => (o.product_id == ProductID)).FirstOrDefault();
+                    if (update != null)
+                    {
+                        update.is_active = 0;
+                    }
 
-                DatabaseOpen();
+                    db.SaveChanges();
 
-                stringSQL.Append("DELECT FORM ");
-                stringSQL.Append(TABLE_PRODUCT);
-                stringSQL.Append(" WHERE product_id = @ProductID;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@ProductID", ProductID);
-
-                cmd.ExecuteNonQuery();
-
-                DatabaseClose();
+                }
                 log.Info("SmoothDataLayer -- Delete Product Success");
                 return 1;
             }
@@ -146,27 +105,27 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfProduct()
+        public List<tb_product> GetListOfProduct()
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_product
+                              select c).ToList();
 
-                DatabaseOpen();
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("Get List Of Product Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
 
-                stringSQL.Append("SELECT product_id, name, description, stock, popup_id, price, avaliable, ingredient_id, type_id ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_PRODUCT + ";");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetListOfProduct Success");
-                return dt;
             }
             catch (Exception ex)
             {
@@ -175,30 +134,28 @@ namespace SmoothDataBaseControl
             }
         }
 
-        public DataTable GetListOfProductFilter(string name)
+        public List<tb_product> GetListOfProductFilter(string Name)
         {
             try
             {
-                StringBuilder stringSQL = new StringBuilder();
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_product
+                              where c.name == Name
+                              select c).ToList();
 
-                DatabaseOpen();
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("Get List Of Product Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
 
-                stringSQL.Append("SELECT product_id, name, description, stock, popup_id, price, avaliable, ingredient_id, type_id ");
-                stringSQL.Append("FROM ");
-                stringSQL.Append(TABLE_PRODUCT);
-                stringSQL.Append(" WEHRE name LIKE % @Name %;");
-
-                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
-                cmd.Parameters.AddWithValue("@Name", name);
-
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                cmd.Dispose();
-                DatabaseClose();
-                log.Info("SmoothDataLayer -- GetLisOfProductFilter Success");
-                return dt;
             }
             catch (Exception ex)
             {

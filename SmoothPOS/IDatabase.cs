@@ -94,7 +94,7 @@ namespace SmoothPOS
         int DeleteReceipt(int receiptID);
     }
 
-    interface IReport
+    interface ITable
     {
         int AddTable(string tableDetail);
         int UpdateTable(string tableDetail);

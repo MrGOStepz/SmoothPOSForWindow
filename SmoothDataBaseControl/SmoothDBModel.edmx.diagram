@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="SmoothDBModel.tb_customer" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_employee" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_employee_status" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmoothDBModel.tb_employee_time_sheet" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_employee_time_sheet" Width="1.5" PointX="9.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_ingredient" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_level" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_location_menu" Width="1.5" PointX="9.25" PointY="8.875" IsExpanded="true" />
@@ -25,7 +25,7 @@
         <EntityTypeShape EntityType="SmoothDBModel.tb_printer_log" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_printer_product" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_product" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmoothDBModel.tb_product_ingredient" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmoothDBModel.tb_product_ingredient" Width="1.5" PointX="9.5" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_section" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_setting" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmoothDBModel.tb_table_section" Width="1.5" PointX="7.75" PointY="12.75" IsExpanded="true" />
