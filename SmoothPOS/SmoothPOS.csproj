@@ -92,6 +92,10 @@
     <Compile Include="ItemOrderControl.xaml.cs">
       <DependentUpon>ItemOrderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modals\LocationMenuModel.cs" />
+    <Compile Include="Modals\PrinterModel.cs" />
+    <Compile Include="Modals\ReportModel.cs" />
+    <Compile Include="Modals\TableModel.cs" />
     <Compile Include="OrderComment.xaml.cs">
       <DependentUpon>OrderComment.xaml</DependentUpon>
     </Compile>
@@ -100,7 +104,6 @@
     <Compile Include="TableDialog.xaml.cs">
       <DependentUpon>TableDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TableModal.cs" />
     <Compile Include="TableSection.cs" />
     <Compile Include="TableSettingControl.xaml.cs">
       <DependentUpon>TableSettingControl.xaml</DependentUpon>
@@ -138,7 +141,6 @@
     <Compile Include="UserControl\PayUserControl.xaml.cs">
       <DependentUpon>PayUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Printer.cs" />
     <Compile Include="ProductCRUDForm.xaml.cs">
       <DependentUpon>ProductCRUDForm.xaml</DependentUpon>
     </Compile>

@@ -16,7 +16,7 @@ namespace SmoothDataBaseControl
         public float MarginRight { get; set; }
         public float MarginBottom { get; set; }
         public float MarginLeft { get; set; }
-        public int is_active { get; set; }
+        public int IsActive { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
     }

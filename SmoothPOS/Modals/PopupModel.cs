@@ -15,6 +15,7 @@ namespace SmoothPOS
 
     public class ListPopup
     {
+        public int SubPopUpID { get; set; }
         public string Name { get; set; }
         public float Price { get; set; }
         public string Image64 { get; set; }

@@ -105,7 +105,7 @@ namespace SmoothPOS
     interface ISection
     {
         int AddSectionTable(string name);
-        int UpdateSectiontable(int sectionID, string name);
+        int UpdateSectiontable(string sectionDetail);
         int RemoveSectionTable(int sectionID);
         string GetListOfSection();
     }
@@ -121,7 +121,7 @@ namespace SmoothPOS
     interface ILocationTab
     {
         int AddLocationTab(string name);
-        int UpdateLocationTab(int locationTabID, string name);
+        int UpdateLocationTab(string locationTabDetail);
         int RemoveLocationTab(int locationID);
         string GetListOfLocationTab();
     }

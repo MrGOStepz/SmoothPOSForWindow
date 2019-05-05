@@ -81,9 +81,27 @@ namespace SmoothDataBaseControl
             try
             {
                 List<tb_employee> lstEmploy = new List<tb_employee>();
+                List<EmployeeModel> lstEmployModel = new List<EmployeeModel>();
+                EmployeeModel empModel;
                 lstEmploy = _employeeDAO.GetListOfEmployee();
 
-                return JsonConvert.SerializeObject(lstEmploy);
+                for (int i = 0; i < lstEmploy.Count; i++)
+                {
+                    empModel = new EmployeeModel();
+                    empModel.EmployeeID = lstEmploy[i].employee_id;
+                    empModel.FirstName = lstEmploy[i].first_name;
+                    empModel.LastName = lstEmploy[i].last_name;
+                    empModel.Phone = lstEmploy[i].phone;
+                    empModel.Email = lstEmploy[i].email;
+                    empModel.LevelID = lstEmploy[i].level_id ?? 0;
+                    empModel.StatusID = lstEmploy[i].status_id ?? 0;
+                    empModel.Password = lstEmploy[i].password;
+                    empModel.NickName = lstEmploy[i].nick_name;
+                    lstEmployModel.Add(empModel);
+
+                }
+
+                return JsonConvert.SerializeObject(lstEmployModel);
 
             }
             catch (Exception ex)
@@ -98,9 +116,20 @@ namespace SmoothDataBaseControl
             try
             {
                 tb_employee employeeModel = new tb_employee();
-                employeeModel = _employeeDAO.GetEmployeeDetailByPassword(Password);
 
-                return JsonConvert.SerializeObject(employeeModel);
+                employeeModel = _employeeDAO.GetEmployeeDetailByPassword(Password);
+                EmployeeModel empModel = new EmployeeModel();
+                empModel.EmployeeID = employeeModel.employee_id;
+                empModel.FirstName = employeeModel.first_name;
+                empModel.LastName = employeeModel.last_name;
+                empModel.Phone = employeeModel.phone;
+                empModel.Email = employeeModel.email;
+                empModel.LevelID = employeeModel.level_id ?? -1;
+                empModel.StatusID = employeeModel.status_id ?? -1;
+                empModel.Password = employeeModel.password;
+                empModel.NickName = employeeModel.nick_name;
+
+                return JsonConvert.SerializeObject(empModel);
             }
             catch (Exception ex)
             {
@@ -116,8 +145,8 @@ namespace SmoothDataBaseControl
                 return _employeeDAO.UpdateEmployeeStatus(staffID, StatusID);
             }
             catch (Exception ex)
-            {   
-
+            {
+                log.Error("BussicnessLogic => UpdateEmployeeStatus" + ex.Message);
                 return -1;
             }
         }
@@ -130,7 +159,7 @@ namespace SmoothDataBaseControl
             }
             catch (Exception ex)
             {
-
+                log.Error("BussicnessLogic => CheckStaffStatus" + ex.Message);
                 return -1;
             }
         }
@@ -249,7 +278,19 @@ namespace SmoothDataBaseControl
             {
                 List<tb_popup> lstPopupModel = new List<tb_popup>();
                 lstPopupModel = _popupDAO.GetListOfPopup();
-                return JsonConvert.SerializeObject(lstPopupModel);
+
+                PopupModel popupModel;
+                List<PopupModel> lstPopup = new List<PopupModel>();
+                for (int i = 0; i < lstPopupModel.Count; i++)
+                {
+                    popupModel = new PopupModel();
+                    popupModel.PopupID = lstPopupModel[i].popup_id;
+                    popupModel.Name = lstPopupModel[i].name;
+                    lstPopup.Add(popupModel);
+
+                }
+
+                return JsonConvert.SerializeObject(lstPopup);
 
             }
             catch (Exception ex)
@@ -265,7 +306,17 @@ namespace SmoothDataBaseControl
             {
                 List<tb_popup> lstPopupModel = new List<tb_popup>();
                 lstPopupModel = _popupDAO.GetListOfPopupFilter(name);
-                return JsonConvert.SerializeObject(lstPopupModel);
+                PopupModel popupModel;
+                List<PopupModel> lstPopup = new List<PopupModel>();
+                for (int i = 0; i < lstPopupModel.Count; i++)
+                {
+                    popupModel = new PopupModel();
+                    popupModel.PopupID = lstPopupModel[i].popup_id;
+                    popupModel.Name = lstPopupModel[i].name;
+                    lstPopup.Add(popupModel);
+
+                }
+                return JsonConvert.SerializeObject(lstPopup);
             }
             catch (Exception ex)
             {
@@ -407,7 +458,18 @@ namespace SmoothDataBaseControl
             {
                 List<tb_section> lstSectionModel = new List<tb_section>();
                 lstSectionModel = _tableDAO.GetListOfSection();
-                return JsonConvert.SerializeObject(lstSectionModel);
+                SectionModel sectionModel;
+                List<SectionModel> lstSectionModels = new List<SectionModel>();
+                for (int i = 0; i < lstSectionModel.Count; i++)
+                {
+                    sectionModel = new SectionModel();
+                    sectionModel.Name = lstSectionModel[i].name;
+                    sectionModel.SectionID = lstSectionModel[i].section_id;
+                    sectionModel.IsActive = lstSectionModel[i].is_active ?? 0;
+                    lstSectionModels.Add(sectionModel);
+
+                }
+                return JsonConvert.SerializeObject(lstSectionModels);
 
             }
             catch (Exception ex)
@@ -461,14 +523,31 @@ namespace SmoothDataBaseControl
             }
         }
 
-        //TODO Check
         public string GetListOfTable()
         {
             try
             {
                 List<tb_table_section> lstTableSection = new List<tb_table_section>();
                 lstTableSection = _tableDAO.GetListTable();
-                return JsonConvert.SerializeObject(lstTableSection);
+                TableModal tableModel;
+                List<TableModal> lstTableModel = new List<TableModal>();
+                for (int i = 0; i < lstTableSection.Count; i++)
+                {
+                    tableModel = new TableModal();
+                    tableModel.TableID = lstTableSection[i].table_section_id;
+                    tableModel.uniName = lstTableSection[i].u_name;
+                    tableModel.Name = lstTableSection[i].name;
+                    tableModel.SectionID = lstTableSection[i].section_id ?? -1;
+                    tableModel.MarginTop = lstTableSection[i].margin_top ?? -1;
+                    tableModel.MarginBottom = lstTableSection[i].margin_bottom ?? -1;
+                    tableModel.MarginRight = lstTableSection[i].margin_right ?? -1;
+                    tableModel.MarginLeft = lstTableSection[i].margin_left ?? -1;
+                    tableModel.Height = lstTableSection[i].height ?? 50;
+                    tableModel.Width = lstTableSection[i].width ?? 50;
+                    tableModel.IsActive = lstTableSection[i].is_active ?? 0;
+                    lstTableModel.Add(tableModel);
+                }
+                return JsonConvert.SerializeObject(lstTableModel);
             }
             catch (Exception ex)
             {
@@ -539,9 +618,20 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                List<tb_location_tab> lstlocationLab = new List<tb_location_tab>();
-                lstlocationLab = _locationDAO.GetListOfLocationTab();
-                return JsonConvert.SerializeObject(lstlocationLab);
+                List<tb_location_tab> lstLocationTab = new List<tb_location_tab>();
+                lstLocationTab = _locationDAO.GetListOfLocationTab();
+                LocationTab locationTab;
+                List<LocationTab> lstLocationTabModel = new List<LocationTab>();
+                for (int i = 0; i < lstLocationTab.Count; i++)
+                {
+                    locationTab = new LocationTab();
+                    locationTab.LocationTabID = lstLocationTab[i].location_tab_id;
+                    locationTab.Name = lstLocationTab[i].name;
+                    locationTab.IsActive = lstLocationTab[i].is_active ?? 0;
+                    lstLocationTabModel.Add(locationTab);
+                }
+
+                return JsonConvert.SerializeObject(lstLocationTabModel);
 
             }
             catch (Exception ex)
@@ -599,9 +689,23 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                List< tb_location_menu> lstlocationMenu = new List<tb_location_menu>();
+                List<tb_location_menu> lstlocationMenu = new List<tb_location_menu>();
                 lstlocationMenu = _locationDAO.GetListLocationMenu();
-                return JsonConvert.SerializeObject(lstlocationMenu);
+                LocationMenu locationMenuModel;
+                List<LocationMenu> lstLocationMenu = new List<LocationMenu>();
+
+                for (int i = 0; i < lstlocationMenu.Count; i++)
+                {
+                    locationMenuModel = new LocationMenu();
+                    locationMenuModel.LocationMenuID = lstlocationMenu[i].tb_location_menu_id;
+                    locationMenuModel.ProductID = lstlocationMenu[i].product_id ?? -1;
+                    locationMenuModel.LocationTabID = lstlocationMenu[i].tb_location_tab_id ?? -1;
+                    locationMenuModel.Column = lstlocationMenu[i].column_no ?? -1;
+                    locationMenuModel.Row = lstlocationMenu[i].row_no ?? -1;
+                    lstLocationMenu.Add(locationMenuModel);
+                }
+
+                return JsonConvert.SerializeObject(lstLocationMenu);
             }
             catch (Exception ex)
             {
@@ -664,7 +768,21 @@ namespace SmoothDataBaseControl
             {
                 List<tb_printer> lstPrinterModel = new List<tb_printer>();
                 lstPrinterModel = _printerDAO.GetListOfPrinter();
-                return JsonConvert.SerializeObject(lstPrinterModel);
+                PrinterModel printerModel;
+                List<PrinterModel> lstPrinter = new List<PrinterModel>();
+
+                for (int i = 0; i < lstPrinterModel.Count; i++)
+                {
+                    printerModel = new PrinterModel();
+                    printerModel.PrinterID = lstPrinterModel[i].printer_id;
+                    printerModel.Name = lstPrinterModel[i].name;
+                    printerModel.PrinterIP = lstPrinterModel[i].printer_ip;
+                    printerModel.PrinterPort = lstPrinterModel[i].printer_port;
+                    printerModel.IsActive = lstPrinterModel[i].is_active ?? 0;
+
+                    lstPrinter.Add(printerModel);
+                }
+                return JsonConvert.SerializeObject(lstPrinter);
             }
             catch (Exception ex)
             {
@@ -727,6 +845,20 @@ namespace SmoothDataBaseControl
             {
                 List<tb_printer_log> lstPrinterLogModel = new List<tb_printer_log>();
                 lstPrinterLogModel = _printerDAO.GetListOfPrinterLog();
+
+                PrinterLogModel printerLogModel;
+                List<PrinterLogModel> lstPrinterLog = new List<PrinterLogModel>();
+                for (int i = 0; i < lstPrinterLogModel.Count; i++)
+                {
+                    printerLogModel = new PrinterLogModel();
+                    printerLogModel.PrinterLogID = lstPrinterLogModel[i].printer_log_id;
+                    printerLogModel.PrinterID = lstPrinterLogModel[i].printer_id;
+                    printerLogModel.PrinterDateTime = lstPrinterLogModel[i].print_dt;
+                    printerLogModel.PrinterDetail = lstPrinterLogModel[i].printer_detail;
+
+
+                    lstPrinterLog.Add(printerLogModel);
+                }
                 return JsonConvert.SerializeObject(lstPrinterLogModel);
 
             }
@@ -760,7 +892,22 @@ namespace SmoothDataBaseControl
             {
                 List<tb_order> lstOrder = new List<tb_order>();
                 lstOrder = _reportDAO.GetListOfOrder();
-                return JsonConvert.SerializeObject(lstOrder);
+                OrderModel orderModel;
+                List<OrderModel> lstOrderModel = new List<OrderModel>();
+                for (int i = 0; i < lstOrder.Count; i++)
+                {
+                    orderModel = new OrderModel();
+                    orderModel.OrderID = lstOrder[i].order_id;
+                    orderModel.OrderTime = lstOrder[i].order_at ?? DateTime.MinValue;
+                    orderModel.EmployeeID = lstOrder[i].employee_id ?? 0;
+                    orderModel.TableID = lstOrder[i].table;
+                    orderModel.OrderStatusID = lstOrder[i].order_status_id ?? 0;
+                    orderModel.PaymentTypeID = lstOrder[i].payment_id ?? 1;
+                    orderModel.CustomerID = lstOrder[i].customer_id ?? -1;
+                    orderModel.IsActive = lstOrder[i].is_active;
+                    lstOrderModel.Add(orderModel);
+                }
+                return JsonConvert.SerializeObject(lstOrderModel);
             }
             catch (Exception ex)
             {
@@ -774,8 +921,23 @@ namespace SmoothDataBaseControl
             try
             {
                 List<tb_order> lstOrder = new List<tb_order>();
-                lstOrder = _reportDAO.GetListOfOrder();
-                return JsonConvert.SerializeObject(lstOrder);
+                lstOrder = _reportDAO.GetListOfOrder(Top);
+                OrderModel orderModel;
+                List<OrderModel> lstOrderModel = new List<OrderModel>();
+                for (int i = 0; i < lstOrder.Count; i++)
+                {
+                    orderModel = new OrderModel();
+                    orderModel.OrderID = lstOrder[i].order_id;
+                    orderModel.OrderTime = lstOrder[i].order_at ?? DateTime.MinValue;
+                    orderModel.EmployeeID = lstOrder[i].employee_id ?? 0;
+                    orderModel.TableID = lstOrder[i].table;
+                    orderModel.OrderStatusID = lstOrder[i].order_status_id ?? 0;
+                    orderModel.PaymentTypeID = lstOrder[i].payment_id ?? 1;
+                    orderModel.CustomerID = lstOrder[i].customer_id ?? -1;
+                    orderModel.IsActive = lstOrder[i].is_active;
+                    lstOrderModel.Add(orderModel);
+                }
+                return JsonConvert.SerializeObject(lstOrderModel);
             }
             catch (Exception ex)
             {

@@ -357,12 +357,28 @@ namespace SmoothPOS
 
         public int RemoveLocationMenu(int LocationMenuID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _businessLogic.RemoveLocationMenu(LocationMenuID);
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
         }
 
         public int RemoveLocationTab(int locationID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _businessLogic.RemoveLocationTab(locationID);
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
         }
 
         public int RemovePopup(int popupID)
@@ -379,12 +395,28 @@ namespace SmoothPOS
 
         public int RemovePrinter(int PritnerID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _businessLogic.RemovePrinter(PritnerID);
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
         }
 
         public int RemovePrinterProduct(int PritnerID, int ProductID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _businessLogic.RemovePrinterProduct(PritnerID, ProductID);
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
         }
 
         public int RemoveProduct(int productID)
@@ -394,7 +426,15 @@ namespace SmoothPOS
 
         public int RemoveSectionTable(int sectionID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _businessLogic.RemoveSectionTable(sectionID);
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
         }
 
         public int RemoveStaff(int staffID)
@@ -409,27 +449,67 @@ namespace SmoothPOS
 
         public int UpdateLocationMenu(string locationMenuDetail)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _businessLogic.UpdateLocationMenu(locationMenuDetail);
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
         }
 
-        public int UpdateLocationTab(int locationTabID, string name)
+        public int UpdateLocationTab(string LocationTap)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _businessLogic.UpdateLocationTab(LocationTap);
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
         }
 
         public int UpdatePrinter(string stringJSON)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _businessLogic.UpdatePrinter(stringJSON);
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
         }
 
         public int UpdateProduct(string product)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _businessLogic.UpdateProductLogic(product);
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
         }
 
-        public int UpdateSectiontable(int sectionID, string name)
+        public int UpdateSectiontable(string strJSON)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _businessLogic.UpdateSectionTable(strJSON);
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
         }
 
         public int UpdateStaffStatus(int staffID, int statusID)

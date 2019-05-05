@@ -5,286 +5,250 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SmoothDBModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="SmoothDBModelStoreContainer">
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="SmoothDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="tb_cook_status">
           <Key>
             <PropertyRef Name="cook_status_id" />
           </Key>
-          <Property Name="cook_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="cook_status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="tb_customer">
           <Key>
             <PropertyRef Name="customer_id" />
           </Key>
-          <Property Name="customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="first_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="last_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="address" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
-          <Property Name="total_order" Type="Int32" />
-          <Property Name="last_active" Type="DateTime" />
-          <Property Name="dob" Type="DateTime" />
-          <Property Name="card" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_order" Relationship="Self.FK_customer_order" FromRole="tb_customer" ToRole="tb_order" />
+          <Property Name="customer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="45" />
+          <Property Name="phone" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="address" Type="mediumtext" />
+          <Property Name="total_order" Type="int" />
+          <Property Name="last_active" Type="date" />
+          <Property Name="dob" Type="datetime" Precision="0" />
+          <Property Name="card" Type="longtext" />
+          <Property Name="email" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="tb_employee">
           <Key>
             <PropertyRef Name="employee_id" />
           </Key>
-          <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="first_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="last_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="level_id" Type="Int32" />
-          <Property Name="status_id" Type="Int32" />
-          <Property Name="password" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nick_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_order" Relationship="Self.FK_employy_order" FromRole="tb_employee" ToRole="tb_order" />
-          <NavigationProperty Name="tb_level" Relationship="Self.FK_level_employee" FromRole="tb_employee" ToRole="tb_level" />
-          <NavigationProperty Name="tb_employee_status" Relationship="Self.FK_status_employee" FromRole="tb_employee" ToRole="tb_employee_status" />
+          <Property Name="employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="45" />
+          <Property Name="phone" Type="varchar" MaxLength="45" />
+          <Property Name="email" Type="varchar" MaxLength="45" />
+          <Property Name="level_id" Type="int" />
+          <Property Name="status_id" Type="int" />
+          <Property Name="password" Type="longtext" Nullable="false" />
+          <Property Name="nick_name" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="tb_employee_status">
           <Key>
             <PropertyRef Name="tb_status_id" />
           </Key>
-          <Property Name="tb_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tb_employee" Relationship="Self.FK_status_employee" FromRole="tb_employee_status" ToRole="tb_employee" />
+          <Property Name="tb_status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_employee_time_sheet">
           <Key>
             <PropertyRef Name="employee_time_sheet_id" />
           </Key>
-          <Property Name="employee_time_sheet_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="employee_id" Type="Int32" Nullable="false" />
-          <Property Name="clockin_time" Type="DateTime" />
-          <Property Name="clockout_time" Type="DateTime" />
+          <Property Name="employee_time_sheet_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employee_id" Type="int" Nullable="false" />
+          <Property Name="clockin_time" Type="datetime" Precision="0" />
+          <Property Name="clockout_time" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="tb_ingredient">
           <Key>
             <PropertyRef Name="ingredient_id" />
           </Key>
-          <Property Name="ingredient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="image_path" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="ingredient_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="image_path" Type="text" />
         </EntityType>
         <EntityType Name="tb_level">
           <Key>
             <PropertyRef Name="level_id" />
           </Key>
-          <Property Name="level_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tb_employee" Relationship="Self.FK_level_employee" FromRole="tb_level" ToRole="tb_employee" />
+          <Property Name="level_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_location_menu">
           <Key>
             <PropertyRef Name="tb_location_menu_id" />
           </Key>
-          <Property Name="tb_location_menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_id" Type="Int32" />
-          <Property Name="tb_location_tab_id" Type="Int32" />
-          <Property Name="column_no" Type="Int32" />
-          <Property Name="row_no" Type="Int32" />
-          <Property Name="is_active" Type="Int32" Nullable="false" />
+          <Property Name="tb_location_menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="tb_location_tab_id" Type="int" />
+          <Property Name="column_no" Type="int" />
+          <Property Name="row_no" Type="int" />
+          <Property Name="is_active" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_location_tab">
           <Key>
             <PropertyRef Name="location_tab_id" />
           </Key>
-          <Property Name="location_tab_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="is_active" Type="Int32" />
+          <Property Name="location_tab_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="is_active" Type="int" />
         </EntityType>
         <EntityType Name="tb_order">
           <Key>
             <PropertyRef Name="order_id" />
           </Key>
-          <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="order_at" Type="DateTime" />
-          <Property Name="order_type_id" Type="Int32" />
-          <Property Name="employee_id" Type="Int32" />
-          <Property Name="table" Type="Int32" Nullable="false" />
-          <Property Name="order_status_id" Type="Int32" />
-          <Property Name="payment_id" Type="Int32" />
-          <Property Name="customer_id" Type="Int32" />
-          <NavigationProperty Name="tb_customer" Relationship="Self.FK_customer_order" FromRole="tb_order" ToRole="tb_customer" />
-          <NavigationProperty Name="tb_employee" Relationship="Self.FK_employy_order" FromRole="tb_order" ToRole="tb_employee" />
-          <NavigationProperty Name="tb_order_detail" Relationship="Self.FK_order" FromRole="tb_order" ToRole="tb_order_detail" />
-          <NavigationProperty Name="tb_order_status" Relationship="Self.FK_orderstatus_order" FromRole="tb_order" ToRole="tb_order_status" />
-          <NavigationProperty Name="tb_order_type" Relationship="Self.FK_ordertype_order" FromRole="tb_order" ToRole="tb_order_type" />
-          <NavigationProperty Name="tb_payment_type" Relationship="Self.FK_payment_order" FromRole="tb_order" ToRole="tb_payment_type" />
-          <Property Name="is_active" Type="Int32" Nullable="false" />
+          <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_at" Type="datetime" Precision="0" />
+          <Property Name="order_type_id" Type="int" />
+          <Property Name="employee_id" Type="int" />
+          <Property Name="table" Type="int" Nullable="false" />
+          <Property Name="order_status_id" Type="int" />
+          <Property Name="payment_id" Type="int" />
+          <Property Name="customer_id" Type="int" />
+          <Property Name="is_active" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_order_detail">
           <Key>
             <PropertyRef Name="order_detail_id" />
           </Key>
-          <Property Name="order_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_id" Type="Int32" />
-          <Property Name="popup_item_id" Type="Int32" />
-          <Property Name="order_id" Type="Int32" Nullable="false" />
-          <Property Name="product_qty" Type="Int32" />
-          <Property Name="amount" Type="Single" />
-          <Property Name="comment" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
-          <Property Name="cook_status" Type="Int32" />
-          <NavigationProperty Name="tb_order" Relationship="Self.FK_order" FromRole="tb_order_detail" ToRole="tb_order" />
-          <NavigationProperty Name="tb_popup_item" Relationship="Self.FK_popupitem_orderdetail" FromRole="tb_order_detail" ToRole="tb_popup_item" />
-          <NavigationProperty Name="tb_product" Relationship="Self.FK_product_orderdetail" FromRole="tb_order_detail" ToRole="tb_product" />
-          <Property Name="is_active" Type="Int32" />
+          <Property Name="order_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="popup_item_id" Type="int" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="product_qty" Type="int" />
+          <Property Name="amount" Type="float" />
+          <Property Name="comment" Type="mediumtext" />
+          <Property Name="cook_status" Type="int" />
+          <Property Name="is_active" Type="int" />
         </EntityType>
         <EntityType Name="tb_order_status">
           <Key>
             <PropertyRef Name="order_status_id" />
           </Key>
-          <Property Name="order_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tb_order" Relationship="Self.FK_orderstatus_order" FromRole="tb_order_status" ToRole="tb_order" />
+          <Property Name="order_status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_order_type">
           <Key>
             <PropertyRef Name="tb_order_type_id" />
           </Key>
-          <Property Name="tb_order_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tb_order" Relationship="Self.FK_ordertype_order" FromRole="tb_order_type" ToRole="tb_order" />
+          <Property Name="tb_order_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_payment_type">
           <Key>
             <PropertyRef Name="payment_id" />
           </Key>
-          <Property Name="payment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tb_order" Relationship="Self.FK_payment_order" FromRole="tb_payment_type" ToRole="tb_order" />
+          <Property Name="payment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_popup">
           <Key>
             <PropertyRef Name="popup_id" />
           </Key>
-          <Property Name="popup_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tb_popup_item" Relationship="Self.FK_popup_popupitem" FromRole="tb_popup" ToRole="tb_popup_item" />
-          <NavigationProperty Name="tb_product" Relationship="Self.FK_popup_product" FromRole="tb_popup" ToRole="tb_product" />
-          <Property Name="is_active" Type="Int32" Nullable="false" />
+          <Property Name="popup_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="is_active" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_popup_item">
           <Key>
             <PropertyRef Name="popup_item_id" />
           </Key>
-          <Property Name="popup_item_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="popup_id" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Single" />
-          <Property Name="image_path" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_order_detail" Relationship="Self.FK_popupitem_orderdetail" FromRole="tb_popup_item" ToRole="tb_order_detail" />
-          <NavigationProperty Name="tb_popup" Relationship="Self.FK_popup_popupitem" FromRole="tb_popup_item" ToRole="tb_popup" />
+          <Property Name="popup_item_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="popup_id" Type="int" Nullable="false" />
+          <Property Name="price" Type="float" />
+          <Property Name="image_path" Type="longtext" />
         </EntityType>
         <EntityType Name="tb_printer">
           <Key>
             <PropertyRef Name="printer_id" />
           </Key>
-          <Property Name="printer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="printer_ip" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="printer_port" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="is_active" Type="Int32" />
-          <NavigationProperty Name="tb_printer_product" Relationship="Self.FK_printer_printerproduct" FromRole="tb_printer" ToRole="tb_printer_product" />
-          <NavigationProperty Name="tb_printer_log" Relationship="Self.FK_printerlog_printer" FromRole="tb_printer" ToRole="tb_printer_log" />
+          <Property Name="printer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="printer_ip" Type="varchar" MaxLength="45" />
+          <Property Name="printer_port" Type="varchar" MaxLength="45" />
+          <Property Name="is_active" Type="int" />
         </EntityType>
         <EntityType Name="tb_printer_log">
           <Key>
             <PropertyRef Name="printer_log_id" />
           </Key>
-          <Property Name="printer_log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="printer_id" Type="Int32" Nullable="false" />
-          <Property Name="print_dt" Type="DateTime" Nullable="false" />
-          <Property Name="printer_detail" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tb_printer" Relationship="Self.FK_printerlog_printer" FromRole="tb_printer_log" ToRole="tb_printer" />
+          <Property Name="printer_log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="printer_id" Type="int" Nullable="false" />
+          <Property Name="print_dt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="printer_detail" Type="longtext" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_printer_product">
           <Key>
             <PropertyRef Name="printer_product_id" />
           </Key>
-          <Property Name="printer_product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_id" Type="Int32" Nullable="false" />
-          <Property Name="printer_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tb_printer" Relationship="Self.FK_printer_printerproduct" FromRole="tb_printer_product" ToRole="tb_printer" />
-          <NavigationProperty Name="tb_product" Relationship="Self.FK_product_printerproudct" FromRole="tb_printer_product" ToRole="tb_product" />
-          <Property Name="is_active" Type="Int32" />
+          <Property Name="printer_product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="printer_id" Type="int" Nullable="false" />
+          <Property Name="is_active" Type="int" />
         </EntityType>
         <EntityType Name="tb_product">
           <Key>
             <PropertyRef Name="product_id" />
           </Key>
-          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="short_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="avaliable" Type="Int32" />
-          <Property Name="product_ingredient_id" Type="Int32" />
-          <Property Name="popup_id" Type="Int32" />
-          <Property Name="stock" Type="Int32" />
-          <Property Name="price" Type="Single" />
-          <Property Name="image_path" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="type_food_id" Type="Int32" />
-          <NavigationProperty Name="tb_order_detail" Relationship="Self.FK_product_orderdetail" FromRole="tb_product" ToRole="tb_order_detail" />
-          <NavigationProperty Name="tb_popup" Relationship="Self.FK_popup_product" FromRole="tb_product" ToRole="tb_popup" />
-          <NavigationProperty Name="tb_printer_product" Relationship="Self.FK_product_printerproudct" FromRole="tb_product" ToRole="tb_printer_product" />
-          <Property Name="is_active" Type="Int32" />
+          <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="short_name" Type="varchar" MaxLength="45" />
+          <Property Name="description" Type="longtext" />
+          <Property Name="avaliable" Type="int" />
+          <Property Name="product_ingredient_id" Type="int" />
+          <Property Name="popup_id" Type="int" />
+          <Property Name="stock" Type="int" />
+          <Property Name="price" Type="float" />
+          <Property Name="image_path" Type="longtext" />
+          <Property Name="type_food_id" Type="int" />
+          <Property Name="is_active" Type="int" />
         </EntityType>
         <EntityType Name="tb_product_ingredient">
           <Key>
             <PropertyRef Name="product_ingredient_id" />
           </Key>
-          <Property Name="product_ingredient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_id" Type="Int32" Nullable="false" />
-          <Property Name="ingredient_id" Type="Int32" Nullable="false" />
+          <Property Name="product_ingredient_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="ingredient_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_section">
           <Key>
             <PropertyRef Name="section_id" />
           </Key>
-          <Property Name="section_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="is_active" Type="Int32" />
+          <Property Name="section_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="is_active" Type="int" />
         </EntityType>
         <EntityType Name="tb_setting">
           <Key>
             <PropertyRef Name="setting_id" />
           </Key>
-          <Property Name="setting_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="key" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="value" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="setting_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="key" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="tb_table_section">
           <Key>
             <PropertyRef Name="table_section_id" />
           </Key>
-          <Property Name="table_section_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="u_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="section_id" Type="Int32" />
-          <Property Name="margin_top" Type="Single" />
-          <Property Name="margin_bottom" Type="Single" />
-          <Property Name="margin_right" Type="Single" />
-          <Property Name="margin_left" Type="Single" />
-          <Property Name="height" Type="Single" />
-          <Property Name="width" Type="Single" />
-          <Property Name="is_active" Type="Int32" />
+          <Property Name="table_section_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="u_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="section_id" Type="int" />
+          <Property Name="margin_top" Type="float" />
+          <Property Name="margin_bottom" Type="float" />
+          <Property Name="margin_right" Type="float" />
+          <Property Name="margin_left" Type="float" />
+          <Property Name="height" Type="float" />
+          <Property Name="width" Type="float" />
+          <Property Name="is_active" Type="int" />
         </EntityType>
         <EntityType Name="tb_type_food">
           <Key>
             <PropertyRef Name="type_food_id" />
           </Key>
-          <Property Name="type_food_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type_food_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <Association Name="FK_customer_order">
           <End Role="tb_customer" Type="Self.tb_customer" Multiplicity="0..1" />
@@ -319,18 +283,6 @@
             </Principal>
             <Dependent Role="tb_employee">
               <PropertyRef Name="level_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_status_employee">
-          <End Role="tb_employee_status" Type="Self.tb_employee_status" Multiplicity="0..1" />
-          <End Role="tb_employee" Type="Self.tb_employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_employee_status">
-              <PropertyRef Name="tb_status_id" />
-            </Principal>
-            <Dependent Role="tb_employee">
-              <PropertyRef Name="status_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -382,30 +334,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_popupitem_orderdetail">
-          <End Role="tb_popup_item" Type="Self.tb_popup_item" Multiplicity="0..1" />
-          <End Role="tb_order_detail" Type="Self.tb_order_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_popup_item">
-              <PropertyRef Name="popup_item_id" />
-            </Principal>
-            <Dependent Role="tb_order_detail">
-              <PropertyRef Name="popup_item_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_product_orderdetail">
-          <End Role="tb_product" Type="Self.tb_product" Multiplicity="0..1" />
-          <End Role="tb_order_detail" Type="Self.tb_order_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="tb_order_detail">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_popup_popupitem">
           <End Role="tb_popup" Type="Self.tb_popup" Multiplicity="1" />
           <End Role="tb_popup_item" Type="Self.tb_popup_item" Multiplicity="*" />
@@ -427,6 +355,18 @@
             </Principal>
             <Dependent Role="tb_product">
               <PropertyRef Name="popup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_popupitem_orderdetail">
+          <End Role="tb_popup_item" Type="Self.tb_popup_item" Multiplicity="0..1" />
+          <End Role="tb_order_detail" Type="Self.tb_order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_popup_item">
+              <PropertyRef Name="popup_item_id" />
+            </Principal>
+            <Dependent Role="tb_order_detail">
+              <PropertyRef Name="popup_item_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -454,6 +394,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_product_orderdetail">
+          <End Role="tb_product" Type="Self.tb_product" Multiplicity="0..1" />
+          <End Role="tb_order_detail" Type="Self.tb_order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="tb_order_detail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_product_printerproudct">
           <End Role="tb_product" Type="Self.tb_product" Multiplicity="1" />
           <End Role="tb_printer_product" Type="Self.tb_printer_product" Multiplicity="*" />
@@ -466,32 +418,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SmoothDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tb_cook_status" EntityType="Self.tb_cook_status" />
-          <EntitySet Name="tb_customer" EntityType="Self.tb_customer" />
-          <EntitySet Name="tb_employee" EntityType="Self.tb_employee" />
-          <EntitySet Name="tb_employee_status" EntityType="Self.tb_employee_status" />
-          <EntitySet Name="tb_employee_time_sheet" EntityType="Self.tb_employee_time_sheet" />
-          <EntitySet Name="tb_ingredient" EntityType="Self.tb_ingredient" />
-          <EntitySet Name="tb_level" EntityType="Self.tb_level" />
-          <EntitySet Name="tb_location_menu" EntityType="Self.tb_location_menu" />
-          <EntitySet Name="tb_location_tab" EntityType="Self.tb_location_tab" />
-          <EntitySet Name="tb_order" EntityType="Self.tb_order" />
-          <EntitySet Name="tb_order_detail" EntityType="Self.tb_order_detail" />
-          <EntitySet Name="tb_order_status" EntityType="Self.tb_order_status" />
-          <EntitySet Name="tb_order_type" EntityType="Self.tb_order_type" />
-          <EntitySet Name="tb_payment_type" EntityType="Self.tb_payment_type" />
-          <EntitySet Name="tb_popup" EntityType="Self.tb_popup" />
-          <EntitySet Name="tb_popup_item" EntityType="Self.tb_popup_item" />
-          <EntitySet Name="tb_printer" EntityType="Self.tb_printer" />
-          <EntitySet Name="tb_printer_log" EntityType="Self.tb_printer_log" />
-          <EntitySet Name="tb_printer_product" EntityType="Self.tb_printer_product" />
-          <EntitySet Name="tb_product" EntityType="Self.tb_product" />
-          <EntitySet Name="tb_product_ingredient" EntityType="Self.tb_product_ingredient" />
-          <EntitySet Name="tb_section" EntityType="Self.tb_section" />
-          <EntitySet Name="tb_setting" EntityType="Self.tb_setting" />
-          <EntitySet Name="tb_table_section" EntityType="Self.tb_table_section" />
-          <EntitySet Name="tb_type_food" EntityType="Self.tb_type_food" />
+        <Association Name="FK_status_employee">
+          <End Role="tb_employee_status" Type="Self.tb_employee_status" Multiplicity="0..1" />
+          <End Role="tb_employee" Type="Self.tb_employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_employee_status">
+              <PropertyRef Name="tb_status_id" />
+            </Principal>
+            <Dependent Role="tb_employee">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmoothDBModelStoreContainer">
+          <EntitySet Name="tb_cook_status" EntityType="Self.tb_cook_status" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_customer" EntityType="Self.tb_customer" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_employee" EntityType="Self.tb_employee" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_employee_status" EntityType="Self.tb_employee_status" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_employee_time_sheet" EntityType="Self.tb_employee_time_sheet" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_ingredient" EntityType="Self.tb_ingredient" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_level" EntityType="Self.tb_level" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_location_menu" EntityType="Self.tb_location_menu" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_location_tab" EntityType="Self.tb_location_tab" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_order" EntityType="Self.tb_order" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_order_detail" EntityType="Self.tb_order_detail" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_order_status" EntityType="Self.tb_order_status" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_order_type" EntityType="Self.tb_order_type" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_payment_type" EntityType="Self.tb_payment_type" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_popup" EntityType="Self.tb_popup" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_popup_item" EntityType="Self.tb_popup_item" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_printer" EntityType="Self.tb_printer" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_printer_log" EntityType="Self.tb_printer_log" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_printer_product" EntityType="Self.tb_printer_product" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_product" EntityType="Self.tb_product" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_product_ingredient" EntityType="Self.tb_product_ingredient" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_section" EntityType="Self.tb_section" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_setting" EntityType="Self.tb_setting" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_table_section" EntityType="Self.tb_table_section" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_type_food" EntityType="Self.tb_type_food" Schema="smoothdb" store:Type="Tables" />
           <AssociationSet Name="FK_customer_order" Association="Self.FK_customer_order">
             <End Role="tb_customer" EntitySet="tb_customer" />
             <End Role="tb_order" EntitySet="tb_order" />
@@ -502,10 +466,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_level_employee" Association="Self.FK_level_employee">
             <End Role="tb_level" EntitySet="tb_level" />
-            <End Role="tb_employee" EntitySet="tb_employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_status_employee" Association="Self.FK_status_employee">
-            <End Role="tb_employee_status" EntitySet="tb_employee_status" />
             <End Role="tb_employee" EntitySet="tb_employee" />
           </AssociationSet>
           <AssociationSet Name="FK_order" Association="Self.FK_order">
@@ -524,14 +484,6 @@
             <End Role="tb_payment_type" EntitySet="tb_payment_type" />
             <End Role="tb_order" EntitySet="tb_order" />
           </AssociationSet>
-          <AssociationSet Name="FK_popupitem_orderdetail" Association="Self.FK_popupitem_orderdetail">
-            <End Role="tb_popup_item" EntitySet="tb_popup_item" />
-            <End Role="tb_order_detail" EntitySet="tb_order_detail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_product_orderdetail" Association="Self.FK_product_orderdetail">
-            <End Role="tb_product" EntitySet="tb_product" />
-            <End Role="tb_order_detail" EntitySet="tb_order_detail" />
-          </AssociationSet>
           <AssociationSet Name="FK_popup_popupitem" Association="Self.FK_popup_popupitem">
             <End Role="tb_popup" EntitySet="tb_popup" />
             <End Role="tb_popup_item" EntitySet="tb_popup_item" />
@@ -539,6 +491,10 @@
           <AssociationSet Name="FK_popup_product" Association="Self.FK_popup_product">
             <End Role="tb_popup" EntitySet="tb_popup" />
             <End Role="tb_product" EntitySet="tb_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_popupitem_orderdetail" Association="Self.FK_popupitem_orderdetail">
+            <End Role="tb_popup_item" EntitySet="tb_popup_item" />
+            <End Role="tb_order_detail" EntitySet="tb_order_detail" />
           </AssociationSet>
           <AssociationSet Name="FK_printer_printerproduct" Association="Self.FK_printer_printerproduct">
             <End Role="tb_printer" EntitySet="tb_printer" />
@@ -548,17 +504,841 @@
             <End Role="tb_printer" EntitySet="tb_printer" />
             <End Role="tb_printer_log" EntitySet="tb_printer_log" />
           </AssociationSet>
+          <AssociationSet Name="FK_product_orderdetail" Association="Self.FK_product_orderdetail">
+            <End Role="tb_product" EntitySet="tb_product" />
+            <End Role="tb_order_detail" EntitySet="tb_order_detail" />
+          </AssociationSet>
           <AssociationSet Name="FK_product_printerproudct" Association="Self.FK_product_printerproudct">
             <End Role="tb_product" EntitySet="tb_product" />
             <End Role="tb_printer_product" EntitySet="tb_printer_product" />
           </AssociationSet>
+          <AssociationSet Name="FK_status_employee" Association="Self.FK_status_employee">
+            <End Role="tb_employee_status" EntitySet="tb_employee_status" />
+            <End Role="tb_employee" EntitySet="tb_employee" />
+          </AssociationSet>
         </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmoothDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SmoothDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_cook_status" EntityType="SmoothDBModel.tb_cook_status" />
+          <EntitySet Name="tb_customer" EntityType="SmoothDBModel.tb_customer" />
+          <EntitySet Name="tb_employee" EntityType="SmoothDBModel.tb_employee" />
+          <EntitySet Name="tb_employee_status" EntityType="SmoothDBModel.tb_employee_status" />
+          <EntitySet Name="tb_employee_time_sheet" EntityType="SmoothDBModel.tb_employee_time_sheet" />
+          <EntitySet Name="tb_ingredient" EntityType="SmoothDBModel.tb_ingredient" />
+          <EntitySet Name="tb_level" EntityType="SmoothDBModel.tb_level" />
+          <EntitySet Name="tb_location_menu" EntityType="SmoothDBModel.tb_location_menu" />
+          <EntitySet Name="tb_location_tab" EntityType="SmoothDBModel.tb_location_tab" />
+          <EntitySet Name="tb_order" EntityType="SmoothDBModel.tb_order" />
+          <EntitySet Name="tb_order_detail" EntityType="SmoothDBModel.tb_order_detail" />
+          <EntitySet Name="tb_order_status" EntityType="SmoothDBModel.tb_order_status" />
+          <EntitySet Name="tb_order_type" EntityType="SmoothDBModel.tb_order_type" />
+          <EntitySet Name="tb_payment_type" EntityType="SmoothDBModel.tb_payment_type" />
+          <EntitySet Name="tb_popup" EntityType="SmoothDBModel.tb_popup" />
+          <EntitySet Name="tb_popup_item" EntityType="SmoothDBModel.tb_popup_item" />
+          <EntitySet Name="tb_printer" EntityType="SmoothDBModel.tb_printer" />
+          <EntitySet Name="tb_printer_log" EntityType="SmoothDBModel.tb_printer_log" />
+          <EntitySet Name="tb_printer_product" EntityType="SmoothDBModel.tb_printer_product" />
+          <EntitySet Name="tb_product" EntityType="SmoothDBModel.tb_product" />
+          <EntitySet Name="tb_product_ingredient" EntityType="SmoothDBModel.tb_product_ingredient" />
+          <EntitySet Name="tb_section" EntityType="SmoothDBModel.tb_section" />
+          <EntitySet Name="tb_setting" EntityType="SmoothDBModel.tb_setting" />
+          <EntitySet Name="tb_table_section" EntityType="SmoothDBModel.tb_table_section" />
+          <EntitySet Name="tb_type_food" EntityType="SmoothDBModel.tb_type_food" />
+          <AssociationSet Name="FK_customer_order" Association="SmoothDBModel.FK_customer_order">
+            <End Role="tb_customer" EntitySet="tb_customer" />
+            <End Role="tb_order" EntitySet="tb_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employy_order" Association="SmoothDBModel.FK_employy_order">
+            <End Role="tb_employee" EntitySet="tb_employee" />
+            <End Role="tb_order" EntitySet="tb_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_level_employee" Association="SmoothDBModel.FK_level_employee">
+            <End Role="tb_level" EntitySet="tb_level" />
+            <End Role="tb_employee" EntitySet="tb_employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_status_employee" Association="SmoothDBModel.FK_status_employee">
+            <End Role="tb_employee_status" EntitySet="tb_employee_status" />
+            <End Role="tb_employee" EntitySet="tb_employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order" Association="SmoothDBModel.FK_order">
+            <End Role="tb_order" EntitySet="tb_order" />
+            <End Role="tb_order_detail" EntitySet="tb_order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderstatus_order" Association="SmoothDBModel.FK_orderstatus_order">
+            <End Role="tb_order_status" EntitySet="tb_order_status" />
+            <End Role="tb_order" EntitySet="tb_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ordertype_order" Association="SmoothDBModel.FK_ordertype_order">
+            <End Role="tb_order_type" EntitySet="tb_order_type" />
+            <End Role="tb_order" EntitySet="tb_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payment_order" Association="SmoothDBModel.FK_payment_order">
+            <End Role="tb_payment_type" EntitySet="tb_payment_type" />
+            <End Role="tb_order" EntitySet="tb_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_popupitem_orderdetail" Association="SmoothDBModel.FK_popupitem_orderdetail">
+            <End Role="tb_popup_item" EntitySet="tb_popup_item" />
+            <End Role="tb_order_detail" EntitySet="tb_order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_orderdetail" Association="SmoothDBModel.FK_product_orderdetail">
+            <End Role="tb_product" EntitySet="tb_product" />
+            <End Role="tb_order_detail" EntitySet="tb_order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_popup_popupitem" Association="SmoothDBModel.FK_popup_popupitem">
+            <End Role="tb_popup" EntitySet="tb_popup" />
+            <End Role="tb_popup_item" EntitySet="tb_popup_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_popup_product" Association="SmoothDBModel.FK_popup_product">
+            <End Role="tb_popup" EntitySet="tb_popup" />
+            <End Role="tb_product" EntitySet="tb_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_printer_printerproduct" Association="SmoothDBModel.FK_printer_printerproduct">
+            <End Role="tb_printer" EntitySet="tb_printer" />
+            <End Role="tb_printer_product" EntitySet="tb_printer_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_printerlog_printer" Association="SmoothDBModel.FK_printerlog_printer">
+            <End Role="tb_printer" EntitySet="tb_printer" />
+            <End Role="tb_printer_log" EntitySet="tb_printer_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_printerproudct" Association="SmoothDBModel.FK_product_printerproudct">
+            <End Role="tb_product" EntitySet="tb_product" />
+            <End Role="tb_printer_product" EntitySet="tb_printer_product" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tb_cook_status">
+          <Key>
+            <PropertyRef Name="cook_status_id" />
+          </Key>
+          <Property Name="cook_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_customer">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="total_order" Type="Int32" />
+          <Property Name="last_active" Type="DateTime" />
+          <Property Name="dob" Type="DateTime" />
+          <Property Name="card" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_order" Relationship="SmoothDBModel.FK_customer_order" FromRole="tb_customer" ToRole="tb_order" />
+        </EntityType>
+        <EntityType Name="tb_employee">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="level_id" Type="Int32" />
+          <Property Name="status_id" Type="Int32" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="nick_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_order" Relationship="SmoothDBModel.FK_employy_order" FromRole="tb_employee" ToRole="tb_order" />
+          <NavigationProperty Name="tb_level" Relationship="SmoothDBModel.FK_level_employee" FromRole="tb_employee" ToRole="tb_level" />
+          <NavigationProperty Name="tb_employee_status" Relationship="SmoothDBModel.FK_status_employee" FromRole="tb_employee" ToRole="tb_employee_status" />
+        </EntityType>
+        <EntityType Name="tb_employee_status">
+          <Key>
+            <PropertyRef Name="tb_status_id" />
+          </Key>
+          <Property Name="tb_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_employee" Relationship="SmoothDBModel.FK_status_employee" FromRole="tb_employee_status" ToRole="tb_employee" />
+        </EntityType>
+        <EntityType Name="tb_employee_time_sheet">
+          <Key>
+            <PropertyRef Name="employee_time_sheet_id" />
+          </Key>
+          <Property Name="employee_time_sheet_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
+          <Property Name="clockin_time" Type="DateTime" />
+          <Property Name="clockout_time" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="tb_ingredient">
+          <Key>
+            <PropertyRef Name="ingredient_id" />
+          </Key>
+          <Property Name="ingredient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="image_path" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_level">
+          <Key>
+            <PropertyRef Name="level_id" />
+          </Key>
+          <Property Name="level_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_employee" Relationship="SmoothDBModel.FK_level_employee" FromRole="tb_level" ToRole="tb_employee" />
+        </EntityType>
+        <EntityType Name="tb_location_menu">
+          <Key>
+            <PropertyRef Name="tb_location_menu_id" />
+          </Key>
+          <Property Name="tb_location_menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="tb_location_tab_id" Type="Int32" />
+          <Property Name="column_no" Type="Int32" />
+          <Property Name="row_no" Type="Int32" />
+          <Property Name="is_active" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_location_tab">
+          <Key>
+            <PropertyRef Name="location_tab_id" />
+          </Key>
+          <Property Name="location_tab_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_order">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_at" Type="DateTime" />
+          <Property Name="order_type_id" Type="Int32" />
+          <Property Name="employee_id" Type="Int32" />
+          <Property Name="table" Type="Int32" Nullable="false" />
+          <Property Name="order_status_id" Type="Int32" />
+          <Property Name="payment_id" Type="Int32" />
+          <Property Name="customer_id" Type="Int32" />
+          <Property Name="is_active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_customer" Relationship="SmoothDBModel.FK_customer_order" FromRole="tb_order" ToRole="tb_customer" />
+          <NavigationProperty Name="tb_employee" Relationship="SmoothDBModel.FK_employy_order" FromRole="tb_order" ToRole="tb_employee" />
+          <NavigationProperty Name="tb_order_detail" Relationship="SmoothDBModel.FK_order" FromRole="tb_order" ToRole="tb_order_detail" />
+          <NavigationProperty Name="tb_order_status" Relationship="SmoothDBModel.FK_orderstatus_order" FromRole="tb_order" ToRole="tb_order_status" />
+          <NavigationProperty Name="tb_order_type" Relationship="SmoothDBModel.FK_ordertype_order" FromRole="tb_order" ToRole="tb_order_type" />
+          <NavigationProperty Name="tb_payment_type" Relationship="SmoothDBModel.FK_payment_order" FromRole="tb_order" ToRole="tb_payment_type" />
+        </EntityType>
+        <EntityType Name="tb_order_detail">
+          <Key>
+            <PropertyRef Name="order_detail_id" />
+          </Key>
+          <Property Name="order_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="popup_item_id" Type="Int32" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="product_qty" Type="Int32" />
+          <Property Name="amount" Type="Single" />
+          <Property Name="comment" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="cook_status" Type="Int32" />
+          <Property Name="is_active" Type="Int32" />
+          <NavigationProperty Name="tb_order" Relationship="SmoothDBModel.FK_order" FromRole="tb_order_detail" ToRole="tb_order" />
+          <NavigationProperty Name="tb_popup_item" Relationship="SmoothDBModel.FK_popupitem_orderdetail" FromRole="tb_order_detail" ToRole="tb_popup_item" />
+          <NavigationProperty Name="tb_product" Relationship="SmoothDBModel.FK_product_orderdetail" FromRole="tb_order_detail" ToRole="tb_product" />
+        </EntityType>
+        <EntityType Name="tb_order_status">
+          <Key>
+            <PropertyRef Name="order_status_id" />
+          </Key>
+          <Property Name="order_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_order" Relationship="SmoothDBModel.FK_orderstatus_order" FromRole="tb_order_status" ToRole="tb_order" />
+        </EntityType>
+        <EntityType Name="tb_order_type">
+          <Key>
+            <PropertyRef Name="tb_order_type_id" />
+          </Key>
+          <Property Name="tb_order_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_order" Relationship="SmoothDBModel.FK_ordertype_order" FromRole="tb_order_type" ToRole="tb_order" />
+        </EntityType>
+        <EntityType Name="tb_payment_type">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_order" Relationship="SmoothDBModel.FK_payment_order" FromRole="tb_payment_type" ToRole="tb_order" />
+        </EntityType>
+        <EntityType Name="tb_popup">
+          <Key>
+            <PropertyRef Name="popup_id" />
+          </Key>
+          <Property Name="popup_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_popup_item" Relationship="SmoothDBModel.FK_popup_popupitem" FromRole="tb_popup" ToRole="tb_popup_item" />
+          <NavigationProperty Name="tb_product" Relationship="SmoothDBModel.FK_popup_product" FromRole="tb_popup" ToRole="tb_product" />
+        </EntityType>
+        <EntityType Name="tb_popup_item">
+          <Key>
+            <PropertyRef Name="popup_item_id" />
+          </Key>
+          <Property Name="popup_item_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="popup_id" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Single" />
+          <Property Name="image_path" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_order_detail" Relationship="SmoothDBModel.FK_popupitem_orderdetail" FromRole="tb_popup_item" ToRole="tb_order_detail" />
+          <NavigationProperty Name="tb_popup" Relationship="SmoothDBModel.FK_popup_popupitem" FromRole="tb_popup_item" ToRole="tb_popup" />
+        </EntityType>
+        <EntityType Name="tb_printer">
+          <Key>
+            <PropertyRef Name="printer_id" />
+          </Key>
+          <Property Name="printer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="printer_ip" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="printer_port" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Int32" />
+          <NavigationProperty Name="tb_printer_product" Relationship="SmoothDBModel.FK_printer_printerproduct" FromRole="tb_printer" ToRole="tb_printer_product" />
+          <NavigationProperty Name="tb_printer_log" Relationship="SmoothDBModel.FK_printerlog_printer" FromRole="tb_printer" ToRole="tb_printer_log" />
+        </EntityType>
+        <EntityType Name="tb_printer_log">
+          <Key>
+            <PropertyRef Name="printer_log_id" />
+          </Key>
+          <Property Name="printer_log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="printer_id" Type="Int32" Nullable="false" />
+          <Property Name="print_dt" Type="DateTime" Nullable="false" />
+          <Property Name="printer_detail" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_printer" Relationship="SmoothDBModel.FK_printerlog_printer" FromRole="tb_printer_log" ToRole="tb_printer" />
+        </EntityType>
+        <EntityType Name="tb_printer_product">
+          <Key>
+            <PropertyRef Name="printer_product_id" />
+          </Key>
+          <Property Name="printer_product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="printer_id" Type="Int32" Nullable="false" />
+          <Property Name="is_active" Type="Int32" />
+          <NavigationProperty Name="tb_printer" Relationship="SmoothDBModel.FK_printer_printerproduct" FromRole="tb_printer_product" ToRole="tb_printer" />
+          <NavigationProperty Name="tb_product" Relationship="SmoothDBModel.FK_product_printerproudct" FromRole="tb_printer_product" ToRole="tb_product" />
+        </EntityType>
+        <EntityType Name="tb_product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="short_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="avaliable" Type="Int32" />
+          <Property Name="product_ingredient_id" Type="Int32" />
+          <Property Name="popup_id" Type="Int32" />
+          <Property Name="stock" Type="Int32" />
+          <Property Name="price" Type="Single" />
+          <Property Name="image_path" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="type_food_id" Type="Int32" />
+          <Property Name="is_active" Type="Int32" />
+          <NavigationProperty Name="tb_order_detail" Relationship="SmoothDBModel.FK_product_orderdetail" FromRole="tb_product" ToRole="tb_order_detail" />
+          <NavigationProperty Name="tb_popup" Relationship="SmoothDBModel.FK_popup_product" FromRole="tb_product" ToRole="tb_popup" />
+          <NavigationProperty Name="tb_printer_product" Relationship="SmoothDBModel.FK_product_printerproudct" FromRole="tb_product" ToRole="tb_printer_product" />
+        </EntityType>
+        <EntityType Name="tb_product_ingredient">
+          <Key>
+            <PropertyRef Name="product_ingredient_id" />
+          </Key>
+          <Property Name="product_ingredient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="ingredient_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_section">
+          <Key>
+            <PropertyRef Name="section_id" />
+          </Key>
+          <Property Name="section_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_setting">
+          <Key>
+            <PropertyRef Name="setting_id" />
+          </Key>
+          <Property Name="setting_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="key" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="value" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_table_section">
+          <Key>
+            <PropertyRef Name="table_section_id" />
+          </Key>
+          <Property Name="table_section_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="u_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="section_id" Type="Int32" />
+          <Property Name="margin_top" Type="Single" />
+          <Property Name="margin_bottom" Type="Single" />
+          <Property Name="margin_right" Type="Single" />
+          <Property Name="margin_left" Type="Single" />
+          <Property Name="height" Type="Single" />
+          <Property Name="width" Type="Single" />
+          <Property Name="is_active" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_type_food">
+          <Key>
+            <PropertyRef Name="type_food_id" />
+          </Key>
+          <Property Name="type_food_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_customer_order">
+          <End Type="SmoothDBModel.tb_customer" Role="tb_customer" Multiplicity="0..1" />
+          <End Type="SmoothDBModel.tb_order" Role="tb_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="tb_order">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employy_order">
+          <End Type="SmoothDBModel.tb_employee" Role="tb_employee" Multiplicity="0..1" />
+          <End Type="SmoothDBModel.tb_order" Role="tb_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_employee">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="tb_order">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_level_employee">
+          <End Type="SmoothDBModel.tb_level" Role="tb_level" Multiplicity="0..1" />
+          <End Type="SmoothDBModel.tb_employee" Role="tb_employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_level">
+              <PropertyRef Name="level_id" />
+            </Principal>
+            <Dependent Role="tb_employee">
+              <PropertyRef Name="level_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_status_employee">
+          <End Type="SmoothDBModel.tb_employee_status" Role="tb_employee_status" Multiplicity="0..1" />
+          <End Type="SmoothDBModel.tb_employee" Role="tb_employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_employee_status">
+              <PropertyRef Name="tb_status_id" />
+            </Principal>
+            <Dependent Role="tb_employee">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order">
+          <End Type="SmoothDBModel.tb_order" Role="tb_order" Multiplicity="1" />
+          <End Type="SmoothDBModel.tb_order_detail" Role="tb_order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_order">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="tb_order_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orderstatus_order">
+          <End Type="SmoothDBModel.tb_order_status" Role="tb_order_status" Multiplicity="0..1" />
+          <End Type="SmoothDBModel.tb_order" Role="tb_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_order_status">
+              <PropertyRef Name="order_status_id" />
+            </Principal>
+            <Dependent Role="tb_order">
+              <PropertyRef Name="order_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ordertype_order">
+          <End Type="SmoothDBModel.tb_order_type" Role="tb_order_type" Multiplicity="0..1" />
+          <End Type="SmoothDBModel.tb_order" Role="tb_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_order_type">
+              <PropertyRef Name="tb_order_type_id" />
+            </Principal>
+            <Dependent Role="tb_order">
+              <PropertyRef Name="order_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payment_order">
+          <End Type="SmoothDBModel.tb_payment_type" Role="tb_payment_type" Multiplicity="0..1" />
+          <End Type="SmoothDBModel.tb_order" Role="tb_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_payment_type">
+              <PropertyRef Name="payment_id" />
+            </Principal>
+            <Dependent Role="tb_order">
+              <PropertyRef Name="payment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_popupitem_orderdetail">
+          <End Type="SmoothDBModel.tb_popup_item" Role="tb_popup_item" Multiplicity="0..1" />
+          <End Type="SmoothDBModel.tb_order_detail" Role="tb_order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_popup_item">
+              <PropertyRef Name="popup_item_id" />
+            </Principal>
+            <Dependent Role="tb_order_detail">
+              <PropertyRef Name="popup_item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_orderdetail">
+          <End Type="SmoothDBModel.tb_product" Role="tb_product" Multiplicity="0..1" />
+          <End Type="SmoothDBModel.tb_order_detail" Role="tb_order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="tb_order_detail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_popup_popupitem">
+          <End Type="SmoothDBModel.tb_popup" Role="tb_popup" Multiplicity="1" />
+          <End Type="SmoothDBModel.tb_popup_item" Role="tb_popup_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_popup">
+              <PropertyRef Name="popup_id" />
+            </Principal>
+            <Dependent Role="tb_popup_item">
+              <PropertyRef Name="popup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_popup_product">
+          <End Type="SmoothDBModel.tb_popup" Role="tb_popup" Multiplicity="0..1" />
+          <End Type="SmoothDBModel.tb_product" Role="tb_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_popup">
+              <PropertyRef Name="popup_id" />
+            </Principal>
+            <Dependent Role="tb_product">
+              <PropertyRef Name="popup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_printer_printerproduct">
+          <End Type="SmoothDBModel.tb_printer" Role="tb_printer" Multiplicity="1" />
+          <End Type="SmoothDBModel.tb_printer_product" Role="tb_printer_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_printer">
+              <PropertyRef Name="printer_id" />
+            </Principal>
+            <Dependent Role="tb_printer_product">
+              <PropertyRef Name="printer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_printerlog_printer">
+          <End Type="SmoothDBModel.tb_printer" Role="tb_printer" Multiplicity="1" />
+          <End Type="SmoothDBModel.tb_printer_log" Role="tb_printer_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_printer">
+              <PropertyRef Name="printer_id" />
+            </Principal>
+            <Dependent Role="tb_printer_log">
+              <PropertyRef Name="printer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_printerproudct">
+          <End Type="SmoothDBModel.tb_product" Role="tb_product" Multiplicity="1" />
+          <End Type="SmoothDBModel.tb_printer_product" Role="tb_printer_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="tb_printer_product">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SmoothDBModelStoreContainer" CdmEntityContainer="SmoothDBEntities">
+          <EntitySetMapping Name="tb_cook_status">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_cook_status">
+              <MappingFragment StoreEntitySet="tb_cook_status">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cook_status_id" ColumnName="cook_status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_customer">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_customer">
+              <MappingFragment StoreEntitySet="tb_customer">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="card" ColumnName="card" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="last_active" ColumnName="last_active" />
+                <ScalarProperty Name="total_order" ColumnName="total_order" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_employee">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_employee">
+              <MappingFragment StoreEntitySet="tb_employee">
+                <ScalarProperty Name="nick_name" ColumnName="nick_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="level_id" ColumnName="level_id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_employee_status">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_employee_status">
+              <MappingFragment StoreEntitySet="tb_employee_status">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="tb_status_id" ColumnName="tb_status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_employee_time_sheet">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_employee_time_sheet">
+              <MappingFragment StoreEntitySet="tb_employee_time_sheet">
+                <ScalarProperty Name="clockout_time" ColumnName="clockout_time" />
+                <ScalarProperty Name="clockin_time" ColumnName="clockin_time" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="employee_time_sheet_id" ColumnName="employee_time_sheet_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ingredient">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_ingredient">
+              <MappingFragment StoreEntitySet="tb_ingredient">
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ingredient_id" ColumnName="ingredient_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_level">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_level">
+              <MappingFragment StoreEntitySet="tb_level">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="level_id" ColumnName="level_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_location_menu">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_location_menu">
+              <MappingFragment StoreEntitySet="tb_location_menu">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="row_no" ColumnName="row_no" />
+                <ScalarProperty Name="column_no" ColumnName="column_no" />
+                <ScalarProperty Name="tb_location_tab_id" ColumnName="tb_location_tab_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="tb_location_menu_id" ColumnName="tb_location_menu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_location_tab">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_location_tab">
+              <MappingFragment StoreEntitySet="tb_location_tab">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="location_tab_id" ColumnName="location_tab_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_order">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_order">
+              <MappingFragment StoreEntitySet="tb_order">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="order_status_id" ColumnName="order_status_id" />
+                <ScalarProperty Name="table" ColumnName="table" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="order_type_id" ColumnName="order_type_id" />
+                <ScalarProperty Name="order_at" ColumnName="order_at" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_order_detail">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_order_detail">
+              <MappingFragment StoreEntitySet="tb_order_detail">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="cook_status" ColumnName="cook_status" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="product_qty" ColumnName="product_qty" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="popup_item_id" ColumnName="popup_item_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="order_detail_id" ColumnName="order_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_order_status">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_order_status">
+              <MappingFragment StoreEntitySet="tb_order_status">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="order_status_id" ColumnName="order_status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_order_type">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_order_type">
+              <MappingFragment StoreEntitySet="tb_order_type">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="tb_order_type_id" ColumnName="tb_order_type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_payment_type">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_payment_type">
+              <MappingFragment StoreEntitySet="tb_payment_type">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_popup">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_popup">
+              <MappingFragment StoreEntitySet="tb_popup">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="popup_id" ColumnName="popup_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_popup_item">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_popup_item">
+              <MappingFragment StoreEntitySet="tb_popup_item">
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="popup_id" ColumnName="popup_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="popup_item_id" ColumnName="popup_item_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_printer">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_printer">
+              <MappingFragment StoreEntitySet="tb_printer">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="printer_port" ColumnName="printer_port" />
+                <ScalarProperty Name="printer_ip" ColumnName="printer_ip" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="printer_id" ColumnName="printer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_printer_log">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_printer_log">
+              <MappingFragment StoreEntitySet="tb_printer_log">
+                <ScalarProperty Name="printer_detail" ColumnName="printer_detail" />
+                <ScalarProperty Name="print_dt" ColumnName="print_dt" />
+                <ScalarProperty Name="printer_id" ColumnName="printer_id" />
+                <ScalarProperty Name="printer_log_id" ColumnName="printer_log_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_printer_product">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_printer_product">
+              <MappingFragment StoreEntitySet="tb_printer_product">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="printer_id" ColumnName="printer_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="printer_product_id" ColumnName="printer_product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_product">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_product">
+              <MappingFragment StoreEntitySet="tb_product">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="type_food_id" ColumnName="type_food_id" />
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="popup_id" ColumnName="popup_id" />
+                <ScalarProperty Name="product_ingredient_id" ColumnName="product_ingredient_id" />
+                <ScalarProperty Name="avaliable" ColumnName="avaliable" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="short_name" ColumnName="short_name" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_product_ingredient">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_product_ingredient">
+              <MappingFragment StoreEntitySet="tb_product_ingredient">
+                <ScalarProperty Name="ingredient_id" ColumnName="ingredient_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="product_ingredient_id" ColumnName="product_ingredient_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_section">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_section">
+              <MappingFragment StoreEntitySet="tb_section">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="section_id" ColumnName="section_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_setting">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_setting">
+              <MappingFragment StoreEntitySet="tb_setting">
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="setting_id" ColumnName="setting_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_table_section">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_table_section">
+              <MappingFragment StoreEntitySet="tb_table_section">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="margin_left" ColumnName="margin_left" />
+                <ScalarProperty Name="margin_right" ColumnName="margin_right" />
+                <ScalarProperty Name="margin_bottom" ColumnName="margin_bottom" />
+                <ScalarProperty Name="margin_top" ColumnName="margin_top" />
+                <ScalarProperty Name="section_id" ColumnName="section_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="u_name" ColumnName="u_name" />
+                <ScalarProperty Name="table_section_id" ColumnName="table_section_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_type_food">
+            <EntityTypeMapping TypeName="SmoothDBModel.tb_type_food">
+              <MappingFragment StoreEntitySet="tb_type_food">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type_food_id" ColumnName="type_food_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

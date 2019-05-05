@@ -84,12 +84,4 @@ namespace SmoothPOS
         }
 
     }
-
-    public enum EmployeeLevel
-    {
-        Admin,
-        Manage,
-        Staff,
-        Trainee
-    }
 }

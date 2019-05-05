@@ -11,7 +11,6 @@ namespace SmoothDataBaseControl
 {
     public class ProductDAO
     {
-        private MySqlConnection _conn;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(ProductDAO));
 

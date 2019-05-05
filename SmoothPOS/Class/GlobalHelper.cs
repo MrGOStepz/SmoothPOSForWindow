@@ -9,7 +9,6 @@ namespace SmoothPOS
     public static class GlobalHelper
     {
         public static EmployeeModel EmployeeDetail;
-        public static EmployeeLevel EmployeeLevel;
     }
 
     public enum ServiceStatus

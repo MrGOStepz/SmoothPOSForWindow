@@ -147,6 +147,37 @@ namespace SmoothDataBaseControl
             }
         }
 
+        public List<tb_order> GetListOfOrder(int Top)
+        {
+            try
+            {
+                using (var db = new SmoothDBEntities())
+                {
+                    var ds = (from c in db.tb_order
+                              where c.is_active == 1
+                              orderby c.order_id descending
+                              select c).Take(Top).ToList();
+
+                    // Assign to DataGridView
+                    if (ds.Count() > 0)
+                    {
+                        log.Info("SmoothDataLayer -- GetListSection Success");
+                        return ds;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Error("SmoothDataLayer => GetListOfOrder(): " + ex.Message);
+                return null;
+            }
+        }
+
         public DataTable GetListOfOrderByFilter(string Column, string Name)
         {
             try
