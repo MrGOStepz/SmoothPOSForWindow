@@ -39,7 +39,7 @@
                     <Button x:Name="btnTest"
                             Content="test"
                             HorizontalAlignment="Left"
-                            Margin="195,113,0,0"
+                            Margin="378,231,0,0"
                             VerticalAlignment="Top"
                             Width="75" 
                             MouseLeftButtonUp="Button_MouseLeftButtonUp"

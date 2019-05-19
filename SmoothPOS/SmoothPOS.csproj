@@ -89,23 +89,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConvertControlImageToBitmapImage.cs" />
-    <Compile Include="ItemOrderControl.xaml.cs">
+    <Compile Include="UserControl\ItemOrderControl.xaml.cs">
       <DependentUpon>ItemOrderControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modals\LocationMenuModel.cs" />
     <Compile Include="Modals\PrinterModel.cs" />
     <Compile Include="Modals\ReportModel.cs" />
     <Compile Include="Modals\TableModel.cs" />
-    <Compile Include="OrderComment.xaml.cs">
+    <Compile Include="Forms\OrderComment.xaml.cs">
       <DependentUpon>OrderComment.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrderCommentDetail.cs" />
     <Compile Include="PrinterPOS.cs" />
-    <Compile Include="TableDialog.xaml.cs">
+    <Compile Include="Forms\TableDialog.xaml.cs">
       <DependentUpon>TableDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="TableSection.cs" />
-    <Compile Include="TableSettingControl.xaml.cs">
+    <Compile Include="UserControl\TableSettingControl.xaml.cs">
       <DependentUpon>TableSettingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddPopupControl.xaml.cs">
@@ -114,14 +114,14 @@
     <Compile Include="UserControl\AddProductControl.xaml.cs">
       <DependentUpon>AddProductControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BackOfficeForm.xaml.cs">
+    <Compile Include="Forms\BackOfficeForm.xaml.cs">
       <DependentUpon>BackOfficeForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\ConvertDataTable.cs" />
     <Compile Include="DatabaseHandle.cs" />
     <Compile Include="Class\GlobalHelper.cs" />
     <Compile Include="IDatabase.cs" />
-    <Compile Include="ItemDetailControl.xaml.cs">
+    <Compile Include="UserControl\ItemDetailControl.xaml.cs">
       <DependentUpon>ItemDetailControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modals\EmployeeModel.cs" />
@@ -141,27 +141,27 @@
     <Compile Include="UserControl\PayUserControl.xaml.cs">
       <DependentUpon>PayUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProductCRUDForm.xaml.cs">
+    <Compile Include="Forms\ProductCRUDForm.xaml.cs">
       <DependentUpon>ProductCRUDForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Setting.cs" />
-    <Compile Include="SettingForm.xaml.cs">
+    <Compile Include="Forms\SettingForm.xaml.cs">
       <DependentUpon>SettingForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\UserStatic.cs" />
-    <Page Include="ItemOrderControl.xaml">
+    <Page Include="UserControl\ItemOrderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OrderComment.xaml">
+    <Page Include="Forms\OrderComment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TableDialog.xaml">
+    <Page Include="Forms\TableDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TableSettingControl.xaml">
+    <Page Include="UserControl\TableSettingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,15 +173,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BackOfficeForm.xaml">
+    <Page Include="Forms\BackOfficeForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ItemDetailControl.xaml">
+    <Page Include="UserControl\ItemDetailControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginForm.xaml">
+    <Page Include="Forms\LoginForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,7 +201,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SmoothPOS.xaml">
+    <Page Include="Forms\SmoothPOS.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -210,18 +210,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Layout.cs" />
-    <Compile Include="LoginForm.xaml.cs">
+    <Compile Include="Forms\LoginForm.xaml.cs">
       <DependentUpon>LoginForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SmoothPOS.xaml.cs">
+    <Compile Include="Forms\SmoothPOS.xaml.cs">
       <DependentUpon>SmoothPOS.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ProductCRUDForm.xaml">
+    <Page Include="Forms\ProductCRUDForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingForm.xaml">
+    <Page Include="Forms\SettingForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

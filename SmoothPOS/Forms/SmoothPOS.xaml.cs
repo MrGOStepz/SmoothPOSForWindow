@@ -46,9 +46,7 @@ namespace SmoothPOS
 
                 LoginForm loginForm = new LoginForm();
                 loginForm.ShowDialog();
-                
-
-                
+                            
                 //Set UserControl Size
                 TableControl tbControl = new TableControl();
                 tbControl.Height = _UIProperies.ActualHeight;

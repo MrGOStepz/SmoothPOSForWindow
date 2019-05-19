@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,49 @@ namespace SmoothPOS
             btnTest2.PreviewMouseUp += Button_MouseUp;
             btnTest2.PreviewMouseLeftButtonDown += Button_MouseLeftButtonUp;
             btnTest2.PreviewMouseMove += Button_MouseMove;
+
+            GenerateTabItem();
+            GenerateTable();
+        }
+        
+        private void GenerateTabItem()
+        {
+            DatabaseHandle dbHandle = new DatabaseHandle();
+            string tabJson = dbHandle.GetListOfSection();
+            List<SectionModel> lstSectionModel = JsonConvert.DeserializeObject<List<SectionModel>>(tabJson);
+
+            for (int i = 0; i < lstSectionModel.Count; i++)
+            {
+                TabItem ti = new TabItem();
+                ti.Header = lstSectionModel[i].Name;
+                ti.Name = lstSectionModel[i].Name + lstSectionModel[i].SectionID.ToString();
+                ti.Width = 100;
+                ti.Height = 50;
+
+                Grid grid = new Grid();
+                grid.Name = "section" + lstSectionModel[i].Name;
+                grid.AllowDrop = true;
+
+                Button btnTest = new Button();
+                btnTest.Name = "btnTest3";
+                btnTest.Margin = new Thickness(195, 113, 0, 0);
+                btnTest.Width = 100;
+                btnTest.Height = 100;
+                grid.Children.Add(btnTest);
+                ti.Content = grid;
+
+                tcTable.Items.Insert (tcTable.Items.Count - 1, ti);
+            }
+            
+        }
+        
+        private void GenerateTable()
+        {
+            //DatabaseHandle databaseHandle = new DatabaseHandle();
+            //List<TableModal> lstTable = new List<TableModal>();
+
+            //string strJson = databaseHandle.GetListTable();
+            //lstTable = JsonConvert.DeserializeObject<List<TableModal>>(strJson);
         }
 
         private void BtnEditTable_Click(object sender, RoutedEventArgs e)
@@ -103,6 +147,9 @@ namespace SmoothPOS
 
             Button btnTemp = sender as Button;
             Console.WriteLine(btnTemp.Name);
+            TableModal tableModel = new TableModal();
+            tableModel.Name = btnTemp.Name;
+            
                      
         }
 
