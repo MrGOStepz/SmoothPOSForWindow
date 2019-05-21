@@ -13,10 +13,10 @@ namespace SmoothDataBaseControl
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SmoothDBEntities : DbContext
+    public partial class smoothdbEntities : DbContext
     {
-        public SmoothDBEntities()
-            : base("name=SmoothDBEntities")
+        public smoothdbEntities()
+            : base("name=smoothdbEntities")
         {
         }
     

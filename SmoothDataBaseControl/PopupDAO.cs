@@ -49,7 +49,7 @@ namespace SmoothDataBaseControl
                     return -1;
                 }
 
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_popup.Add(new tb_popup()
                     {
@@ -91,7 +91,7 @@ namespace SmoothDataBaseControl
                     return -1;
                 }
 
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_popup.Where(o => (o.popup_id == PopupID)).FirstOrDefault();
                     if (update != null)
@@ -164,7 +164,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_popup
                               where c.is_active == 1
@@ -194,7 +194,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_popup
                               where c.name.Contains(name)

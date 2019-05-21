@@ -17,7 +17,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_section.Add(new tb_section()
                     {
@@ -41,7 +41,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_table_section.Where(o => (o.section_id == SectionID)).FirstOrDefault();
                     if (update != null)
@@ -66,7 +66,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_section.Where(o => (o.section_id == SectionID)).FirstOrDefault();
                     if (update != null)
@@ -91,7 +91,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_section
                               select c).ToList();
@@ -121,7 +121,7 @@ namespace SmoothDataBaseControl
             try
             {
 
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_table_section.Add(new tb_table_section()
                     {
@@ -154,7 +154,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_table_section.Where(o => (o.table_section_id == TableID)).FirstOrDefault();
                     if (update != null)
@@ -183,7 +183,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_table_section.Where(o => (o.table_section_id == TableID)).FirstOrDefault();
                     if (update != null)
@@ -209,7 +209,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_table_section
                               select c).ToList();

@@ -26,7 +26,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_employee.Add(new tb_employee()
                     {
@@ -62,7 +62,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_employee.Where(o => (o.employee_id == EmployeeID)).FirstOrDefault();
                     if (update != null)
@@ -95,7 +95,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_employee
                               select c).ToList();
@@ -124,7 +124,7 @@ namespace SmoothDataBaseControl
             try
             {
                 tb_employee employee = new tb_employee();
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_employee
                               select c).FirstOrDefault();
@@ -149,7 +149,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_employee.Where(o => (o.employee_id == employeeID)).FirstOrDefault();
                     if (update != null)
@@ -174,7 +174,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_employee
                               where c.employee_id == employeeID

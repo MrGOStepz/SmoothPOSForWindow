@@ -18,7 +18,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_product.Add(new tb_product()
                     {
@@ -48,7 +48,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_product.Where(o => (o.product_id == ProductID)).FirstOrDefault();
                     if (update != null)
@@ -83,7 +83,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_product.Where(o => (o.product_id == ProductID)).FirstOrDefault();
                     if (update != null)
@@ -108,7 +108,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_product
                               select c).ToList();
@@ -137,7 +137,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_product
                               where c.name == Name

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ServiceProcess;
+using Newtonsoft.Json;
 
 namespace SmoothPOS
 {
@@ -27,6 +28,7 @@ namespace SmoothPOS
         public MainWindow()
         {
             InitializeComponent();
+            InitializeGlobalHelper();
             lbTime.Content = DateTime.Now.ToLongTimeString();
             Loaded += MainWindow_Loaded;
             _UIProperies = (Border)mainPanel.Children
@@ -65,8 +67,15 @@ namespace SmoothPOS
                 //TODO Exception Service
                 MessageBox.Show(ex.Message);
             }
-
-
+        }
+        
+        private void InitializeGlobalHelper()
+        {
+            DatabaseHandle dbHandle = new DatabaseHandle();
+            GlobalHelper.SectionDetail = JsonConvert.DeserializeObject<List<SectionModel>>(dbHandle.GetListOfSection());
+            GlobalHelper.TableDetail = JsonConvert.DeserializeObject<List<TableModal>>(dbHandle.GetListTable());
+            GlobalHelper.LocationMenuDetail = JsonConvert.DeserializeObject<List<LocationMenuModel>>(dbHandle.GetListLocationMenu());
+            GlobalHelper.LocationTabDetail = JsonConvert.DeserializeObject<List<LocationTabModel>>(dbHandle.GetListOfLocationTab());
         }
 
         private ServiceStatus DatabaseServiceStatus(string serviceName)

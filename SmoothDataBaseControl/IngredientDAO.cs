@@ -20,7 +20,7 @@ namespace SmoothDataBaseControl
 
                 try
                 {
-                    using (var db = new SmoothDBEntities())
+                    using (var db = new smoothdbEntities())
                     {
                         var ds = db.tb_ingredient.Add(new tb_ingredient()
                         {
@@ -50,7 +50,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_ingredient.Where(o => (o.ingredient_id == IngredientID)).FirstOrDefault();
                     if (update != null)
@@ -75,7 +75,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var del = db.tb_ingredient.Where(o => (o.ingredient_id == IngredientID)).FirstOrDefault();
                     if (del != null)
@@ -100,7 +100,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_ingredient
                               select c).ToList();
@@ -129,7 +129,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_ingredient
                               where c.name == Name

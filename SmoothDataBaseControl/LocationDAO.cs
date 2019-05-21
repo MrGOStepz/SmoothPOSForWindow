@@ -17,7 +17,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_location_tab.Add(new tb_location_tab()
                     {
@@ -41,7 +41,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_location_tab.Where(o => (o.location_tab_id == LocationTabID)).FirstOrDefault();
                     if (update != null)
@@ -65,7 +65,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_location_tab.Where(o => (o.location_tab_id == LocationTabID)).FirstOrDefault();
                     if (update != null)
@@ -90,7 +90,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_location_tab
                               select c).ToList();
@@ -118,7 +118,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     
                     var ds = db.tb_location_menu.Add(new tb_location_menu()
@@ -149,7 +149,7 @@ namespace SmoothDataBaseControl
             try
             {
 
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_location_menu.Where(o => (o.tb_location_menu_id == LocationMenuID)).FirstOrDefault();
                     if (update != null)
@@ -176,7 +176,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_location_menu.Where(o => (o.tb_location_menu_id == LocationMenuID)).FirstOrDefault();
                     if (update != null)
@@ -201,7 +201,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_location_menu
                               select c).ToList();

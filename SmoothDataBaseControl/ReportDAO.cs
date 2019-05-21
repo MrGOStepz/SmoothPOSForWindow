@@ -34,7 +34,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_order.Add(new tb_order()
                     {
@@ -63,7 +63,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_order.Where(o => (o.order_id == OrderID)).FirstOrDefault();
                     if (update != null)
@@ -94,7 +94,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_order.Where(o => (o.order_id == OrderID)).FirstOrDefault();
                     if (update != null)
@@ -120,7 +120,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_order
                               where c.is_active == 1
@@ -151,7 +151,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_order
                               where c.is_active == 1
@@ -219,7 +219,7 @@ namespace SmoothDataBaseControl
             try
             {
 
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_order_detail.Add(new tb_order_detail()
                     {
@@ -249,7 +249,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_order_detail.Where(o => (o.order_id == OrderID)).Where(o=> (o.product_id == ProductID)).FirstOrDefault();
                     if (update != null)
@@ -275,7 +275,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_order_detail.Where(o => (o.order_detail_id == OrderDetailID)).FirstOrDefault();
                     if (update != null)
@@ -305,7 +305,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_order_detail.Where(o => (o.order_detail_id == OrderDetailID)).FirstOrDefault();
                     if (update != null)

@@ -35,7 +35,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_printer.Add(new tb_printer()
                     {
@@ -61,7 +61,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_printer.Where(o => (o.printer_id == PrinterID)).FirstOrDefault();
                     if (update != null)
@@ -86,7 +86,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_printer.Where(o => (o.printer_id == PrinterID)).FirstOrDefault();
                     if (update != null)
@@ -111,7 +111,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_printer
                               where c.is_active == 1
@@ -142,7 +142,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_printer_product.Add(new tb_printer_product()
                     {
@@ -167,7 +167,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var update = db.tb_printer_product.Where(o => (o.printer_id == PrinterID)).Where(o => (o.product_id == ProductID)).FirstOrDefault();
                     if (update != null)
@@ -192,7 +192,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = db.tb_printer_log.Add(new tb_printer_log()
                     {
@@ -219,7 +219,7 @@ namespace SmoothDataBaseControl
         {
             try
             {
-                using (var db = new SmoothDBEntities())
+                using (var db = new smoothdbEntities())
                 {
                     var ds = (from c in db.tb_printer_log
                               select c).Take(50).ToList();

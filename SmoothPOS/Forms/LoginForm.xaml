@@ -97,7 +97,7 @@
                     Grid.Row="3"
                     Grid.Column="0"
                     Click="btnDelete_Click">
-                <Image Source="Images/Icons/Delete.png"></Image>
+                <Image Source="../Images/Icons/Delete.png"></Image>
             </Button>
             <Button x:Name="btn0"
                     Content="0"
@@ -111,7 +111,7 @@
                     Grid.Row="3"
                     Grid.Column="2"
                     Click="btnLogin_Click">
-                <Image Source="Images/Icons/Login.png"></Image>
+                <Image Source="../Images/Icons/Login.png"></Image>
             </Button>
         </Grid>
         <PasswordBox x:Name="pwBox"

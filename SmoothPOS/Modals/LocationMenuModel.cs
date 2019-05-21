@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmoothPOS
 {
-    public class LocationMenu
+    public class LocationMenuModel
     {
         public int LocationMenuID { get; set; }
         public int ProductID { get; set; }
@@ -15,7 +15,7 @@ namespace SmoothPOS
         public int Row { get; set; }
     }
 
-    public class LocationTab
+    public class LocationTabModel
     {
         public int LocationTabID { get; set; }
         public string Name { get; set; }
