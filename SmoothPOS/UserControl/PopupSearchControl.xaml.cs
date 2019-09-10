@@ -30,10 +30,36 @@ namespace SmoothPOS
 
         private void PopupSearchControl_Loaded(object sender, RoutedEventArgs e)
         {
+            GetListOfPopup("");
+
+        }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Do you want to delete?", "Confirm", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    DatabaseHandle dbHandle = new DatabaseHandle();
+                    DataRowView row = (DataRowView)dgvPopup.SelectedItems[0];
+                    dbHandle.RemovePopup((int)row["ID"]);
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+        }
+
+        private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            GetListOfPopup(txtSearchProduct.Text);
+        }
+
+        private void GetListOfPopup(String name)
+        {
             DatabaseHandle dbHandle = new DatabaseHandle();
 
             DataTable dt = new DataTable();
-            string json = dbHandle.ListOfPopup();
+            string json = dbHandle.ListOfPopupFilter(name);
 
             List<PopupModel> lstPopupModel = JsonConvert.DeserializeObject<List<PopupModel>>(json);
 
@@ -51,12 +77,13 @@ namespace SmoothPOS
 
             dgvPopup.SetBinding(ItemsControl.ItemsSourceProperty, new Binding { Source = table });
             dgvPopup.IsReadOnly = true;
-
+            dgvPopup.Items.Refresh();
         }
 
-        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        private class TableTemp
         {
-            
+            public int ID { get; set; }
+            public string Name { get; set; }
         }
     }
 }

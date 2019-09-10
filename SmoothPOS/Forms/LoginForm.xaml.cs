@@ -117,19 +117,19 @@ namespace SmoothPOS
             
             if (employeeDetail != null)
             {
-                GlobalHelper.EmployeeDetail = JsonConvert.DeserializeObject<EmployeeModel>(employeeDetail);
+                GlobalHelper.CurrentEmployee = JsonConvert.DeserializeObject<EmployeeModel>(employeeDetail);
 
                 //1 = in
-                if(GlobalHelper.EmployeeDetail.StatusID == 1)
+                if(GlobalHelper.CurrentEmployee.StatusID == 1)
                 {
                     MessageBox.Show("Please Clock Out!\nThen Tell to Manager to edit time");
                     return;
                 }
 
-                if (dbHandle.UpdateStaffStatus(GlobalHelper.EmployeeDetail.EmployeeID, 1) > 0)
+                if (dbHandle.UpdateStaffStatus(GlobalHelper.CurrentEmployee.EmployeeID, 1) > 0)
                 {
                     pwBox.Password = "";
-                    MessageBox.Show(String.Format("Welcome {0} \nYou've logined at {1}", GlobalHelper.EmployeeDetail.FirstName, DateTime.Now.ToShortTimeString()));
+                    MessageBox.Show(String.Format("Welcome {0} \nYou've logined at {1}", GlobalHelper.CurrentEmployee.FirstName, DateTime.Now.ToShortTimeString()));
                 }           
             }
             else
@@ -152,19 +152,19 @@ namespace SmoothPOS
 
             if (employeeDetail != null)
             {
-                GlobalHelper.EmployeeDetail = JsonConvert.DeserializeObject<EmployeeModel>(employeeDetail);
+                GlobalHelper.CurrentEmployee = JsonConvert.DeserializeObject<EmployeeModel>(employeeDetail);
 
                 //2 = Out
-                if (GlobalHelper.EmployeeDetail.StatusID == 2)
+                if (GlobalHelper.CurrentEmployee.StatusID == 2)
                 {
                     MessageBox.Show("Please Clock In!");
                     return;
                 }
 
-                if (dbHandle.UpdateStaffStatus(GlobalHelper.EmployeeDetail.EmployeeID, 2) > 0)
+                if (dbHandle.UpdateStaffStatus(GlobalHelper.CurrentEmployee.EmployeeID, 2) > 0)
                 {
                     pwBox.Password = "";
-                    MessageBox.Show(String.Format("Good bye {0} \nYou've logouted at {1}", GlobalHelper.EmployeeDetail.FirstName, DateTime.Now.ToShortTimeString()));
+                    MessageBox.Show(String.Format("Good bye {0} \nYou've logouted at {1}", GlobalHelper.CurrentEmployee.FirstName, DateTime.Now.ToShortTimeString()));
                 }
             }
             else

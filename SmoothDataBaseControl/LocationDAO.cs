@@ -209,7 +209,7 @@ namespace SmoothDataBaseControl
                     // Assign to DataGridView
                     if (ds.Count() > 0)
                     {
-                        log.Info("Get List Of Employee Success");
+                        log.Info("Get List Of Location Menu Success");
                         return ds;
                     }
                     else

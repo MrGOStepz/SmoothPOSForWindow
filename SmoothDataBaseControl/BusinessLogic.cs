@@ -50,7 +50,7 @@ namespace SmoothDataBaseControl
             }
             catch (Exception ex)
             {
-                log.Error("BussicnessLogic => AddNewEmployee" + ex.Message);
+                log.ErrorFormat( .Error("BussicnessLogic => AddNewEmployee" + ex.Message);
                 return -1;
             }
         }
@@ -948,4 +948,6 @@ namespace SmoothDataBaseControl
 
         #endregion
     }
+
+    
 }

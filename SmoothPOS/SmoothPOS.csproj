@@ -95,6 +95,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConvertControlImageToBitmapImage.cs" />
+    <Compile Include="UserControl\StaffSearchControl.xaml.cs">
+      <DependentUpon>StaffSearchControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\ItemOrderControl.xaml.cs">
       <DependentUpon>ItemOrderControl.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
       <DependentUpon>SettingForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\UserStatic.cs" />
+    <Page Include="UserControl\StaffSearchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControl\ItemOrderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

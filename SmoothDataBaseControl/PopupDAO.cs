@@ -168,7 +168,7 @@ namespace SmoothDataBaseControl
                 {
                     var ds = (from c in db.tb_popup
                               where c.is_active == 1
-                              orderby c.popup_id descending
+                              orderby c.popup_id ascending
                               select c).ToList();
 
                     // Assign to DataGridView
@@ -199,7 +199,7 @@ namespace SmoothDataBaseControl
                     var ds = (from c in db.tb_popup
                               where c.name.Contains(name)
                               where c.is_active == 1                           
-                              orderby c.popup_id descending
+                              orderby c.popup_id ascending
                               select c).ToList();
 
                     // Assign to DataGridView
