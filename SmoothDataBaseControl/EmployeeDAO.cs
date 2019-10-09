@@ -144,8 +144,6 @@ namespace SmoothDataBaseControl
             }
 
         }
-
-        public List<tb_employee> GetListOfEmploy
         public int UpdateEmployeeStatus(int employeeID, int statusID)
         {
             try

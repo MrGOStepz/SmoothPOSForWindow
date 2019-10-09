@@ -49,6 +49,9 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="log4net.Ext.Json, Version=2.0.8.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.Ext.Json.2.0.8.3\lib\net452\log4net.Ext.Json.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.16.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.16\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -305,6 +308,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Logo\Logo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="log4net.Ext.Json.README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="log4net.Ext.Json.LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
