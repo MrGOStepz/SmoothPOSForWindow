@@ -120,13 +120,13 @@ namespace SmoothPOS
                 GlobalHelper.CurrentEmployee = JsonConvert.DeserializeObject<EmployeeModel>(employeeDetail);
 
                 //1 = in
-                if(GlobalHelper.CurrentEmployee.StatusID == 1)
+                if(GlobalHelper.CurrentEmployee.StatusID == (int)ClockStatus.In)
                 {
                     MessageBox.Show("Please Clock Out!\nThen Tell to Manager to edit time");
                     return;
                 }
 
-                if (dbHandle.UpdateStaffStatus(GlobalHelper.CurrentEmployee.EmployeeID, 1) > 0)
+                if (dbHandle.UpdateStaffStatus(GlobalHelper.CurrentEmployee.EmployeeID, (int)ClockStatus.In) > 0)
                 {
                     pwBox.Password = "";
                     MessageBox.Show(String.Format("Welcome {0} \nYou've logined at {1}", GlobalHelper.CurrentEmployee.FirstName, DateTime.Now.ToShortTimeString()));
@@ -155,7 +155,7 @@ namespace SmoothPOS
                 GlobalHelper.CurrentEmployee = JsonConvert.DeserializeObject<EmployeeModel>(employeeDetail);
 
                 //2 = Out
-                if (GlobalHelper.CurrentEmployee.StatusID == 2)
+                if (GlobalHelper.CurrentEmployee.StatusID == (int)ClockStatus.Out)
                 {
                     MessageBox.Show("Please Clock In!");
                     return;

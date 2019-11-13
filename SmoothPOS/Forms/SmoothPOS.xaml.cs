@@ -124,15 +124,37 @@ namespace SmoothPOS
 
         private void BtnCookStatus_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO DB get list of cook status
+            //List of table order by Time DESC
+            //Show like columns
         }
 
         private void BtnResendOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO DB get list from printer order by Time
         }
 
         private void BtnReprintReceipt_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO DB get list of Receipt order by Time
+        }
+
+        private void btnAddItems_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUpdateItems_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPay_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
 
         }
