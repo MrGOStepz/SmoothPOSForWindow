@@ -14,8 +14,17 @@ namespace SmoothDataBaseControl
     
     public partial class tb_location_tab
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tb_location_tab()
+        {
+            this.tb_location_menu = new HashSet<tb_location_menu>();
+        }
+    
         public int location_tab_id { get; set; }
         public string name { get; set; }
         public Nullable<int> is_active { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_location_menu> tb_location_menu { get; set; }
     }
 }

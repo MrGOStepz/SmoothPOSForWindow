@@ -27,6 +27,16 @@
           <Property Name="card" Type="longtext" />
           <Property Name="email" Type="varchar" MaxLength="45" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'def.smoothdb.tb_delete_popup' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tb_delete_popup">
+          <Property Name="pop_up_id" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'def.smoothdb.tb_delete_product' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tb_delete_product">
+          <Property Name="product_id" Type="int" />
+        </EntityType>-->
         <EntityType Name="tb_employee">
           <Key>
             <PropertyRef Name="employee_id" />
@@ -74,14 +84,14 @@
         </EntityType>
         <EntityType Name="tb_location_menu">
           <Key>
-            <PropertyRef Name="tb_location_menu_id" />
+            <PropertyRef Name="location_menu_id" />
           </Key>
-          <Property Name="tb_location_menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="location_menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="product_id" Type="int" />
-          <Property Name="tb_location_tab_id" Type="int" />
+          <Property Name="location_tab_id" Type="int" />
           <Property Name="column_no" Type="int" />
           <Property Name="row_no" Type="int" />
-          <Property Name="is_active" Type="int" Nullable="false" />
+          <Property Name="is_active" Type="int" />
         </EntityType>
         <EntityType Name="tb_location_tab">
           <Key>
@@ -103,7 +113,7 @@
           <Property Name="order_status_id" Type="int" />
           <Property Name="payment_id" Type="int" />
           <Property Name="customer_id" Type="int" />
-          <Property Name="is_active" Type="int" Nullable="false" />
+          <Property Name="is_active" Type="int" />
         </EntityType>
         <EntityType Name="tb_order_detail">
           <Key>
@@ -146,7 +156,7 @@
           </Key>
           <Property Name="popup_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="is_active" Type="int" Nullable="false" />
+          <Property Name="is_active" Type="int" />
         </EntityType>
         <EntityType Name="tb_popup_item">
           <Key>
@@ -175,7 +185,7 @@
           <Property Name="printer_log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="printer_id" Type="int" Nullable="false" />
           <Property Name="print_dt" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="printer_detail" Type="longtext" Nullable="false" />
+          <Property Name="printer_detail" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_printer_product">
           <Key>
@@ -203,11 +213,13 @@
           <Property Name="type_food_id" Type="int" />
           <Property Name="is_active" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.smoothdb.tb_product_ingredient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tb_product_ingredient">
           <Key>
-            <PropertyRef Name="product_ingredient_id" />
+            <PropertyRef Name="product_id" />
+            <PropertyRef Name="ingredient_id" />
           </Key>
-          <Property Name="product_ingredient_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="product_id" Type="int" Nullable="false" />
           <Property Name="ingredient_id" Type="int" Nullable="false" />
         </EntityType>
@@ -283,6 +295,18 @@
             </Principal>
             <Dependent Role="tb_employee">
               <PropertyRef Name="level_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_locationmenu_locationtab">
+          <End Role="tb_location_tab" Type="Self.tb_location_tab" Multiplicity="0..1" />
+          <End Role="tb_location_menu" Type="Self.tb_location_menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_location_tab">
+              <PropertyRef Name="location_tab_id" />
+            </Principal>
+            <Dependent Role="tb_location_menu">
+              <PropertyRef Name="location_tab_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -451,11 +475,16 @@
           <EntitySet Name="tb_printer_log" EntityType="Self.tb_printer_log" Schema="smoothdb" store:Type="Tables" />
           <EntitySet Name="tb_printer_product" EntityType="Self.tb_printer_product" Schema="smoothdb" store:Type="Tables" />
           <EntitySet Name="tb_product" EntityType="Self.tb_product" Schema="smoothdb" store:Type="Tables" />
-          <EntitySet Name="tb_product_ingredient" EntityType="Self.tb_product_ingredient" Schema="smoothdb" store:Type="Tables" />
           <EntitySet Name="tb_section" EntityType="Self.tb_section" Schema="smoothdb" store:Type="Tables" />
           <EntitySet Name="tb_setting" EntityType="Self.tb_setting" Schema="smoothdb" store:Type="Tables" />
           <EntitySet Name="tb_table_section" EntityType="Self.tb_table_section" Schema="smoothdb" store:Type="Tables" />
           <EntitySet Name="tb_type_food" EntityType="Self.tb_type_food" Schema="smoothdb" store:Type="Tables" />
+          <EntitySet Name="tb_product_ingredient" EntityType="Self.tb_product_ingredient" store:Type="Tables" store:Schema="smoothdb">
+            <DefiningQuery>SELECT
+`tb_product_ingredient`.`product_id`, 
+`tb_product_ingredient`.`ingredient_id`
+FROM `tb_product_ingredient` AS `tb_product_ingredient`</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_customer_order" Association="Self.FK_customer_order">
             <End Role="tb_customer" EntitySet="tb_customer" />
             <End Role="tb_order" EntitySet="tb_order" />
@@ -467,6 +496,10 @@
           <AssociationSet Name="FK_level_employee" Association="Self.FK_level_employee">
             <End Role="tb_level" EntitySet="tb_level" />
             <End Role="tb_employee" EntitySet="tb_employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_locationmenu_locationtab" Association="Self.FK_locationmenu_locationtab">
+            <End Role="tb_location_tab" EntitySet="tb_location_tab" />
+            <End Role="tb_location_menu" EntitySet="tb_location_menu" />
           </AssociationSet>
           <AssociationSet Name="FK_order" Association="Self.FK_order">
             <End Role="tb_order" EntitySet="tb_order" />
@@ -597,14 +630,15 @@
         </EntityType>
         <EntityType Name="tb_location_menu">
           <Key>
-            <PropertyRef Name="tb_location_menu_id" />
+            <PropertyRef Name="location_menu_id" />
           </Key>
-          <Property Name="tb_location_menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="location_menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="product_id" Type="Int32" />
-          <Property Name="tb_location_tab_id" Type="Int32" />
+          <Property Name="location_tab_id" Type="Int32" />
           <Property Name="column_no" Type="Int32" />
           <Property Name="row_no" Type="Int32" />
-          <Property Name="is_active" Type="Int32" Nullable="false" />
+          <Property Name="is_active" Type="Int32" />
+          <NavigationProperty Name="tb_location_tab" Relationship="Self.FK_locationmenu_locationtab" FromRole="tb_location_menu" ToRole="tb_location_tab" />
         </EntityType>
         <EntityType Name="tb_location_tab">
           <Key>
@@ -613,6 +647,7 @@
           <Property Name="location_tab_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="is_active" Type="Int32" />
+          <NavigationProperty Name="tb_location_menu" Relationship="Self.FK_locationmenu_locationtab" FromRole="tb_location_tab" ToRole="tb_location_menu" />
         </EntityType>
         <EntityType Name="tb_order">
           <Key>
@@ -626,7 +661,7 @@
           <Property Name="order_status_id" Type="Int32" />
           <Property Name="payment_id" Type="Int32" />
           <Property Name="customer_id" Type="Int32" />
-          <Property Name="is_active" Type="Int32" Nullable="false" />
+          <Property Name="is_active" Type="Int32" />
           <NavigationProperty Name="tb_customer" Relationship="Self.FK_customer_order" FromRole="tb_order" ToRole="tb_customer" />
           <NavigationProperty Name="tb_employee" Relationship="Self.FK_employy_order" FromRole="tb_order" ToRole="tb_employee" />
           <NavigationProperty Name="tb_order_detail" Relationship="Self.FK_order" FromRole="tb_order" ToRole="tb_order_detail" />
@@ -681,7 +716,7 @@
           </Key>
           <Property Name="popup_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="is_active" Type="Int32" Nullable="false" />
+          <Property Name="is_active" Type="Int32" />
           <NavigationProperty Name="tb_popup_item" Relationship="Self.FK_popup_popupitem" FromRole="tb_popup" ToRole="tb_popup_item" />
           <NavigationProperty Name="tb_product" Relationship="Self.FK_popup_product" FromRole="tb_popup" ToRole="tb_product" />
         </EntityType>
@@ -716,7 +751,7 @@
           <Property Name="printer_log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="printer_id" Type="Int32" Nullable="false" />
           <Property Name="print_dt" Type="DateTime" Nullable="false" />
-          <Property Name="printer_detail" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="printer_detail" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tb_printer" Relationship="Self.FK_printerlog_printer" FromRole="tb_printer_log" ToRole="tb_printer" />
         </EntityType>
         <EntityType Name="tb_printer_product">
@@ -749,14 +784,6 @@
           <NavigationProperty Name="tb_order_detail" Relationship="Self.FK_product_orderdetail" FromRole="tb_product" ToRole="tb_order_detail" />
           <NavigationProperty Name="tb_popup" Relationship="Self.FK_popup_product" FromRole="tb_product" ToRole="tb_popup" />
           <NavigationProperty Name="tb_printer_product" Relationship="Self.FK_product_printerproudct" FromRole="tb_product" ToRole="tb_printer_product" />
-        </EntityType>
-        <EntityType Name="tb_product_ingredient">
-          <Key>
-            <PropertyRef Name="product_ingredient_id" />
-          </Key>
-          <Property Name="product_ingredient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_id" Type="Int32" Nullable="false" />
-          <Property Name="ingredient_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_section">
           <Key>
@@ -796,6 +823,14 @@
           </Key>
           <Property Name="type_food_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_product_ingredient">
+          <Key>
+            <PropertyRef Name="product_id" />
+            <PropertyRef Name="ingredient_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="ingredient_id" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_customer_order">
           <End Role="tb_customer" Type="Self.tb_customer" Multiplicity="0..1" />
@@ -842,6 +877,18 @@
             </Principal>
             <Dependent Role="tb_employee">
               <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_locationmenu_locationtab">
+          <End Role="tb_location_tab" Type="Self.tb_location_tab" Multiplicity="0..1" />
+          <End Role="tb_location_menu" Type="Self.tb_location_menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_location_tab">
+              <PropertyRef Name="location_tab_id" />
+            </Principal>
+            <Dependent Role="tb_location_menu">
+              <PropertyRef Name="location_tab_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -998,11 +1045,11 @@
           <EntitySet Name="tb_printer_log" EntityType="Self.tb_printer_log" />
           <EntitySet Name="tb_printer_product" EntityType="Self.tb_printer_product" />
           <EntitySet Name="tb_product" EntityType="Self.tb_product" />
-          <EntitySet Name="tb_product_ingredient" EntityType="Self.tb_product_ingredient" />
           <EntitySet Name="tb_section" EntityType="Self.tb_section" />
           <EntitySet Name="tb_setting" EntityType="Self.tb_setting" />
           <EntitySet Name="tb_table_section" EntityType="Self.tb_table_section" />
           <EntitySet Name="tb_type_food" EntityType="Self.tb_type_food" />
+          <EntitySet Name="tb_product_ingredient" EntityType="Self.tb_product_ingredient" />
           <AssociationSet Name="FK_customer_order" Association="Self.FK_customer_order">
             <End Role="tb_customer" EntitySet="tb_customer" />
             <End Role="tb_order" EntitySet="tb_order" />
@@ -1018,6 +1065,10 @@
           <AssociationSet Name="FK_status_employee" Association="Self.FK_status_employee">
             <End Role="tb_employee_status" EntitySet="tb_employee_status" />
             <End Role="tb_employee" EntitySet="tb_employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_locationmenu_locationtab" Association="Self.FK_locationmenu_locationtab">
+            <End Role="tb_location_tab" EntitySet="tb_location_tab" />
+            <End Role="tb_location_menu" EntitySet="tb_location_menu" />
           </AssociationSet>
           <AssociationSet Name="FK_order" Association="Self.FK_order">
             <End Role="tb_order" EntitySet="tb_order" />
@@ -1147,9 +1198,9 @@
           <EntitySetMapping Name="tb_location_menu">
             <EntityTypeMapping TypeName="smoothdbModel.tb_location_menu">
               <MappingFragment StoreEntitySet="tb_location_menu">
-                <ScalarProperty Name="tb_location_menu_id" ColumnName="tb_location_menu_id" />
+                <ScalarProperty Name="location_menu_id" ColumnName="location_menu_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="tb_location_tab_id" ColumnName="tb_location_tab_id" />
+                <ScalarProperty Name="location_tab_id" ColumnName="location_tab_id" />
                 <ScalarProperty Name="column_no" ColumnName="column_no" />
                 <ScalarProperty Name="row_no" ColumnName="row_no" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
@@ -1288,15 +1339,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_product_ingredient">
-            <EntityTypeMapping TypeName="smoothdbModel.tb_product_ingredient">
-              <MappingFragment StoreEntitySet="tb_product_ingredient">
-                <ScalarProperty Name="product_ingredient_id" ColumnName="product_ingredient_id" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="ingredient_id" ColumnName="ingredient_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tb_section">
             <EntityTypeMapping TypeName="smoothdbModel.tb_section">
               <MappingFragment StoreEntitySet="tb_section">
@@ -1337,6 +1379,14 @@
               <MappingFragment StoreEntitySet="tb_type_food">
                 <ScalarProperty Name="type_food_id" ColumnName="type_food_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_product_ingredient">
+            <EntityTypeMapping TypeName="smoothdbModel.tb_product_ingredient">
+              <MappingFragment StoreEntitySet="tb_product_ingredient">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="ingredient_id" ColumnName="ingredient_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

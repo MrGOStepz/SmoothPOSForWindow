@@ -697,9 +697,9 @@ namespace SmoothDataBaseControl
                 for (int i = 0; i < lstlocationMenu.Count; i++)
                 {
                     locationMenuModel = new LocationMenu();
-                    locationMenuModel.LocationMenuID = lstlocationMenu[i].tb_location_menu_id;
+                    locationMenuModel.LocationMenuID = lstlocationMenu[i].location_menu_id;
                     locationMenuModel.ProductID = lstlocationMenu[i].product_id ?? -1;
-                    locationMenuModel.LocationTabID = lstlocationMenu[i].tb_location_tab_id ?? -1;
+                    locationMenuModel.LocationTabID = lstlocationMenu[i].location_tab_id ?? -1;
                     locationMenuModel.Column = lstlocationMenu[i].column_no ?? -1;
                     locationMenuModel.Row = lstlocationMenu[i].row_no ?? -1;
                     lstLocationMenu.Add(locationMenuModel);
@@ -854,7 +854,7 @@ namespace SmoothDataBaseControl
                     printerLogModel.PrinterLogID = lstPrinterLogModel[i].printer_log_id;
                     printerLogModel.PrinterID = lstPrinterLogModel[i].printer_id;
                     printerLogModel.PrinterDateTime = lstPrinterLogModel[i].print_dt;
-                    printerLogModel.PrinterDetail = lstPrinterLogModel[i].printer_detail;
+                    //printerLogModel.PrinterDetail = lstPrinterLogModel[i].printer_detail;
 
 
                     lstPrinterLog.Add(printerLogModel);
@@ -904,7 +904,7 @@ namespace SmoothDataBaseControl
                     orderModel.OrderStatusID = lstOrder[i].order_status_id ?? 0;
                     orderModel.PaymentTypeID = lstOrder[i].payment_id ?? 1;
                     orderModel.CustomerID = lstOrder[i].customer_id ?? -1;
-                    orderModel.IsActive = lstOrder[i].is_active;
+                    orderModel.IsActive = lstOrder[i].is_active.GetValueOrDefault(1);
                     lstOrderModel.Add(orderModel);
                 }
                 return JsonConvert.SerializeObject(lstOrderModel);
@@ -934,7 +934,7 @@ namespace SmoothDataBaseControl
                     orderModel.OrderStatusID = lstOrder[i].order_status_id ?? 0;
                     orderModel.PaymentTypeID = lstOrder[i].payment_id ?? 1;
                     orderModel.CustomerID = lstOrder[i].customer_id ?? -1;
-                    orderModel.IsActive = lstOrder[i].is_active;
+                    orderModel.IsActive = lstOrder[i].is_active.GetValueOrDefault(0);
                     lstOrderModel.Add(orderModel);
                 }
                 return JsonConvert.SerializeObject(lstOrderModel);

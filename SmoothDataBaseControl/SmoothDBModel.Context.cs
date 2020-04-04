@@ -45,10 +45,10 @@ namespace SmoothDataBaseControl
         public virtual DbSet<tb_printer_log> tb_printer_log { get; set; }
         public virtual DbSet<tb_printer_product> tb_printer_product { get; set; }
         public virtual DbSet<tb_product> tb_product { get; set; }
-        public virtual DbSet<tb_product_ingredient> tb_product_ingredient { get; set; }
         public virtual DbSet<tb_section> tb_section { get; set; }
         public virtual DbSet<tb_setting> tb_setting { get; set; }
         public virtual DbSet<tb_table_section> tb_table_section { get; set; }
         public virtual DbSet<tb_type_food> tb_type_food { get; set; }
+        public virtual DbSet<tb_product_ingredient> tb_product_ingredient { get; set; }
     }
 }

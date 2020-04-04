@@ -254,14 +254,14 @@ DROP TABLE IF EXISTS `tb_location_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `tb_location_menu` (
-  `tb_location_menu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `location_menu_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) DEFAULT NULL,
-  `tb_location_tab_id` int(11) DEFAULT NULL,
+  `location_tab_id` int(11) DEFAULT NULL,
   `column_no` int(11) DEFAULT NULL,
   `row_no` int(11) DEFAULT NULL,
-  PRIMARY KEY (`tb_location_menu_id`),
-  KEY `FK_locationmenu_locationtab_idx` (`tb_location_tab_id`),
-  CONSTRAINT `FK_locationmenu_locationtab` FOREIGN KEY (`tb_location_tab_id`) REFERENCES `tb_location_tab` (`tb_location_tab_id`)
+  PRIMARY KEY (`location_menu_id`),
+  KEY `FK_locationmenu_locationtab_idx` (`location_tab_id`),
+  CONSTRAINT `FK_locationmenu_locationtab` FOREIGN KEY (`location_tab_id`) REFERENCES `tb_location_tab` (`location_tab_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

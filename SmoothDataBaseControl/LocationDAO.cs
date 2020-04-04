@@ -124,7 +124,7 @@ namespace SmoothDataBaseControl
                     var ds = db.tb_location_menu.Add(new tb_location_menu()
                     {
                         product_id = ProductID,
-                        tb_location_tab_id = LocationTabID,
+                        location_tab_id = LocationTabID,
                         column_no = Column,
                         row_no = Row
                     });
@@ -151,11 +151,11 @@ namespace SmoothDataBaseControl
 
                 using (var db = new smoothdbEntities())
                 {
-                    var update = db.tb_location_menu.Where(o => (o.tb_location_menu_id == LocationMenuID)).FirstOrDefault();
+                    var update = db.tb_location_menu.Where(o => (o.location_menu_id == LocationMenuID)).FirstOrDefault();
                     if (update != null)
                     {
                         update.product_id = ProductID;
-                        update.tb_location_tab_id = LocationTabID;
+                        update.location_tab_id = LocationTabID;
                         update.column_no = Column;
                         update.row_no = Row;
                     }
@@ -178,7 +178,7 @@ namespace SmoothDataBaseControl
             {
                 using (var db = new smoothdbEntities())
                 {
-                    var update = db.tb_location_menu.Where(o => (o.tb_location_menu_id == LocationMenuID)).FirstOrDefault();
+                    var update = db.tb_location_menu.Where(o => (o.location_menu_id == LocationMenuID)).FirstOrDefault();
                     if (update != null)
                     {
                         
